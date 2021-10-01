@@ -386,6 +386,10 @@
                 </li>
 
                 {{-- Category --}}
+                <li class="navigation-header">
+                    <span data-i18n="Categories &amp; Sub-Categories">Categories &amp; Sub-Categories</span>
+                    <i data-feather="more-horizontal"></i>
+                </li>
                   <li class="nav-item has-sub" style="">
                     <a class="d-flex align-items-center" href="#">
                         <i data-feather='target'></i>
