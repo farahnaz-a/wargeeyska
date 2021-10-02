@@ -25,6 +25,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        
         return view('admin.category.create');
     }
 
@@ -44,7 +45,7 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->save();
 
-        return redirect()->route('categories.index')->withSuccess('Created News Category Successfully');
+        return redirect()->route('categories.index')->withSuccess('Created Successfully');
     }
 
     /**
@@ -88,7 +89,7 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->update();
 
-        return redirect()->route('categories.index')->withSuccess('Update News Category Successfully');
+        return redirect()->route('categories.index')->with('success','Updated Successfully');
     }
 
     /**
@@ -101,6 +102,6 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         $category->delete();
-         return redirect()->back()->with('delete','Deleted News Category successfully');
+         return redirect()->back()->with('delete','Deleted successfully');
     }
 }

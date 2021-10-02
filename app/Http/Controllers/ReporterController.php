@@ -21,7 +21,15 @@ class ReporterController extends Controller
      */
     public function index()
     {
-        return view('reporters.dashboard'); 
+        if (Auth::user()->role == "reporter") {
+
+            return view('reporters.dashboard'); 
+        }
+
+        else{
+            return back()->with('deny','Access Deny');
+        }
+        
         
     }
 

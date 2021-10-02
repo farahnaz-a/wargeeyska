@@ -1,10 +1,14 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ReporterController;
-use App\Models\Categories;
+use App\Http\Controllers\SubCategoryController;
+
 use Illuminate\Support\Facades\Route;
+use League\CommonMark\Extension\FrontMatter\FrontMatterParser;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +21,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [FrontendController::class, 'index']);
 
 //Admin
 Route::group(['prefix' => 'admin'], function () {
@@ -27,11 +29,19 @@ Route::group(['prefix' => 'admin'], function () {
 
     // Category Controller
       Route::resource('categories', CategoryController::class);
+    // SubCategory Controller
+      Route::resource('subcategories', SubCategoryController::class);
 });
 
 //Reporters
 Route::group(['prefix' => 'reporter'], function () {
       Route::get('/dashboard',[ReporterController::class , 'index'])->name('reporter.dashboard');
+
+      // Blog Controller
+      Route::resource('blogs', BlogController::class);
+
+      // Subcategory Controller
+      Route::post('blog_subcategories', [BlogController::class,'subcategories'])->name('blog.subcategories');
 });
 
 

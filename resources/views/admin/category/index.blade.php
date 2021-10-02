@@ -32,7 +32,7 @@ active
 @section('content')
 <section id="basic-vertical-layouts">
     <div class="row justify-content-center">
-        <div class="col-lg-8 col-12">
+        <div class="col-lg-12 col-12">
             <div class="card">
                 <div class="card-header">
                     <h4>List of all News Categories</h4>
@@ -45,6 +45,9 @@ active
                     @endif
                     @if (session('delete'))
                     <div class="alert alert-danger">{{ session('delete') }}</div>
+                    @endif
+                    @if (session('deny'))
+                    <div class="alert alert-danger">{{ session('deny') }}</div>
                     @endif
                 </div>
                 <div class="card-body">

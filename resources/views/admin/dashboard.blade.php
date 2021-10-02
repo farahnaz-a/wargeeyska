@@ -52,9 +52,12 @@
 
 
     <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/css/core/menu/menu-types/vertical-menu.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/css/plugins/forms/form-quill-editor.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/css/plugins/extensions/ext-component-toastr.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('dashboard_assets/css/core/menu/menu-types/vertical-menu.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('dashboard_assets/css/plugins/forms/form-quill-editor.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('dashboard_assets/css/plugins/extensions/ext-component-toastr.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/css/pages/app-email.css') }}">
     <!-- END: Page CSS-->
 
@@ -315,6 +318,10 @@
         </li>
     </ul>
     <!-- END: Header-->
+    @if (session('deny'))
+    <div class="alert alert-danger">{{ session('deny') }}</div>
+    @endif
+    </div>
     <!-- BEGIN: Main Menu-->
     <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
         <div class="navbar-header">
@@ -385,12 +392,14 @@
                     </a>
                 </li>
 
-                {{-- Category --}}
+                {{-- Category & Sub Category --}}
                 <li class="navigation-header">
                     <span data-i18n="Categories &amp; Sub-Categories">Categories &amp; Sub-Categories</span>
                     <i data-feather="more-horizontal"></i>
                 </li>
-                  <li class="nav-item has-sub" style="">
+
+                {{-- category --}}
+                <li class="nav-item has-sub" style="">
                     <a class="d-flex align-items-center" href="#">
                         <i data-feather='target'></i>
                         <span class="menu-title text-truncate" data-i18n="Invoice">Category</span>
@@ -408,6 +417,36 @@
                         </li>
                         <li class="@yield('CategoryCreate')">
                             <a class="d-flex align-items-center" href="{{route('categories.create')}}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-circle">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                </svg>
+                                <span class="menu-item text-truncate" data-i18n="Add">Create</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                {{-- sub category --}}
+                <li class="nav-item has-sub" style="">
+                    <a class="d-flex align-items-center" href="#">
+                        <i data-feather='target'></i>
+                        <span class="menu-title text-truncate" data-i18n="Invoice">Subcategory</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li class="nav-item @yield('SubCategoryList')">
+                            <a class="d-flex align-items-center" href="{{route('subcategories.index')}}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-circle">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                </svg>
+                                <span class="menu-item text-truncate" data-i18n="List">List</span>
+                            </a>
+                        </li>
+                        <li class="@yield('SubCategoryCreate')">
+                            <a class="d-flex align-items-center" href="{{route('subcategories.create')}}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" class="feather feather-circle">
@@ -463,7 +502,7 @@
             </div>
         </div>
     </div>
-   
+
     <!-- END: Content-->
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>

@@ -52,9 +52,12 @@
 
 
     <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/css/core/menu/menu-types/vertical-menu.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/css/plugins/forms/form-quill-editor.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/css/plugins/extensions/ext-component-toastr.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('dashboard_assets/css/core/menu/menu-types/vertical-menu.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('dashboard_assets/css/plugins/forms/form-quill-editor.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('dashboard_assets/css/plugins/extensions/ext-component-toastr.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/css/pages/app-email.css') }}">
     <!-- END: Page CSS-->
 
@@ -249,7 +252,7 @@
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="user-nav d-sm-flex d-none">
                             <span class="user-name font-weight-bolder">{{ Auth::user()->name }}</span>
-                            <span class="user-status">Admin</span>
+                            <span class="user-status">Reporter</span>
                         </div>
                         <span class="avatar">
                             <img class="round" src="{{ Auth::user()->profile_photo_url }}" alt="avatar" height="40"
@@ -383,6 +386,42 @@
                     <a class="d-flex align-items-center" href="{{ route('dashboard') }}"><i data-feather='users'></i>
                         <span class="menu-title text-truncate" data-i18n="Chat">Dashboard</span>
                     </a>
+                </li>
+
+                {{-- Blogs --}}
+                <li class="navigation-header">
+                    <span data-i18n="Blogs">Blogs</span>
+                    <i data-feather="more-horizontal"></i>
+                </li>
+
+                {{-- Blogs --}}
+                <li class="nav-item has-sub" style="">
+                    <a class="d-flex align-items-center" href="#">
+                        <i data-feather='target'></i>
+                        <span class="menu-title text-truncate" data-i18n="Invoice">Blogs</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li class="nav-item @yield('blogsIndex')">
+                            <a class="d-flex align-items-center" href="{{route('blogs.index')}}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-circle">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                </svg>
+                                <span class="menu-item text-truncate" data-i18n="List">List</span>
+                            </a>
+                        </li>
+                        <li class="@yield('blogsCreate')">
+                            <a class="d-flex align-items-center" href="{{route('blogs.create')}}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-circle">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                </svg>
+                                <span class="menu-item text-truncate" data-i18n="Add">Create</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>

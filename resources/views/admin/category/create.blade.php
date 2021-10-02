@@ -29,7 +29,7 @@ active
 {{-- Page Content --}}
 @section('content')
 <div class="row justify-content-center">
-    <div class="col-lg-6 col-12">
+    <div class="col-lg-8 col-12">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">Create News Category</h4>
