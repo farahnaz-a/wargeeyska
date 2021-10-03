@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
@@ -22,6 +23,8 @@ use League\CommonMark\Extension\FrontMatter\FrontMatterParser;
 */
 
 Route::get('/', [FrontendController::class, 'index']);
+//Frontend About
+Route::get('/about', [FrontendController::class, 'about'])->name('frontend.about');
 
 //Admin
 Route::group(['prefix' => 'admin'], function () {
@@ -31,6 +34,8 @@ Route::group(['prefix' => 'admin'], function () {
       Route::resource('categories', CategoryController::class);
     // SubCategory Controller
       Route::resource('subcategories', SubCategoryController::class);
+    // About Controller
+      Route::resource('about', AboutController::class);
 });
 
 //Reporters
