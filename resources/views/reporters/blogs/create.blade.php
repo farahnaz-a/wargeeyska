@@ -169,7 +169,7 @@ active
             }
         });
         
-        $.ajax({
+         $.ajax({
             url: "{{route('blog.subcategories')}}",
             type: 'post',
             data: {
@@ -181,7 +181,7 @@ active
 
             },
 
-        });
+          });
         });
     });
 </script>
