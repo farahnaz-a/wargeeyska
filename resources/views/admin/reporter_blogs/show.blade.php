@@ -1,4 +1,4 @@
-@extends('reporters.dashboard')
+@extends('admin.dashboard')
 
 {{-- Title --}}
 @section('title')
@@ -6,7 +6,7 @@
 @endsection
 
 {{-- Menu Active --}}
-@section('blogsIndex')
+@section('reporterblogsIndex')
 active
 @endsection
 
@@ -61,6 +61,10 @@ active
 
                             <tbody>
                                 <tr>
+                                    <th class="font-weight-bold" >Author Name</th>
+                                    <td>{{$details->user->name}}</td>
+                                </tr>
+                                <tr>
                                     <th class="font-weight-bold" >Category</th>
                                     <td>{{$details->category->name}}</td>
                                 </tr>
@@ -91,13 +95,13 @@ active
                                 </tr>
                                 <tr>
                                     <th class="font-weight-bold">Image</th>
-                                   
                                     @if ($details->image == 'null')
                                     <td><img src="{{ asset('uploads/blogs/'.$details->image) }}" width="150"
                                         alt="Image"></td>
                                     @else
                                     <td><span class="">No Image</span></td>
                                     @endif
+                                   
                                 </tr>
                                 <tr>
                                     <th class="font-weight-bold">Payment Status</th>

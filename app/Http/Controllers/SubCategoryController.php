@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class SubCategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');;
+        $this->middleware('checkAdmin');
+    }
     /**
      * Display a listing of the resource.
      *

@@ -25,6 +25,7 @@ class CreateBlogsTable extends Migration
             $table->string('thumbnail');
             $table->string('image')->nullable();
             $table->enum('payment_status',['paid','pending'])->default('pending');
+            $table->enum('read_status',['read','unread'])->default('unread');
             $table->enum('access_status',['published','not_published'])->default('not_published');
             $table->foreign('subcategory_id')
                   ->references('id')->on('sub_categories')

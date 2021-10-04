@@ -1,12 +1,12 @@
-@extends('reporters.dashboard')
+@extends('admin.dashboard')
 
 {{-- Title --}}
 @section('title')
-{{ config('app.name') }} | Blogs List
+{{ config('app.name') }} | Reporter Blogs
 @endsection
 
 {{-- Menu Active --}}
-@section('blogsIndex')
+@section('reporterblogsIndex')
 active
 @endsection
 
@@ -17,10 +17,10 @@ active
 <div class="content-header-left col-md-12 col-12 mb-2">
     <div class="row breadcrumbs-top">
         <div class="col-12">
-            <h2 class="content-header-title float-left mb-0">Reporter Dashboard</h2>
+            <h2 class="content-header-title float-left mb-0">Admin Dashboard</h2>
             <div class="breadcrumb-wrapper">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item">News Categories</li>
+                    <li class="breadcrumb-item">Reporter Blogs</li>
                 </ol>
             </div>
         </div>
@@ -35,7 +35,7 @@ active
         <div class="col-lg-12 col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>List of all Blogs</h4>
+                    <h4>List of all Reporters Blogs</h4>
 
                     @if (session('success'))
                     <div class="alert alert-success">{{ session('success') }}</div>
@@ -59,11 +59,12 @@ active
                             <thead>
                                 <tr>
                                     <th>Sl.</th>
-                                    <th>Title</th>
-                                    <th>Thumbnail</th>
-                                    <th>Payment Status</th>
-                                    <th>Post Status</th>
-                                    <th>Action</th>
+                                    <th style="width: 20%">Reporter Name</th>
+                                    <th style="width: 30%">Title</th>
+                                    <th style="width: 20%">Thumbnail</th>
+                                    <th style="width: 10%">Payment Status</th>
+                                    <th style="width: 10%">Publish Status</th>
+                                    <th style="width: 10%">Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -72,11 +73,18 @@ active
                                     <td>
                                         {{ $loop->index + 1 }}
                                     </td>
+
+                                    <td>
+                                        <span class="font-weight-bold">{{$blog->user->name}}</span>
+                                        <input type="hidden" id="user_id" value="{{ $blog->id }}">
+                                    </td>
+
                                     <td>
                                         <span class="font-weight-bold">{{$blog->title}}</span>
                                     </td>
                                     <td>
-                                        <img src="{{ asset('uploads/blogs/'.$blog->thumbnail) }}" width="150" alt="Thumbnail">
+                                        <img src="{{ asset('uploads/blogs/'.$blog->thumbnail) }}" width="150"
+                                            alt="Thumbnail">
                                     </td>
                                     <td>
                                         @if ($blog->payment_status == "paid")
@@ -84,16 +92,22 @@ active
                                         @else
                                         <span class="font-weight-bold">Unpaid</span>
                                         @endif
-                                        
                                     </td>
                                     <td>
                                         @if ($blog->access_status == "published")
-                                        <span class="font-weight-bold">Published</span>
+                                        <span class="text-success">Published</span>
                                         @else
-                                        <span class="font-weight-bold">Not published</span>
+
+                                        <form action="{{route('reporter.blog_published')}}" method="POST">
+                                            @csrf
+                                            <input  type="hidden" name="id" value="{{ $blog->id }}">
+                                            <button type="submit" class="btn btn-danger waves-effect waves-float waves-light">No Publishd</button>
+                                        </form>
+                                       
                                         @endif
-                                      
+
                                     </td>
+
                                     <td>
                                         <div class="dropdown">
                                             <button type="button"
@@ -110,7 +124,7 @@ active
                                             </button>
                                             <div class="dropdown-menu">
 
-                                                <a class="dropdown-item" href="{{route('blogs.show',$blog->id)}}">
+                                                <a class="dropdown-item" href="{{route('reporter.blog_details',$blog->id)}}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -121,10 +135,12 @@ active
                                                     </svg>
                                                     <span>Details</span>
                                                 </a>
-                                                <form action="{{route('blogs.destroy',$blog->id)}}" method="POST">
+
+
+                                                <form action="" method="POST">
                                                     {{ method_field('DELETE') }}
                                                     @csrf
-                                                    <a class="dropdown-item" href="{{route('blogs.destroy',$blog->id)}}"
+                                                    <a class="dropdown-item" href=""
                                                         onclick="event.preventDefault(); this.closest('form').submit();">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"

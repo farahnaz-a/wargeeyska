@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AdminBlogController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
@@ -36,6 +37,10 @@ Route::group(['prefix' => 'admin'], function () {
       Route::resource('subcategories', SubCategoryController::class);
     // About Controller
       Route::resource('about', AboutController::class);
+    // Reporters Blog Controller
+      Route::get('/reporter/blogs', [AdminBlogController::class, 'index'])->name('reporter.blog');
+      Route::post('/reporter/blogs/access', [AdminBlogController::class, 'published'])->name('reporter.blog_published');
+      Route::get('/reporter/blogs/access/{id}', [AdminBlogController::class, 'details'])->name('reporter.blog_details');
 });
 
 //Reporters
