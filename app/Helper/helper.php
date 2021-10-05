@@ -8,4 +8,27 @@ function unread(){
 
     return \App\Models\Blog::where('read_status','unread')->get();
   }
+function logo(){
+
+    return \App\Models\logo::first();
+  }
+function footerContact(){
+
+    return \App\Models\FooterContact::first();
+  }
+function footerAbout(){
+
+    return \App\Models\FooterAbout::first();
+  }
+function favicon(){
+
+    return \App\Models\favicon::first();
+  }
+function featuredNews(){
+    return \App\Models\Blog::where('access_status','published')->latest()->take(3)->get();
+  }
+function featuredNews2(){
+    return \App\Models\Blog::where('access_status','published')->latest()->skip(3)->first();
+  }
+
 ?>

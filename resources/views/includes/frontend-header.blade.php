@@ -16,7 +16,7 @@
 
     <!--Favicon-->
 
-    <link rel="icon" href="{{ asset('frontend_assets/images/favicon.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('uploads/favicon/'.favicon()->image) }}" type="image/x-icon">
 
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('frontend_assets/css/bootstrap.min.css') }}">
@@ -101,7 +101,7 @@
                 <div class="row">
                     <div class="col-md-3 col-sm-12">
                         <div class="logo"> <a href="{{ url('/') }}"> <img
-                                    src="{{ asset('frontend_asset/images/logo.png') }}" width="190" alt=""> </a>
+                                    src="{{ asset('uploads/logo/'.logo()->logo) }}" width="190" alt=""> </a>
                         </div>
                     </div>
                     <div class="col-md-9 col-sm-12 header-right">

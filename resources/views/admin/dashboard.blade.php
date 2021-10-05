@@ -109,9 +109,9 @@
                 </li>
                 <li class="nav-item dropdown dropdown-notification mr-25">
                     <a class="nav-link" href="javascript:void(0);" data-toggle="dropdown" aria-expanded="false">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14"
-                            height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell ficon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-bell ficon">
                             <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
                             <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
                         </svg>
@@ -120,7 +120,7 @@
                         @else
                         <span class="badge badge-pill badge-danger badge-up d-none">{{ unread()->count() }}</span>
                         @endif
-                        
+
                     </a>
                     <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
                         <li class="dropdown-menu-header">
@@ -136,47 +136,46 @@
                                     <div class="media-left">
                                         {{-- <div class="avatar"><img
                                                 src="{{ asset('dashboard_assets/images/portrait/small/avatar-s-15.jpg') }}"
-                                                alt="avatar" width="32" height="32">
-                                            </div> --}}
-                                    </div>
-                                    <div class="media-body">
-                                        <p class="media-heading">
-                                            <span class="font-weight-bolder">{{ $unread->user->name }}</span>
-                                        </p>
-                                        <small class="notification-text">
-                                            {{ $unread->title }}
-                                        </small>
-                                    </div>
+                                        alt="avatar" width="32" height="32">
+                                    </div> --}}
                                 </div>
-                            </a>
-                        </li>
-                        @endforeach 
-                    </ul>
-                </li>
-                <li class="nav-item dropdown dropdown-user">
-                    <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="javascript:void(0);"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <div class="user-nav d-sm-flex d-none">
-                            <span class="user-name font-weight-bolder">{{ Auth::user()->name }}</span>
-                            <span class="user-status">Admin</span>
-                        </div>
-                        <span class="avatar">
-                            <img class="round" src="{{ Auth::user()->profile_photo_url }}" alt="avatar" height="40"
-                                width="40">
-                            <span class="avatar-status-online"></span>
-                        </span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-user">
-                        <a class="dropdown-item" href="{{ url('user/profile') }}"><i class="mr-50"
-                                data-feather="user"></i>Profile</a>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                <div class="media-body">
+                                    <p class="media-heading">
+                                        <span class="font-weight-bolder">{{ $unread->user->name }}</span>
+                                    </p>
+                                    <small class="notification-text">
+                                        {{ $unread->title }}
+                                    </small>
+                                </div>
+        </div>
+        </a>
+        </li>
+        @endforeach
+        </ul>
+        </li>
+        <li class="nav-item dropdown dropdown-user">
+            <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="javascript:void(0);"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="user-nav d-sm-flex d-none">
+                    <span class="user-name font-weight-bolder">{{ Auth::user()->name }}</span>
+                    <span class="user-status">Admin</span>
+                </div>
+                <span class="avatar">
+                    <img class="round" src="{{ Auth::user()->profile_photo_url }}" alt="avatar" height="40" width="40">
+                    <span class="avatar-status-online"></span>
+                </span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-user">
+                <a class="dropdown-item" href="{{ url('user/profile') }}"><i class="mr-50"
+                        data-feather="user"></i>Profile</a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                             this.closest('form').submit();"><i class="mr-50" data-feather="power"></i>Logout</a>
-                        </form>
-                    </div>
-                </li>
-            </ul>
+                </form>
+            </div>
+        </li>
+        </ul>
         </div>
     </nav>
     <ul class="main-search-list-defaultlist d-none">
@@ -313,21 +312,13 @@
                     <ul class="menu-content">
                         <li class="nav-item @yield('CategoryList')">
                             <a class="d-flex align-items-center" href="{{route('categories.index')}}">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-circle">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                </svg>
+                                <i data-feather='target'></i>
                                 <span class="menu-item text-truncate" data-i18n="List">List</span>
                             </a>
                         </li>
                         <li class="@yield('CategoryCreate')">
                             <a class="d-flex align-items-center" href="{{route('categories.create')}}">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-circle">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                </svg>
+                                <i data-feather='target'></i>
                                 <span class="menu-item text-truncate" data-i18n="Add">Create</span>
                             </a>
                         </li>
@@ -385,6 +376,37 @@
                 <li class="nav-item @yield('reporterblogsIndex')">
                     <a class="d-flex align-items-center" href="{{route('reporter.blog')}}"><i data-feather='users'></i>
                         <span class="menu-title text-truncate" data-i18n="Chat">Reporter Blogs</span>
+                    </a>
+                </li>
+
+                {{-- Footer, Logo and favicon--}}
+                <li class="navigation-header">
+                    <span data-i18n="About">Footer, Logo and Favicon</span>
+                    <i data-feather="more-horizontal"></i>
+                </li>
+
+                {{-- Logo --}}
+                <li class="nav-item @yield('logoIndex')">
+                    <a class="d-flex align-items-center" href="{{ route('logo.index') }}"><i data-feather='users'></i>
+                        <span class="menu-title text-truncate" data-i18n="Chat">Logo</span>
+                    </a>
+                </li>
+                {{-- Logo --}}
+                <li class="nav-item @yield('faviconIndex')">
+                    <a class="d-flex align-items-center" href="{{ route('favicon.index') }}"><i data-feather='users'></i>
+                        <span class="menu-title text-truncate" data-i18n="Chat">Favicon</span>
+                    </a>
+                </li>
+                {{-- Footer About us --}}
+                <li class="nav-item @yield('aboutIndex')">
+                    <a class="d-flex align-items-center" href="{{route('footer_about.index')}}"><i data-feather='users'></i>
+                        <span class="menu-title text-truncate" data-i18n="Chat">Footer About</span>
+                    </a>
+                </li>
+                {{-- Footer Contact us --}}
+                <li class="nav-item @yield('aboutIndex')">
+                    <a class="d-flex align-items-center" href="{{ route('footer_contact.index') }}"><i data-feather='users'></i>
+                        <span class="menu-title text-truncate" data-i18n="Chat">Footer Contact</span>
                     </a>
                 </li>
             </ul>

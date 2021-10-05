@@ -39,8 +39,14 @@ class AdminBlogController extends Controller
 
         $details->read_status = 'read';
         $details->update();
-        
         return view('admin.reporter_blogs.show',compact('details'));
+
+    }
+    public function delete($id){
+      
+        $details = Blog::find($id);
+        $details->delete();
+        return redirect()->back()->with('delete','Deleted successfully');
 
     }
 }

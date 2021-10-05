@@ -67,7 +67,6 @@ class BlogController extends Controller
     {
         $request->validate([
            'category_id'        => 'required',
-           'subcategory_id'     => 'required',
            'title'              => 'required',
            'short_description'  => 'required',
            'description'        => 'required',
@@ -127,9 +126,12 @@ class BlogController extends Controller
      * @param  \App\Models\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function edit(Blog $blog)
+    public function edit($id)
     {
-        //
+        $categories = Category::get();
+        $subcategories = [];
+        $details = Blog::where('id',$id)->first();
+        return view('reporters.blogs.edit',compact('details','categories','subcategories'));
     }
 
     /**
@@ -139,9 +141,63 @@ class BlogController extends Controller
      * @param  \App\Models\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Blog $blog)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'category_id'        => 'required',
+            'title'              => 'required',
+            'short_description'  => 'required',
+            'description'        => 'required',
+            'thumbnail'          => 'image',
+            'image'              => 'image',
+         ]);
+
+        
+         $blogs = Blog::where('id',$id)->first();
+         if ($request->image) {
+             //Thumbnail Upload
+            $thumbnail    = $request->file('thumbnail');
+            $filename = $blogs->id. '-thumbnail.' .$thumbnail->extension();
+            $location = public_path('uploads/blogs/');
+            $thumbnail->move($location, $filename); 
+    
+            // Save Thumbnail name in the database 
+            $blogs->thumbnail = $filename; 
+         }
+         
+      
+ 
+ 
+         if ($request->image) {
+         
+         //image Upload
+         $image    = $request->file('image');
+         $filename2 = $blogs->id. '-image.' .$image->extention();
+         $location = public_path('uploads/blogs/');
+         $image->move($location, $filename2); 
+ 
+         // Save Image name in the database 
+         $blogs->image = $filename2; 
+         }
+
+        //  if ($blogs->access_status) {
+        //      # code...
+        //  }
+         
+
+         // Save Everything In Database
+         $blogs->category_id       = $request->category_id; 
+         $blogs->subcategory_id    = $request->subcategory_id; 
+         $blogs->title             = $request->title; 
+         $blogs->short_description = $request->short_description; 
+         $blogs->description       = $request->description; 
+         $blogs->quote             = $request->quote; 
+         $blogs->video             = $request->video; 
+         $blogs->access_status     = 'not_published'; 
+         $blogs->update(); 
+ 
+         // Return Back to Index With Success Message
+         return redirect()->route('blogs.index')->with('update','Update Successfully');
     }
 
     /**
@@ -150,8 +206,34 @@ class BlogController extends Controller
      * @param  \App\Models\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Blog $blog)
+    public function destroy($id)
     {
-        
+        Blog::find($id)->delete();
+        Blog::onlyTrashed()->find($id)->forceDelete();
+        return redirect()->back()->with('delete','Deleted successfully');
     }
+
+    public function rejected()
+    {
+        $blogs = Blog::onlyTrashed()->get();
+       
+        return view('reporters.blogs.trash',compact('blogs'));
+      
+    }
+    
+    // permanent delete
+    public function p_delete($id)
+    {
+        $blog = Blog::onlyTrashed()->find($id)->forceDelete();
+        return redirect()->back()->withSuccess('p_delete','Deleted permanently');
+    }
+
+
+      // restore
+      public function restore($id)
+      {
+          $reservations = Blog::withTrashed()->find($id)->restore();    
+          return redirect()->back()->withSuccess('restore','Reservation restore successfully');
+      }
+
 }

@@ -421,6 +421,17 @@
                                 <span class="menu-item text-truncate" data-i18n="Add">Create</span>
                             </a>
                         </li>
+                        <li class="nav-item @yield('blogTrash')">
+                            <a class="d-flex align-items-center" href="{{route('blog.trash')}}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-circle">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                </svg>
+                                <span class="menu-item text-truncate" data-i18n="List">Trash List</span>
+                            </a>
+                        </li>
+                     
                     </ul>
                 </li>
             </ul>

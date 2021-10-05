@@ -6,7 +6,7 @@
 @endsection
 
 {{-- Menu Active --}}
-@section('aboutIndex')
+@section('footerAboutIndex')
 active
 @endsection
 
@@ -36,47 +36,23 @@ active
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Update About Settings</small></h4>
+                 
                     @if (session('update'))
                     <div class="alert alert-warning">{{ session('update') }}</div>
                     @endif
+                   
                 </div>
                 <div class="card-body">
-                    <form action="{{route('about.update',$about->id)}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('footer_about.update',$about->id)}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
-                            <label for="text">Upper Description</label>
-                            <textarea name="upper_section" class="form-control" id="text" >{{$about->upper_section}}</textarea>
-                            @error('text')
-                            <span class="text-danger">{{$message}}</span>
-                            @enderror
-                        </div>
-    
-                        <div class="form-group">
                             <label for="text">Lower Description</label>
-                            <textarea name="lower_section" class="form-control" id="text" >{{$about->lower_section}}</textarea>
+                            <textarea name="description" class="form-control" id="text" >{{$about->description}}</textarea>
                             @error('text')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
                         </div>
-    
-                     
-                        <div class="form-group">
-                            <label for="image">Image</label>
-                            <input name="image" type="file" class="form-control-file" id="image" value="{{$about->image}}">
-                            @error('iamge')
-                            <span class="text-danger">{{$message}}</span>
-                            @enderror
-                        </div>
-    
-    
-                        <div class="from-group">
-                            <img src="{{asset('uploads/about/'.$about->image)}}" alt="" style="height:250px;width:160px;">
-                        </div>
-                        
-                        <br>
-                        <br>
-    
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>

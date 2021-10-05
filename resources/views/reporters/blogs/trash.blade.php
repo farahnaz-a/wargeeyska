@@ -1,12 +1,12 @@
-@extends('admin.dashboard')
+@extends('reporters.dashboard')
 
 {{-- Title --}}
 @section('title')
-{{ config('app.name') }} | Reporter Blogs
+{{ config('app.name') }} | Blogs List
 @endsection
 
 {{-- Menu Active --}}
-@section('reporterblogsIndex')
+@section('blogsIndex')
 active
 @endsection
 
@@ -17,10 +17,10 @@ active
 <div class="content-header-left col-md-12 col-12 mb-2">
     <div class="row breadcrumbs-top">
         <div class="col-12">
-            <h2 class="content-header-title float-left mb-0">Admin Dashboard</h2>
+            <h2 class="content-header-title float-left mb-0">Reporter Dashboard</h2>
             <div class="breadcrumb-wrapper">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item">Reporter Blogs</li>
+                    <li class="breadcrumb-item">News Categories</li>
                 </ol>
             </div>
         </div>
@@ -35,7 +35,7 @@ active
         <div class="col-lg-12 col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>List of all Reporters Blogs</h4>
+                    <h4>List of all Blogs</h4>
 
                     @if (session('success'))
                     <div class="alert alert-success">{{ session('success') }}</div>
@@ -55,16 +55,16 @@ active
 
                     </p>
                     <div class="table-responsive">
+                        @if ($blogs->count() != 0)
                         <table id="data_table" class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>Sl.</th>
-                                    <th style="width: 20%">Reporter Name</th>
-                                    <th style="width: 30%">Title</th>
-                                    <th style="width: 20%">Thumbnail</th>
-                                    <th style="width: 10%">Payment Status</th>
-                                    <th style="width: 10%">Publish Status</th>
-                                    <th style="width: 10%">Delete</th>
+                                    <th>Title</th>
+                                    <th>Thumbnail</th>
+                                    <th>Payment Status</th>
+                                    <th>Post Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -73,18 +73,11 @@ active
                                     <td>
                                         {{ $loop->index + 1 }}
                                     </td>
-
-                                    <td>
-                                        <span class="font-weight-bold">{{$blog->user->name}}</span>
-                                        <input type="hidden" id="user_id" value="{{ $blog->id }}">
-                                    </td>
-
                                     <td>
                                         <span class="font-weight-bold">{{$blog->title}}</span>
                                     </td>
                                     <td>
-                                        <img src="{{ asset('uploads/blogs/'.$blog->thumbnail) }}" width="150"
-                                            alt="Thumbnail">
+                                        <img src="{{ asset('uploads/blogs/'.$blog->thumbnail) }}" width="150" alt="Thumbnail">
                                     </td>
                                     <td>
                                         @if ($blog->payment_status == "paid")
@@ -92,22 +85,16 @@ active
                                         @else
                                         <span class="font-weight-bold">Unpaid</span>
                                         @endif
+                                        
                                     </td>
                                     <td>
                                         @if ($blog->access_status == "published")
-                                        <span class="text-success">Published</span>
+                                        <span class="font-weight-bold">Published</span>
                                         @else
-
-                                        <form action="{{route('reporter.blog_published')}}" method="POST">
-                                            @csrf
-                                            <input  type="hidden" name="id" value="{{ $blog->id }}">
-                                            <button type="submit" class="btn btn-danger waves-effect waves-float waves-light">No Publishd</button>
-                                        </form>
-                                       
+                                        <span class="font-weight-bold">Not published</span>
                                         @endif
-
+                                      
                                     </td>
-
                                     <td>
                                         <div class="dropdown">
                                             <button type="button"
@@ -124,7 +111,7 @@ active
                                             </button>
                                             <div class="dropdown-menu">
 
-                                                <a class="dropdown-item" href="{{route('reporter.blog_details',$blog->id)}}">
+                                                <a class="dropdown-item" href="{{route('blogs.show',$blog->id)}}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -135,10 +122,18 @@ active
                                                     </svg>
                                                     <span>Details</span>
                                                 </a>
-
-
-                                                
-                                                    <a class="dropdown-item" href="{{ route('reporter.blog_delete',$blog->id) }}">
+                                                <a class="dropdown-item" href="{{route('blog.restore',$blog->id)}}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-edit-2 mr-50">
+                                                        <path
+                                                            d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z">
+                                                        </path>
+                                                    </svg>
+                                                    <span>Restore</span>
+                                                </a>                                             
+                                                    <a class="dropdown-item" href="{{route('blog.delete',$blog->id)}}">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                             stroke-width="2" stroke-linecap="round"
@@ -150,7 +145,6 @@ active
                                                         </svg>
                                                         <span>Delete</span>
                                                     </a>
-                                                
                                             </div>
                                         </div>
                                     </td>
@@ -158,6 +152,10 @@ active
                                 @endforeach
                             </tbody>
                         </table>
+                        @else
+                            <span class="text-success">There is no rejected Blogs</span>
+                        @endif
+                        
                     </div>
                 </div>
             </div>

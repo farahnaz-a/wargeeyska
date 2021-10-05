@@ -2,11 +2,11 @@
 
 {{-- Title --}}
 @section('title')
-{{ config('app.name') }} | About
+{{ config('app.name') }} | Favicon
 @endsection
 
 {{-- Menu Active --}}
-@section('aboutIndex')
+@section('faviconIndex')
 active
 @endsection
 
@@ -20,7 +20,7 @@ active
             <h2 class="content-header-title float-left mb-0">Admin Dashboard</h2>
             <div class="breadcrumb-wrapper">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item">About</li>
+                    <li class="breadcrumb-item">Favicon</li>
                 </ol>
             </div>
         </div>
@@ -35,35 +35,19 @@ active
         <div class="col-lg-8">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Update About Settings</small></h4>
+                    <h4 class="card-title">Update Favicon</small></h4>
                     @if (session('update'))
                     <div class="alert alert-warning">{{ session('update') }}</div>
                     @endif
                 </div>
                 <div class="card-body">
-                    <form action="{{route('about.update',$about->id)}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('favicon.update',$favicon->id)}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-                        <div class="form-group">
-                            <label for="text">Upper Description</label>
-                            <textarea name="upper_section" class="form-control" id="text" >{{$about->upper_section}}</textarea>
-                            @error('text')
-                            <span class="text-danger">{{$message}}</span>
-                            @enderror
-                        </div>
-    
-                        <div class="form-group">
-                            <label for="text">Lower Description</label>
-                            <textarea name="lower_section" class="form-control" id="text" >{{$about->lower_section}}</textarea>
-                            @error('text')
-                            <span class="text-danger">{{$message}}</span>
-                            @enderror
-                        </div>
-    
-                     
+
                         <div class="form-group">
                             <label for="image">Image</label>
-                            <input name="image" type="file" class="form-control-file" id="image" value="{{$about->image}}">
+                            <input name="image" type="file" class="form-control-file" id="image" value="{{$favicon->image}}">
                             @error('iamge')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
@@ -71,7 +55,7 @@ active
     
     
                         <div class="from-group">
-                            <img src="{{asset('uploads/about/'.$about->image)}}" alt="" style="height:250px;width:160px;">
+                            <img src="{{asset('uploads/favicon/'.$favicon->image)}}" alt="" style="height:170px;width:300px;">
                         </div>
                         
                         <br>

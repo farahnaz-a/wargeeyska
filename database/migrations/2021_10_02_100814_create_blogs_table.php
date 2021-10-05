@@ -17,13 +17,14 @@ class CreateBlogsTable extends Migration
             $table->id();
             $table->bigInteger('user_id');
             $table->unsignedBigInteger('subcategory_id');
-            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->string('title');
             $table->text('short_description')->nullable();
             $table->text('description'); 
             $table->text('quote')->nullable();
             $table->string('thumbnail');
             $table->string('image')->nullable();
+            $table->string('video')->nullable();
             $table->enum('payment_status',['paid','pending'])->default('pending');
             $table->enum('read_status',['read','unread'])->default('unread');
             $table->enum('access_status',['published','not_published'])->default('not_published');
@@ -32,6 +33,8 @@ class CreateBlogsTable extends Migration
                   ->onDelete('cascade');
                   
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 
