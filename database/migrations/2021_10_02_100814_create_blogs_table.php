@@ -15,8 +15,8 @@ class CreateBlogsTable extends Migration
     {
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id');
-            $table->unsignedBigInteger('subcategory_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('subcategory_id')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->string('title');
             $table->text('short_description')->nullable();
@@ -30,8 +30,10 @@ class CreateBlogsTable extends Migration
             $table->enum('access_status',['published','not_published'])->default('not_published');
             $table->foreign('subcategory_id')
                   ->references('id')->on('sub_categories')
-                  ->onDelete('cascade');
-                  
+                  ->onDelete('cascade');     
+            $table->foreign('user_id')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade');     
             $table->timestamps();
             $table->softDeletes();
 

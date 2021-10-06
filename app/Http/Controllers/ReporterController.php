@@ -21,15 +21,7 @@ class ReporterController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->role == "reporter") {
-
-            return view('reporters.dashboard'); 
-        }
-
-        else{
-            return back()->with('deny','Access Deny');
-        }
-        
+            return view('reporters.dashboard');       
         
     }
 
@@ -43,59 +35,59 @@ class ReporterController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    // /**
+    //  * Store a newly created resource in storage.
+    //  *
+    //  * @param  \Illuminate\Http\Request  $request
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function store(Request $request)
+    // {
+    //     //
+    // }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\reporter  $reporter
-     * @return \Illuminate\Http\Response
-     */
-    public function show(reporter $reporter)
-    {
-        //
-    }
+    // /**
+    //  * Display the specified resource.
+    //  *
+    //  * @param  \App\Models\reporter  $reporter
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function show(reporter $reporter)
+    // {
+    //     //
+    // }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\reporter  $reporter
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(reporter $reporter)
-    {
-        //
-    }
+    // /**
+    //  * Show the form for editing the specified resource.
+    //  *
+    //  * @param  \App\Models\reporter  $reporter
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function edit(reporter $reporter)
+    // {
+    //     //
+    // }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\reporter  $reporter
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, reporter $reporter)
-    {
-        //
-    }
+    // /**
+    //  * Update the specified resource in storage.
+    //  *
+    //  * @param  \Illuminate\Http\Request  $request
+    //  * @param  \App\Models\reporter  $reporter
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function update(Request $request, reporter $reporter)
+    // {
+    //     //
+    // }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\reporter  $reporter
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(reporter $reporter)
-    {
-        //
-    }
+    // /**
+    //  * Remove the specified resource from storage.
+    //  *
+    //  * @param  \App\Models\reporter  $reporter
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function destroy(reporter $reporter)
+    // {
+    //     //
+    // }
 }

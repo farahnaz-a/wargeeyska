@@ -26,40 +26,48 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-12">
-               <div class="single-post">
-                <div class="post-media post-featured-image"> 
-                  <img src="{{ asset('uploads/blogs') }}/{{ $blog->thumbnail }}" class="img-fluid" alt="">
-                </div>
-                <div class="utf_post_title-area"> 
-                  <a class="utf_post_cat" href="#">{{ $blog->subcategory->name }}</a>
-                    <h2 class="utf_post_title">{{ $blog->title }}</h2>
-                    <div class="utf_post_meta"> <span class="utf_post_author"> By {{ $blog->user->name }} </span>
-                        <span class="utf_post_date"><i class="fa fa-clock-o"></i> 
-                          {{ $blog->created_at->format('d M Y, h:i') }}
-                        </span> 
-                        <span class="post-comment">
-                          <i class="fa fa-comments-o"></i> 
-                          <a href="#"  class="comments-link">
-                            <span>01</span>
-                          </a>
-                        </span> 
+                <div class="single-post">
+                    <div class="post-media post-featured-image">
+                        <img src="{{ asset('uploads/blogs') }}/{{ $blog->thumbnail }}" class="img-fluid" alt="">
                     </div>
-                </div>
-
-                <div class="utf_post_content-area">
-                    <div class="entry-content">
-                       
-                        <blockquote>{{ $blog->quote }}</blockquote>
-                        <p>{{ $blog->short_description }}</p>
-                        @if ($blog->quote != null)
-                        <p><img class="pull-left" src="{{ asset('uploads/blogs/')}}/{{ $blog->image }}" alt=""></p>
+                    <div class="utf_post_title-area">
+                        @if ($blog->subcategory_id != null)
+                        <a class="utf_post_cat" href="#">{{ $blog->subcategory->name }}</a>    
+                        @else
+                        <a class="utf_post_cat" href="#">{{ $blog->category->name }}</a>
                         @endif
-                        <p>{{ $blog->description }}</p>
-                        
-                       
+                        <h2 class="utf_post_title">{{ $blog->title }}</h2>
+                        <div class="utf_post_meta"> <span class="utf_post_author"> By {{ $blog->user->name }} </span>
+                            <span class="utf_post_date"><i class="fa fa-clock-o"></i>
+                                {{ $blog->created_at->format('d M Y, h:i') }}
+                            </span>
+                            <span class="post-hits">
+                                <i class="fa fa-eye"> </i>
+                                {{ $viewCount->view_count }}
+                            </span>
+                            <span class="post-comment">
+                                <i class="fa fa-comments-o"></i>
+                                <a href="#" class="comments-link">
+                                    <span>01</span>
+                                </a>
+                            </span>
+                        </div>
                     </div>
 
-                    {{-- <div class="tags-area clearfix">
+                    <div class="utf_post_content-area">
+                        <div class="entry-content">
+
+                            <blockquote>{{ $blog->quote }}</blockquote>
+                            <p>{{ $blog->short_description }}</p>
+                            @if ($blog->image != null)
+                            <p><img class="pull-left" src="{{ asset('uploads/blogs/')}}/{{ $blog->image }}" alt=""></p>
+                            @endif
+                            <p>{{ $blog->description }}</p>
+
+
+                        </div>
+
+                        {{-- <div class="tags-area clearfix">
                         <div class="post-tags">
                             <span>Tags:</span>
                             <a href="#"># Business</a>
@@ -69,7 +77,7 @@
                         </div>
                     </div> --}}
 
-                    {{-- <div class="share-items clearfix">
+                        {{-- <div class="share-items clearfix">
                         <ul class="post-social-icons unstyled">
                             <li class="facebook"> <a href="#"> <i class="fa fa-facebook"></i> <span
                                         class="ts-social-title">Facebook</span></a> </li>
@@ -81,9 +89,9 @@
                                         class="ts-social-title">Pinterest</span></a> </li>
                         </ul>
                     </div> --}}
+                    </div>
                 </div>
-            </div>
-              
+
 
                 <nav class="post-navigation clearfix">
                     {{-- <div class="post-previous">
@@ -113,30 +121,37 @@
                 <div class="related-posts block">
                     <h3 class="utf_block_title"><span>Related Posts</span></h3>
                     <div id="utf_latest_news_slide" class="owl-carousel owl-theme utf_latest_news_slide">
-                      @foreach ($relateds as $related)
-                      <div class="item">
-                          <div class="utf_post_block_style clearfix">
-                              <div class="utf_post_thumb">
-                                  <a href="#">
-                                      <img class="img-fluid"
-                                          src="{{ asset('uploads/blogs/')}}/{{ $related->thumbnail}}" alt="" />
-                                  </a>
-                              </div>
-                              <a class="utf_post_cat" href="#">{{ $related->subcategory->name }}</a>
-                              <div class="utf_post_content">
-                                  <h2 class="utf_post_title title-medium">
-                                      <a href="#">{{ $related->title }}</a>
-                                  </h2>
-                                  <div class="utf_post_meta">
-                                      <span class="utf_post_date">
-                                          <i class="fa fa-clock-o"></i>
-                                          {{ $related->created_at->format('d M Y, h:i') }}
-                                      </span>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      @endforeach
+                        @foreach ($relateds as $related)
+                       
+                        <div class="item">
+                            <div class="utf_post_block_style clearfix">
+                                <div class="utf_post_thumb">
+                                    <a href="{{route('frontend.blog_read',$related->id)}}">
+                                        <img class="img-fluid"
+                                            src="{{ asset('uploads/blogs/')}}/{{ $related->thumbnail}}" alt="" />
+                                    </a>
+                                </div>
+                                @if ($related->subcategory_id != null)
+                                <a class="utf_post_cat" href="#">{{ $related->subcategory->name }}</a>    
+                                @else
+                                <a class="utf_post_cat" href="#">{{ $related->category->name }}</a>
+                                @endif
+                                
+                                <div class="utf_post_content">
+                                    <h2 class="utf_post_title title-medium">
+                                        <a href="{{route('frontend.blog_read',$related->id)}}">{{ $related->title }}</a>
+                                    </h2>
+                                    <div class="utf_post_meta">
+                                        <span class="utf_post_date">
+                                            <i class="fa fa-clock-o"></i>
+                                            {{ $related->created_at->format('d M Y, h:i') }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+                 
+                        @endforeach
                     </div>
                 </div>
 
@@ -261,75 +276,39 @@
                         <h3 class="utf_block_title"><span>Popular News</span></h3>
                         <div class="utf_list_post_block">
                             <ul class="utf_list_post">
+                                @foreach ( $populer as $item)
+                                @if ($item->blog_id != $blog->id)
                                 <li class="clearfix">
                                     <div class="utf_post_block_style post-float clearfix">
-                                        <div class="utf_post_thumb"> <a href="#"> <img class="img-fluid"
-                                                    src="images/news/tech/gadget3.jpg" alt="" /> </a> <a
-                                                class="utf_post_cat" href="#">Gadgets</a> </div>
+                                        <div class="utf_post_thumb"> <a href="{{route('frontend.blog_read',$item->blog_id)}}">
+                                                <img class="img-fluid" src="{{asset('uploads/blogs/')}}/{{ $item->blog->thumbnail }}" alt=""/>
+                                                {{-- <a class="utf_post_cat" href="#">{{ $item->blog->subcategoy->name }}</a>--}}
+                                        </div> 
                                         <div class="utf_post_content">
-                                            <h2 class="utf_post_title title-small"> <a href="#">Zhang social media pop
-                                                    also known when smart innocent...</a> </h2>
-                                            <div class="utf_post_meta"> <span class="utf_post_author"><i
-                                                        class="fa fa-user"></i> <a href="#">John Wick</a></span> <span
-                                                    class="utf_post_date"><i class="fa fa-clock-o"></i> 25 Jan,
-                                                    2021</span> </div>
+                                            <h2 class="utf_post_title title-small"> <a
+                                                    href="{{route('frontend.blog_read',$item->blog_id)}}">{{ $item->blog->title}}</a> </h2>
+                                            <div class="utf_post_meta"> 
+                                                {{-- <span class="utf_post_author">
+                                                    <i class="fa fa-user"></i>
+                                                    <a href="#">{{ $item->blog->user->name }}</a>
+                                                </span> --}}
+                                                <span class="utf_post_date"><i class="fa fa-clock-o">
+                                                    </i>{{ $item->created_at->format('d M Y, h:i') }}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </li>
-
-                                <li class="clearfix">
-                                    <div class="utf_post_block_style post-float clearfix">
-                                        <div class="utf_post_thumb"> <a href="#"> <img class="img-fluid"
-                                                    src="images/news/lifestyle/travel5.jpg" alt="" /> </a> <a
-                                                class="utf_post_cat" href="#">Travel</a> </div>
-                                        <div class="utf_post_content">
-                                            <h2 class="utf_post_title title-small"> <a href="#">Zhang social media pop
-                                                    also known when smart innocent...</a> </h2>
-                                            <div class="utf_post_meta"> <span class="utf_post_author"><i
-                                                        class="fa fa-user"></i> <a href="#">John Wick</a></span> <span
-                                                    class="utf_post_date"><i class="fa fa-clock-o"></i> 25 Jan,
-                                                    2021</span> </div>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="clearfix">
-                                    <div class="utf_post_block_style post-float clearfix">
-                                        <div class="utf_post_thumb"> <a href="#"> <img class="img-fluid"
-                                                    src="images/news/tech/robot5.jpg" alt="" /> </a> <a
-                                                class="utf_post_cat" href="#">Traveling</a> </div>
-                                        <div class="utf_post_content">
-                                            <h2 class="utf_post_title title-small"> <a href="#">Zhang social media pop
-                                                    also known when smart innocent...</a> </h2>
-                                            <div class="utf_post_meta"> <span class="utf_post_author"><i
-                                                        class="fa fa-user"></i> <a href="#">John Wick</a></span> <span
-                                                    class="utf_post_date"><i class="fa fa-clock-o"></i> 25 Jan,
-                                                    2021</span> </div>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="clearfix">
-                                    <div class="utf_post_block_style post-float clearfix">
-                                        <div class="utf_post_thumb"> <a href="#"> <img class="img-fluid"
-                                                    src="images/news/lifestyle/food1.jpg" alt="" /> </a> <a
-                                                class="utf_post_cat" href="#">Food</a> </div>
-                                        <div class="utf_post_content">
-                                            <h2 class="utf_post_title title-small"> <a href="#">Zhang social media pop
-                                                    also known when smart innocent...</a> </h2>
-                                            <div class="utf_post_meta"> <span class="utf_post_author"><i
-                                                        class="fa fa-user"></i> <a href="#">John Wick</a></span> <span
-                                                    class="utf_post_date"><i class="fa fa-clock-o"></i> 25 Jan,
-                                                    2021</span> </div>
-                                        </div>
-                                    </div>
-                                </li>
+                                @endif
+                                @endforeach
                             </ul>
                         </div>
                     </div>
 
-                    <div class="widget text-center"> <img class="banner img-fluid"
-                            src="images/banner-ads/ad-sidebar.png" alt="" /> </div>
+                    <div > 
+                        <img src="{{ asset('frontend_assets/images/banner-ads/ad-sidebar.png')}}" alt="" />
+                        {{-- <img src="https://static.remove.bg/remove-bg-web/8fb1a6ef22fefc0b0866661b4c9b922515be4ae9/assets/start_remove-c851bdf8d3127a24e2d137a55b1b427378cd17385b01aec6e59d5d4b5f39d2ec.png" alt=""/> --}}
+                    </div>
+
                     <div class="widget widget-tags">
                         <h3 class="utf_block_title"><span>Popular Tags</span></h3>
                         <ul class="unstyled clearfix">

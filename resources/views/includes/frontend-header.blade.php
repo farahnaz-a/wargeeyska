@@ -51,11 +51,42 @@
         <div id="top-bar" class="top-bar">
             <div class="container">
                 <div class="row">
+                    @guest
                     <div class="col-md-8">
                         <ul class="unstyled top-nav">
-                            <li><a href="login-signup.html">Login & Signup</a></li>
+                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('register') }}">Signup</a></li>
                         </ul>
                     </div>
+                    @endguest
+                    @auth
+                    <div class="col-md-8">
+                        <ul class="unstyled top-nav">
+
+
+                            @if (Auth::user()->role = 'admin')
+                            <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+
+                            @elseif (Auth::user()->role = 'reporter')
+                            <li><a href="{{ route('reporter.dashboard') }}">Dashboard</a></li>
+
+
+                            @else
+                            <li><a href="{{ route('user.dashboard') }}">Dashboard</a></li>
+                            @endif
+
+                            <li>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <a onclick="event.preventDefault();this.closest('form').submit();"
+                                        href="{{ route('logout') }}">Logout</a>
+                                </form>
+                            </li>
+
+                        </ul>
+                    </div>
+                    @endauth
+
                     <div class="col-md-4 top-social text-lg-right text-md-center">
                         <ul class="unstyled">
                             <li>
@@ -100,13 +131,22 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-3 col-sm-12">
-                        <div class="logo"> <a href="{{ url('/') }}"> <img
-                                    src="{{ asset('uploads/logo/'.logo()->logo) }}" width="190" alt=""> </a>
+                        <div class="logo">
+                            <a href="{{ url('/') }}">
+                                <img src="{{asset('uploads/logo/')}}/{{logo()->logo}}" width="70" height="" alt="Logo">
+                                {{-- <img src="{{asset('frontend_assets/images/banner-ads/ad-top-header.png')}}"
+                                width="70" height="" alt="Logo"> --}}
+
+                            </a>
                         </div>
                     </div>
+
                     <div class="col-md-9 col-sm-12 header-right">
-                        <div class="ad-banner float-right"> <a href="#"><img src="images/banner-ads/ad-top-header.png"
-                                    class="img-fluid" alt=""></a> </div>
+                        <div class=" float-right">
+                            <a href="#">
+                                <img style="img-flu" src="" style="width: 100%; height:250px" alt="">
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -170,24 +210,32 @@
                                                         @foreach ($category->getSubcategory as $subcategory)
                                                         <div class="tab-pane fade show active" id="tab-{{ $j }}">
                                                             <div class="row">
+
+                                                                @foreach (menueNews() as $item)
+                                                                @if ($item->subcategory_id == $subcategory->id)
                                                                 <div class="col-md-3">
                                                                     <div class="utf_post_block_style clearfix">
-                                                                        <div class="utf_post_thumb">
-                                                                            <a href="#">
+                                                                        <a href=" {{route('frontend.blog_read',$item->id)}}">
+                                                                            <div class="utf_post_thumb">
                                                                                 <img class="img-fluid"
-                                                                                    src="images/news/lifestyle/health1.jpg"
-                                                                                    alt="" />
-                                                                            </a>
-                                                                        </div>
-                                                                        <a class="utf_post_cat" href="#">Health</a>
+                                                                                    src="{{ asset('uploads/blogs/') }}/{{ $item->thumbnail }}"
+                                                                                    alt=""/>
+                                                                            </div>
+                                                                        </a>
+                                                                        <a class="utf_post_cat" href="">
+                                                                            {{ $item->subcategory->name }}
+                                                                        </a>
                                                                         <div class="utf_post_content">
                                                                             <h2 class="utf_post_title title-small"> <a
-                                                                                    href="#">That wearable on your wrist
-                                                                                    could soon track your…</a> </h2>
+                                                                                    href="{{route('frontend.blog_read',$item->id)}}">{{ $item->title }}</a>
+                                                                            </h2>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-3">
+                                                                @endif
+                                                                @endforeach
+
+                                                                {{-- <div class="col-md-3">
                                                                     <div class="utf_post_block_style clearfix">
                                                                         <div class="utf_post_thumb"> <a href="#"><img
                                                                                     class="img-fluid"
@@ -229,7 +277,7 @@
                                                                                     tech and beeps when col…</a> </h2>
                                                                         </div>
                                                                     </div>
-                                                                </div>
+                                                                </div> --}}
                                                             </div>
                                                         </div>
                                                         @php

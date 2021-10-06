@@ -11,15 +11,18 @@
                         @foreach ($latest as $item)
                         <li class="clearfix">
                             <div class="utf_post_block_style clearfix">
-                                <div class="utf_post_thumb">
-                                    <a href="{{ route('frontend.blog_read',$item->id) }}">
-                                        <img class="img-fluid" src="{{ asset('uploads/blogs/')}}/{{ $item->thumbnail }}"alt="" />
-                                    </a>
-                                </div>
-                                <a class="utf_post_cat" href="#">{{ $item->subcategory->name }}</a>
+                                <a href="{{route('frontend.blog_read',$item->id)}}">
+                                    <div class="utf_post_thumb">
+                                        <img class="img-fluid" src="{{ asset('uploads/blogs/')}}/{{ $item->thumbnail }}" alt="Thumbnail" />
+                                    </div>
+                                </a>
+                                @if ($featuredNews2->subcategory_id != null)
+                                <a class="utf_post_cat" href="#">{{ $featuredNews2->subcategory->name}}</a>
+                                @endif
                                 <div class="utf_post_content">
                                     <h2 class="utf_post_title title-medium">
-                                        <a href="{{ route('frontend.blog_read',$item->id) }}">{{ $item->title }}</a> </h2>
+                                        <a href="{{ route('frontend.blog_read',$item->id) }}">{{ $item->title }}</a>
+                                    </h2>
                                     <div class="utf_post_meta">
                                         <span class="utf_post_author">
                                             <i class="fa fa-user"></i>
@@ -41,5 +44,5 @@
             </div>
         </div>
     </div>
-   
+
 </section>

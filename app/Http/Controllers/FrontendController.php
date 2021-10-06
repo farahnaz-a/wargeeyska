@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\About;
 use App\Models\Blog;
+use App\Models\ViewCount;
+use Facade\FlareClient\View;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -19,6 +21,8 @@ class FrontendController extends Controller
         return view('frontend.index',
               compact('featuredNews1','featuredNews2','featuredNews3','featuredNews4','latests'));
     }
+
+
     public function about()
     {
         $about = About::first();
@@ -28,8 +32,25 @@ class FrontendController extends Controller
 
     public function blog_read($id)
     {
-        $blog = Blog::where('id',$id)->first();
+        $blog     = Blog::where('id',$id)->first();
         $relateds = Blog::where('subcategory_id',$blog->subcategory_id)->get();
-        return view('frontend.blog_read',compact('blog','relateds'));
-    }
+
+        $viewCount = ViewCount::where('blog_id',$id)->first();
+        if ($viewCount != null) {
+
+            $count = $viewCount->view_count + 1;
+            $viewCount->view_count = $count;
+            $viewCount->update();  
+        } 
+        else {
+            $viewCount = new ViewCount();
+            $viewCount->blog_id = $id;
+            $viewCount->save();
+        }
+        
+        $viewCount = ViewCount::where('blog_id',$id)->first();
+        $populer   =ViewCount::orderBy('view_count','DESC')->take(5)->get();
+        return view('frontend.blog_read',compact('blog','relateds','viewCount','populer'));
+        }
+    
 }

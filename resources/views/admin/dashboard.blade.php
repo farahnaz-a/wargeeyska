@@ -447,8 +447,8 @@
                 <div class="row">
                     <div class="col-12">
                         {{-- content start from here --}}
-                        @yield('content')
-                        {{-- content end here --}}
+                        @yield('content')    {{-- content end her
+                    e --}}
                     </div>
                 </div>
             </div>
@@ -473,6 +473,8 @@
     <!-- END: Footer-->
     <!-- BEGIN: Vendor JS-->
     <script src="{{ asset('dashboard_assets/vendors/js/vendors.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
     <!-- BEGIN Vendor JS-->
 
     <!-- BEGIN: Page Vendor JS-->

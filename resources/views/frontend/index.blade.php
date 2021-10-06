@@ -43,7 +43,7 @@ active
                                 <div class="col-lg-6 col-md-6">
                                     <div class="utf_post_block_style clearfix">
                                         <div class="utf_post_thumb"> <a href="#"> <img class="img-fluid"
-                                                    src="images/news/tech/gadget1.jpg" alt="" /> </a> </div>
+                                                    src="{{ asset('frontend_assets/images/news/tech/gadget1.jpg') }}" alt="" /> </a> </div>
                                         <a class="utf_post_cat" href="#">Lifestyle</a>
                                         <div class="utf_post_content">
                                             <h2 class="utf_post_title"> <a href="#">Zhang social media pop also known

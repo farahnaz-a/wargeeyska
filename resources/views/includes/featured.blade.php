@@ -29,14 +29,17 @@
 
         <div class="col-lg-5 col-md-12 pad-l">
             <div class="row">
-                @if ($featuredNews2->count() != 0)
+                @if ($featuredNews2 != null)
                 <div class="col-md-12">
                     <div class="utf_post_overaly_style contentTop hot-post-top clearfix">
                         <div class="utf_post_thumb"> <a href="#"><img class="img-fluid"
                                     src="{{asset('uploads/blogs')}}/{{ $featuredNews2->thumbnail }}" alt="" /></a>
                         </div>
-                        <div class="utf_post_content"> <a class="utf_post_cat"
-                                href="#">{{ $featuredNews2->subcategory->name}}</a>
+                        <div class="utf_post_content"> 
+                            @if ($featuredNews2->subcategory_id != null)
+                            <a class="utf_post_cat" href="#">{{ $featuredNews2->subcategory->name}}</a>
+                            @endif
+                            
                             <h2 class="utf_post_title title-large"> <a
                                     href="{{ route('frontend.blog_read',$blog->id) }}">{{ $featuredNews2->title}}</a>
                             </h2>
@@ -101,8 +104,10 @@
                         <div class="utf_post_thumb"> <a href="#"><img class="img-fluid"
                                     src="{{asset('uploads/blogs')}}/{{ $featuredNews4->thumbnail }}" alt="" /></a>
                         </div>
-                        <div class="utf_post_content"> <a class="utf_post_cat"
-                                href="#">{{ $featuredNews4->subcategory->name}}</a>
+                        <div class="utf_post_content"> 
+                            @if ($featuredNews2->subcategory_id != null)
+                            <a class="utf_post_cat" href="#">{{ $featuredNews2->subcategory->name}}</a>
+                            @endif
                             <h2 class="utf_post_title title-medium"> <a
                                     href="{{ route('frontend.blog_read',$blog->id) }}">{{ $featuredNews4->title}}</a>
                             </h2>

@@ -24,11 +24,9 @@ function favicon(){
 
     return \App\Models\favicon::first();
   }
-function featuredNews(){
-    return \App\Models\Blog::where('access_status','published')->latest()->take(3)->get();
+function menueNews(){
+    return \App\Models\Blog::where('access_status','published')->latest()->take(4)->get();
   }
-function featuredNews2(){
-    return \App\Models\Blog::where('access_status','published')->latest()->skip(3)->first();
-  }
+
 
 ?>

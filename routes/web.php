@@ -9,9 +9,11 @@ use App\Http\Controllers\FaviconController;
 use App\Http\Controllers\FooterAboutController;
 use App\Http\Controllers\FooterContactController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\LoginRegister;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\ReporterController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\UserController;
 use App\Models\Blog;
 use App\Models\FooterAbout;
 use App\Models\FooterContact;
@@ -34,9 +36,11 @@ Route::get('/', [FrontendController::class, 'index']);
 Route::get('/about', [FrontendController::class, 'about'])->name('frontend.about');
 //blog_read
 Route::get('/blog/read/{id}', [FrontendController::class, 'blog_read'])->name('frontend.blog_read');
+//login_register
+Route::post('/login/register', [LoginRegister::class, 'index'])->name('frontend.login');
 
 //Admin
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin','middleware' => 'checkAdmin'], function () {
       Route::get('/dashboard',[AdminController::class , 'index'])->name('admin.dashboard');
     // Category Controller
       Route::resource('categories', CategoryController::class);
@@ -57,29 +61,33 @@ Route::group(['prefix' => 'admin'], function () {
       Route::post('/reporter/blogs/access', [AdminBlogController::class, 'published'])->name('reporter.blog_published');
       Route::get('/reporter/blogs/access/{id}', [AdminBlogController::class, 'details'])->name('reporter.blog_details');
       Route::get('/reporter/blogs/delete/{id}', [AdminBlogController::class, 'delete'])->name('reporter.blog_delete');
+
+      Route::get('/add/aproved/list', [AdminBlogController::class, 'adminAdList'])->name('ad.allAdmin');
+
+      
 });
 
 //Reporters
 Route::group(['prefix' => 'reporter', 'middleware' => 'checkReporter'], function () {
       Route::get('/dashboard',[ReporterController::class , 'index'])->name('reporter.dashboard');
-      
       // Trash Controller
       Route::get('/blogs/trash', [BlogController::class, 'rejected'])->name('blog.trash');
-
       Route::get('/blog/delete/{id}', [BlogController::class, 'p_delete'])->name('blog.delete');  
-      Route::get('/blog/restore/{id}', [BlogController::class, 'restore'])->name('blog.restore');  
-
-
+      Route::get('/blog/restore/{id}', [BlogController::class, 'restore'])->name('blog.restore'); 
       // Blog Controller
       Route::resource('blogs', BlogController::class);
-      
-     
       // Subcategory
       Route::post('blog_subcategories', [BlogController::class,'subcategories'])->name('blog.subcategories');
 });
 
 
+//Reporters
+Route::group(['prefix' => 'user', 'middleware' => 'checkUser'], function () {
+  Route::get('/dashboard',[UserController::class , 'index'])->name('user.dashboard');
+});
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+
+
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('dashboard');

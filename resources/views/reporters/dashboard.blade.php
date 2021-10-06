@@ -431,7 +431,30 @@
                                 <span class="menu-item text-truncate" data-i18n="List">Trash List</span>
                             </a>
                         </li>
-                     
+
+                        {{-- Blogs --}}
+                        <li class="navigation-header">
+                            <span data-i18n="Blogs">Blogs</span>
+                            <i data-feather="more-horizontal"></i>
+                        </li>
+                        <li class="nav-item @yield('ad')">
+                            <a class="d-flex align-items-center" href="{{ route('ad.allAdmin') }}"><i data-feather='users'></i>
+                                <span class="menu-title text-truncate" data-i18n="Chat">Ad List (Approved)</span>
+                            </a>
+                        </li>
+                       
+                        <li class="nav-item @yield('adRequest')">
+                            <a class="d-flex align-items-center" href="{{ route('ad.request') }}"><i data-feather='users'></i>
+                                <span class="menu-title text-truncate" data-i18n="Chat">Ad Request</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item @yield('adPost')">
+                            <a class="d-flex align-items-center" href="{{ route('ad.postAdmin') }}"><i data-feather='users'></i>
+                                <span class="menu-title text-truncate" data-i18n="Chat">Post a add</span>
+                            </a>
+                        </li>
+
                     </ul>
                 </li>
             </ul>

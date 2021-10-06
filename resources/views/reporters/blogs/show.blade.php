@@ -66,7 +66,14 @@ active
                                 </tr>
                                 <tr>
                                     <th class="font-weight-bold">Subcategory</th>
+
+                                    @if ($details->subcategory_id != null)
                                     <td>{{$details->subcategory->name}}</td>
+                                    @else
+                                    <td class="text-danger">No Subcategory</td>
+                                    @endif
+                                    
+                                    
                                 </tr>
                                 <tr>
                                     <th class="font-weight-bold">Title</th>

@@ -20,7 +20,7 @@ class CheckReporter
 
         if(Auth::user()->role != 'reporter')
         {
-            return back();
+            return redirect()->route('user.dashboard');
         }
         return $next($request);
     }
