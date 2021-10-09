@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\admin;
+// use App\Models\admin;
+use App\Models\Blog;
+use App\Models\User;
+use App\Models\ViewCount;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Str;
 
 class AdminController extends Controller
 {
@@ -20,7 +25,30 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.index');
+        $count = [];
+        $day = [];
+        $view =ViewCount::orderBy('view_count','DESC')->take(7)->get();
+        // $blog =ViewCount::orderBy('view_count','DESC')->take(7);
+
+        $view_count = [];
+        $blog_name  = [];
+        foreach ($view as  $item) {
+            $blog_name[] = Str::limit($item->blog->title, 10);
+            $view_count[] = $item->view_count;
+        }
+
+       $reporter_count = [];
+    
+        for ($i=6; $i >= 0; $i--) { 
+          
+          $count[] =  Blog::whereDate('created_at' ,   Carbon::now()->subDays($i))->get()->count(); 
+          $day[]   =  Carbon::today()->subdays($i)->format('d-M');
+          $reporter_count[] =  User::where('role', 'reporter')->whereDate('created_at' ,   Carbon::now()->subDays($i))->get()->count();
+          
+        }
+
+       
+        return view('admin.index', compact('count', 'day','view','view_count','blog_name','reporter_count'));
     }
 
     /**

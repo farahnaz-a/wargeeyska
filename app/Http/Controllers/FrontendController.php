@@ -4,8 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\About;
 use App\Models\Blog;
+use App\Models\Category;
+use App\Models\Comment;
+use App\Models\Reply;
+use App\Models\SubCategory;
 use App\Models\ViewCount;
 use Facade\FlareClient\View;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -48,9 +53,45 @@ class FrontendController extends Controller
             $viewCount->save();
         }
         
-        $viewCount = ViewCount::where('blog_id',$id)->first();
-        $populer   =ViewCount::orderBy('view_count','DESC')->take(5)->get();
-        return view('frontend.blog_read',compact('blog','relateds','viewCount','populer'));
+        $viewCount  = ViewCount::where('blog_id',$id)->first();
+        $populer    = ViewCount::orderBy('view_count','DESC')->take(5)->get();
+        $comments   = Comment::where('blog_id',$id)->get();
+     
+
+        return view('frontend.blog_read',compact('blog','relateds','viewCount','populer','comments'));
         }
+
+
+        public function blog_comment(Request $request, $id){
+
+
+            $request->validate([
+                'name'         => 'required',
+                'email'        => 'required',
+                'text'         => 'required',
+             ]);
+    
+          $comment = new Comment();
+          $comment->blog_id = $id;
+          $comment->name = $request->name;
+          $comment->email = $request->email;
+          $comment->text= $request->text;
+
+          $comment->save();
+
+
+          return redirect()->back();
+        }
+
+
+        public function blogByCategory($id){
+
+            $blogs       = Blog::where('category_id',$id)->latest()->paginate(3);
+            $category    = Category::where('id',$id)->first();
+            $subcategories = SubCategory::where('category_id',$id)->get();
+
+            return view('frontend.news_by_category',compact('blogs','category','subcategories'));
+        }
+
     
 }

@@ -236,4 +236,10 @@ class BlogController extends Controller
           return redirect()->back()->withSuccess('restore','Reservation restore successfully');
       }
 
+
+     public function blog_comment($id){
+
+
+     }
+
 }

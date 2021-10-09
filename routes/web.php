@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AdController;
 use App\Http\Controllers\AdminBlogController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlogController;
@@ -36,8 +37,12 @@ Route::get('/', [FrontendController::class, 'index']);
 Route::get('/about', [FrontendController::class, 'about'])->name('frontend.about');
 //blog_read
 Route::get('/blog/read/{id}', [FrontendController::class, 'blog_read'])->name('frontend.blog_read');
+//blog_comment
+Route::post('/comment/{id}', [FrontendController::class, 'blog_comment'])->name('frontend.comment');
 //login_register
 Route::post('/login/register', [LoginRegister::class, 'index'])->name('frontend.login');
+//Blogs by Category
+Route::get('/category/blog/{id}', [FrontendController::class, 'blogByCategory'])->name('frontend.blog_category');
 
 //Admin
 Route::group(['prefix' => 'admin','middleware' => 'checkAdmin'], function () {
@@ -50,6 +55,10 @@ Route::group(['prefix' => 'admin','middleware' => 'checkAdmin'], function () {
       Route::resource('about', AboutController::class);
     // logo Controller
       Route::resource('logo', LogoController::class);
+      // ads Controller
+     Route::resource('adAdmin', AdController::class); 
+      // ads Aprovel
+     Route::get('/ad/aprove/{id}', [AdController::class, 'aprove'])->name('adAprove'); 
     // favicon Controller
       Route::resource('favicon', FaviconController::class);
     // footer about Controller
@@ -76,6 +85,9 @@ Route::group(['prefix' => 'reporter', 'middleware' => 'checkReporter'], function
       Route::get('/blog/restore/{id}', [BlogController::class, 'restore'])->name('blog.restore'); 
       // Blog Controller
       Route::resource('blogs', BlogController::class);
+
+          // ads Controller
+     Route::resource('adReporter', AdController::class); 
       // Subcategory
       Route::post('blog_subcategories', [BlogController::class,'subcategories'])->name('blog.subcategories');
 });

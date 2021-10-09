@@ -159,27 +159,30 @@
                 <div id="comments" class="comments-area block">
                     <h3 class="utf_block_title"><span>03 Comments</span></h3>
                     <ul class="comments-list">
+
+                        @foreach ($comments as $comment)
                         <li>
-                            <div class="comment"> <img class="comment-avatar pull-left" alt=""
-                                    src="images/news/user1.png">
+                            <div class="comment"> 
                                 <div class="comment-body">
-                                    <div class="meta-data"> <span class="comment-author">Miss Lisa Doe</span> <span
-                                            class="comment-date pull-right">15 Jan, 2021</span> </div>
-                                    <div class="comment-content">
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                            Lorem Ipsum has been the industry's standard dummy text ever since It has
-                                            survived not only five centuries, but also the leap into electronic type
-                                            setting, remaining essentially unchanged.</p>
+                                    <div class="meta-data">
+                                         <span class="comment-author">{{$comment->name}}</span>
+                                         <span class="comment-date">{{ $comment->email}}</span>
+                                         <span class="comment-date pull-right">{{ $comment->created_at->format('d M, Y')}}</span> 
                                     </div>
-                                    <div class="text-left"> <a class="comment-reply" href="#"><i
-                                                class="fa fa-share"></i> Reply</a> </div>
+                                    <div class="comment-content">
+                                        <p>{{ $comment->text }}</p>
+                                    </div>
+                                    <div class="text-left"> 
+                                        <a class="comment-reply" href="#">
+                                          <i class="fa fa-share"></i> Reply
+                                        </a> 
+                                    </div>
                                 </div>
                             </div>
-
-                            <ul class="comments-reply">
+                             
+                              <ul class="comments-reply">
                                 <li>
-                                    <div class="comment"> <img class="comment-avatar pull-left" alt=""
-                                            src="images/news/user2.png">
+                                    <div class="comment"> 
                                         <div class="comment-body">
                                             <div class="meta-data"> <span class="comment-author">Miss Lisa Doe</span>
                                                 <span class="comment-date pull-right">15 Jan, 2021</span> </div>
@@ -196,7 +199,9 @@
                                     </div>
                                 </li>
                             </ul>
-                            <div class="comment last"> <img class="comment-avatar pull-left" alt=""
+                             
+                           
+                            {{-- <div class="comment last"> <img class="comment-avatar pull-left" alt=""
                                     src="images/news/user1.png">
                                 <div class="comment-body">
                                     <div class="meta-data"> <span class="comment-author">Miss Lisa Doe</span> <span
@@ -210,8 +215,10 @@
                                     <div class="text-left"> <a class="comment-reply" href="#"><i
                                                 class="fa fa-share"></i> Reply</a> </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </li>
+                        @endforeach
+                        
                     </ul>
                 </div>
                 <!-- Post comment end -->
@@ -219,7 +226,8 @@
                 <!-- Comments Form Start -->
                 <div class="comments-form">
                     <h3 class="title-normal">Leave a comment</h3>
-                    <form>
+                    <form action="{{ route('frontend.comment',$blog->id)}}" method="POST" >
+                        @csrf
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -233,7 +241,7 @@
                                         required>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Phone" type="text" required>
                                 </div>
@@ -242,10 +250,10 @@
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Subject" type="text" required>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <textarea class="form-control required-field" id="message" placeholder="Comment"
+                                    <textarea class="form-control required-field" id="message" placeholder="Comment" name="text"
                                         rows="10" required></textarea>
                                 </div>
                             </div>

@@ -171,9 +171,9 @@
 
                                     @foreach (categories() as $category)
 
-                                    @if ($category->getSubcategory->count() > 0)
+                                         @if ($category->getSubcategory->count() > 0)
                                     <li class="nav-item dropdown utf_mega_dropdown">
-                                        <a href="category-style1.html" class="nav-link dropdown-toggle"
+                                        <a href="{{ route('frontend.blog_category', $category->id)}}" class="nav-link dropdown-toggle"
                                             data-toggle="dropdown" role="button" aria-haspopup="true"
                                             aria-expanded="false">{{ $category->name }}
                                             <i class="fa fa-angle-down"></i>
@@ -289,8 +289,8 @@
                                             </div>
                                         </div>
                                         @else
-                                    <li> <a href="category-style2.html">{{ $category->name }}</a> </li>
-                                    @endif
+                                     <li> <a href="{{ route('frontend.blog_category', $category->id)}}">{{ $category->name }}</a> </li>
+                                         @endif
 
 
                                     </li>

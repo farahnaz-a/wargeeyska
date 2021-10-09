@@ -70,7 +70,10 @@ active
                                 </tr>
                                 <tr>
                                     <th class="font-weight-bold">Subcategory</th>
+                                    @if ($details->subcategory !=null )
                                     <td>{{$details->subcategory->name}}</td>
+                                    @endif
+                                     <td><span class="text-danger">No Subcategory</span></td>
                                 </tr>
                                 <tr>
                                     <th class="font-weight-bold">Title</th>
