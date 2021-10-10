@@ -94,18 +94,8 @@ active
                                         @endif
                                     </td>
                                     <td>
-                                        @if ($blog->access_status == "published")
-                                        <span class="text-success">Published</span>
-                                        @else
-
-                                        <form action="{{route('reporter.blog_published')}}" method="POST">
-                                            @csrf
-                                            <input  type="hidden" name="id" value="{{ $blog->id }}">
-                                            <button type="submit" class="btn btn-danger waves-effect waves-float waves-light">No Publishd</button>
-                                        </form>
                                        
-                                        @endif
-
+                                        <span class="text-success">Published</span>
                                     </td>
 
                                     <td>

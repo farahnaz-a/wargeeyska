@@ -349,6 +349,13 @@
                 </li>
 
 
+                <li class="nav-item @yield('adRequest')">
+                    <a class="d-flex align-items-center" href="{{route('adRequest')}}"><i data-feather='users'></i>
+                        <span class="menu-title text-truncate" data-i18n="Chat">Requested Ads</span>
+                    </a>
+                </li>
+
+
                 <li class="nav-item @yield('adPost')">
                     <a class="d-flex align-items-center" href="{{route('adAdmin.create')}}"><i data-feather='users'></i>
                         <span class="menu-title text-truncate" data-i18n="Chat">Post a add</span>
@@ -364,6 +371,12 @@
                 <li class="nav-item @yield('reporterblogsIndex')">
                     <a class="d-flex align-items-center" href="{{route('reporter.blog')}}"><i data-feather='users'></i>
                         <span class="menu-title text-truncate" data-i18n="Chat">Reporter Blogs</span>
+                    </a>
+                </li>
+                {{-- Pending Blogs --}}
+                <li class="nav-item @yield('reporterblogsPending')">
+                    <a class="d-flex align-items-center" href="{{route('reporter.pending_blog')}}"><i data-feather='users'></i>
+                        <span class="menu-title text-truncate" data-i18n="Chat">Pending Requist</span>
                     </a>
                 </li>
 

@@ -2,11 +2,11 @@
 
 {{-- Title --}}
 @section('title')
-{{ config('app.name') }} | Admin ad Section
+{{ config('app.name') }} | Ad Requests
 @endsection
 
 {{-- Menu Active --}}
-@section('ad')
+@section('adRequest')
 active
 @endsection
 
@@ -20,7 +20,7 @@ active
             <h2 class="content-header-title float-left mb-0">Admin Dashboard</h2>
             <div class="breadcrumb-wrapper">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item">Ads</li>
+                    <li class="breadcrumb-item">Ads request</li>
                 </ol>
             </div>
         </div>
@@ -48,6 +48,9 @@ active
                     @endif
                     @if (session('deny'))
                     <div class="alert alert-danger">{{ session('deny') }}</div>
+                    @endif
+                    @if (session('aprove'))
+                    <div class="alert alert-danger">{{ session('aprove') }}</div>
                     @endif
                 </div>
                 <div class="card-body">
@@ -115,8 +118,11 @@ active
 
                                     <td>
                                        
-                                        <span  class="font-weight-bold text-success">Aproved</span>
-                                        
+                                       
+                                        <a href="{{route('adAprove',$ad->id)}}" class="btn btn-danger">
+                                             <span class="font-weight-bold">Aproved</span>
+                                        </a>
+                                      
                                     </td>
                                     <td>
                                         <div class="dropdown">

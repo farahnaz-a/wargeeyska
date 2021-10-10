@@ -14,9 +14,16 @@ class AdminBlogController extends Controller
     }
     public function index(){
       
-        $blogs = Blog::get();
+        $blogs = Blog::where('access_status','published')->get();
         return view('admin.reporter_blogs.index',compact('blogs'));
+    }
 
+    
+
+     public function pending()
+    {
+        $blogs = Blog::where('access_status','not_published')->get();
+        return view('admin.reporter_blogs.pending_request',compact('blogs'));
     }
 
     public function published(Request $request){

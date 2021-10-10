@@ -444,7 +444,12 @@
 
                 <li class="nav-item @yield('adList')">
                     <a class="d-flex align-items-center" href="{{ route('adReporter.index') }}"><i data-feather='users'></i>
-                        <span class="menu-title text-truncate" data-i18n="Chat">Ads List</span>
+                        <span class="menu-title text-truncate" data-i18n="Chat">Approved Ads</span>
+                    </a>
+                </li>
+                <li class="nav-item @yield('adReporterRequest')">
+                    <a class="d-flex align-items-center" href="{{ route('reporter.adRequest') }}"><i data-feather='users'></i>
+                        <span class="menu-title text-truncate" data-i18n="Chat">Pending Ads</span>
                     </a>
                 </li>
 

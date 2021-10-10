@@ -50,8 +50,8 @@ active
                     <div class="alert alert-danger">{{ session('deny') }}</div>
                     @endif
                 </div>
-  
-                
+
+
                 <div class="card-body">
                     <p class="card-text">
 
@@ -61,11 +61,11 @@ active
 
                             <tbody>
                                 <tr>
-                                    <th class="font-weight-bold" >Author Name</th>
+                                    <th class="font-weight-bold">Author Name</th>
                                     <td>{{$details->user->name}}</td>
                                 </tr>
                                 <tr>
-                                    <th class="font-weight-bold" >Category</th>
+                                    <th class="font-weight-bold">Category</th>
                                     <td>{{$details->category->name}}</td>
                                 </tr>
                                 <tr>
@@ -73,7 +73,7 @@ active
                                     @if ($details->subcategory !=null )
                                     <td>{{$details->subcategory->name}}</td>
                                     @endif
-                                     <td><span class="text-danger">No Subcategory</span></td>
+                                    <td><span class="text-danger">No Subcategory</span></td>
                                 </tr>
                                 <tr>
                                     <th class="font-weight-bold">Title</th>
@@ -100,11 +100,11 @@ active
                                     <th class="font-weight-bold">Image</th>
                                     @if ($details->image == 'null')
                                     <td><img src="{{ asset('uploads/blogs/'.$details->image) }}" width="150"
-                                        alt="Image"></td>
+                                            alt="Image"></td>
                                     @else
                                     <td><span class="">No Image</span></td>
                                     @endif
-                                   
+
                                 </tr>
                                 <tr>
                                     <th class="font-weight-bold">Payment Status</th>
@@ -118,7 +118,20 @@ active
                                 <tr>
                                     <th class="font-weight-bold">Post Status</th>
                                     @if ($details->access_status == 'not_published')
+                                    @if (Auth::user()->role == 'admin')
+                                    <td>
+                                        <form action="{{route('reporter.blog_published')}}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $details->id }}">
+                                            <button type="submit"
+                                                class="btn btn-danger waves-effect waves-float waves-light">No
+                                                Publishd</button>
+                                        </form>
+                                    </td>
+                                    @else
                                     <td class="text-danger">Not published yet</td>
+                                    @endif
+
                                     @else
                                     <td class="text-success">Published</td>
                                     @endif

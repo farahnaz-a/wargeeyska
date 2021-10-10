@@ -57,6 +57,8 @@ Route::group(['prefix' => 'admin','middleware' => 'checkAdmin'], function () {
       Route::resource('logo', LogoController::class);
       // ads Controller
      Route::resource('adAdmin', AdController::class); 
+      // ads Requests
+     Route::get('/ad/request/', [AdController::class, 'request'])->name('adRequest'); 
       // ads Aprovel
      Route::get('/ad/aprove/{id}', [AdController::class, 'aprove'])->name('adAprove'); 
     // favicon Controller
@@ -67,6 +69,7 @@ Route::group(['prefix' => 'admin','middleware' => 'checkAdmin'], function () {
       Route::resource('footer_contact', FooterContactController::class);
     // Reporters Blog Controller
       Route::get('/reporter/blogs', [AdminBlogController::class, 'index'])->name('reporter.blog');
+      Route::get('/reporter/pending/blogs', [AdminBlogController::class, 'pending'])->name('reporter.pending_blog');
       Route::post('/reporter/blogs/access', [AdminBlogController::class, 'published'])->name('reporter.blog_published');
       Route::get('/reporter/blogs/access/{id}', [AdminBlogController::class, 'details'])->name('reporter.blog_details');
       Route::get('/reporter/blogs/delete/{id}', [AdminBlogController::class, 'delete'])->name('reporter.blog_delete');
@@ -85,6 +88,8 @@ Route::group(['prefix' => 'reporter', 'middleware' => 'checkReporter'], function
       Route::get('/blog/restore/{id}', [BlogController::class, 'restore'])->name('blog.restore'); 
       // Blog Controller
       Route::resource('blogs', BlogController::class);
+       // ads Requests
+     Route::get('/ad/request/', [AdController::class, 'request'])->name('reporter.adRequest'); 
 
           // ads Controller
      Route::resource('adReporter', AdController::class); 

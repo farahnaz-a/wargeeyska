@@ -1,12 +1,12 @@
-@extends('admin.dashboard')
+@extends('reporters.dashboard')
 
 {{-- Title --}}
 @section('title')
-{{ config('app.name') }} | Admin ad Section
+{{ config('app.name') }} | Reporter ad Request
 @endsection
 
 {{-- Menu Active --}}
-@section('ad')
+@section('adReporterRequest')
 active
 @endsection
 
@@ -17,7 +17,7 @@ active
 <div class="content-header-left col-md-12 col-12 mb-2">
     <div class="row breadcrumbs-top">
         <div class="col-12">
-            <h2 class="content-header-title float-left mb-0">Admin Dashboard</h2>
+            <h2 class="content-header-title float-left mb-0">Reporter Dashboard</h2>
             <div class="breadcrumb-wrapper">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">Ads</li>
@@ -35,7 +35,7 @@ active
         <div class="col-lg-12 col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>List of Ads</h4>
+                    <h4>List of your Ads</h4>
 
                     @if (session('success'))
                     <div class="alert alert-success">{{ session('success') }}</div>
@@ -114,9 +114,11 @@ active
                                     </td>
 
                                     <td>
-                                       
+                                        @if ($ad->aprove_status == "pending")
+                                        <span class="font-weight-bold text-danger">Pending</span>
+                                        @else
                                         <span  class="font-weight-bold text-success">Aproved</span>
-                                        
+                                        @endif
                                     </td>
                                     <td>
                                         <div class="dropdown">
@@ -133,7 +135,7 @@ active
                                                 </svg>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <form action="{{route('adAdmin.destroy',$ad->id)}}" method="POST">
+                                                <form action="{{route('adReporter.destroy',$ad->id)}}" method="POST">
                                                     {{ method_field('DELETE') }}
                                                     @csrf
                                                     <a class="dropdown-item" href="{{route('adAdmin.destroy',$ad->id)}}"

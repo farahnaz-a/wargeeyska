@@ -27,16 +27,35 @@ class AdController extends Controller
     {
         if (Auth::user()->role == 'admin') {
            
-            $ads = Ad::get();
+            $ads = Ad::where('aprove_status','aproved')->get();
            
             return view('admin.ad.ad_list',compact('ads'));
         }
         
         else if(Auth::user()->role == 'reporter'){
 
-            $ads = Ad::where('user_id', Auth::user()->id)->get();
+            $ads = Ad::where('user_id', Auth::user()->id)->where('aprove_status','aproved')->get();
            
             return view('reporters.ad.ad_list',compact('ads'));
+        }
+      
+        
+        
+    }
+    public function request()
+    {
+        if (Auth::user()->role == 'admin') {
+           
+            $ads = Ad::where('aprove_status','pending')->get();
+           
+            return view('admin.ad.ad_pending_list',compact('ads'));
+        }
+        
+        else if(Auth::user()->role == 'reporter'){
+
+            $ads = Ad::where('user_id', Auth::user()->id)->where('aprove_status','pending')->get();
+           
+            return view('reporters.ad.ad_request_list',compact('ads'));
         }
       
         
@@ -101,10 +120,10 @@ class AdController extends Controller
          $ad->save();
  
          if (Auth::user()->role == 'admin') {
-            return redirect()->route('adAdmin.index')->with('create','Added Successfully');
+            return redirect()->route('adRequest')->with('create','Added Successfully');
          } 
          if (Auth::user()->role == 'reporter') {
-            return redirect()->route('adReporter.index')->with('create','Added Successfully');
+            return redirect()->route('reporter.adRequest')->with('create','Added Successfully');
          } 
         
     }
@@ -118,7 +137,7 @@ class AdController extends Controller
       $aprove->aprove_status = 'aproved';
       $aprove->update();
    
-      return redirect()->route('adAdmin.index')->with('aprove','Aproved Successfully');
+      return redirect()->back()->with('aprove','Aproved Successfully');
     }
 
 
