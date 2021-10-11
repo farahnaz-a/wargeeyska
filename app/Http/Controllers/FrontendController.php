@@ -19,12 +19,15 @@ class FrontendController extends Controller
     {
         $featuredNews1 = Blog::where('access_status','published')->latest()->take(3)->get();
         $featuredNews2 = Blog::where('access_status','published')->latest()->skip(3)->first();
-        $featuredNews3= Blog::where('access_status','published')->latest()->skip(4)->first();
+        $featuredNews3 = Blog::where('access_status','published')->latest()->skip(4)->first();
         $featuredNews4 = Blog::where('access_status','published')->latest()->skip(5)->first();
-        $latests = Blog::where('access_status','published')->latest()->get();
+        $latests       = Blog::where('access_status','published')->latest()->get();
+        $categories    = Category::get();
+        $subcategories = SubCategory::get();
+        $blogs         = Blog::get();
 
         return view('frontend.index',
-              compact('featuredNews1','featuredNews2','featuredNews3','featuredNews4','latests'));
+              compact('featuredNews1','featuredNews2','featuredNews3','featuredNews4','latests','categories','subcategories','blogs'));
     }
 
 
@@ -91,6 +94,8 @@ class FrontendController extends Controller
 
             return view('frontend.news_by_category',compact('blogs','category','subcategories'));
         }
+
+    
 
     
 }
