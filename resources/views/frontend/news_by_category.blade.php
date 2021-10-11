@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-md-12">
                 <ul class="breadcrumb">
-                    <li><a href="#">Home</a></li>
+                    <li><a href="{{ url('/') }}">Home</a></li>
                     <li>{{ $category->name }}</li>
                 </ul>
             </div>
@@ -39,20 +39,31 @@
                         <div class="row">
                            
                             <div class="col-lg-5 col-md-6">
-                                <div class="utf_post_thumb thumb-float-style"> <a href="{{route('frontend.blog_read',$blog->id)}}">
+                                <div class="utf_post_thumb thumb-float-style">
+                                    
+                                    {{-- @if ($blogs->video != null)
+                                      <video width="320" height="240" controls>
+                                        <source src="" type="video/mp4">
+                                      </video>
+                                    @else --}}
+                                    <a href="{{route('frontend.blog_read',$blog->id)}}">
                                         <img class="img-fluid"
                                             src="{{ asset('uploads/blogs/')}}/{{ $blog->thumbnail}}" alt="">
                                     </a>
+                                    {{-- @endif --}}
+                                  
                                     @if ($blog->subcategory_id != null)
-                                    <a class="utf_post_cat" href="#">{{ $blog->subcategory->name }}</a> </div>
+                                    <a class="utf_post_cat" href="#">{{ $blog->subcategory->name }}</a> 
                                     @else
-                                    <a class="utf_post_cat" href="#">{{ $blog->category->name }}</a> </div>
+                                    <a class="utf_post_cat" href="#">{{ $blog->category->name }}</a> 
                                     @endif
+                                </div>
                                     
                             </div>
                             <div class="col-lg-7 col-md-6">
                                 <div class="utf_post_content">
                                     <h2 class="utf_post_title title-large">
+                                        
                                         <a href="{{route('frontend.blog_read',$blog->id)}}">{{ $blog->title }}</a>
                                     </h2>
                                     <div class="utf_post_meta">
@@ -66,7 +77,12 @@
                                         </span>
 
                                     </div>
-                                    <p>{{ Str::limit($blog->short_description, 100) }}...</p>
+                                    @if ($blog->short_description != null)
+                                    <p>{{ Str::limit($blog->short_description, 110) }}</p>
+                                    @else
+                                    
+                                    @endif
+                                    
                                 </div>
                             </div>
                         </div>

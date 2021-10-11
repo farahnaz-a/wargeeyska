@@ -166,6 +166,7 @@
                                 <div class="comment-body">
                                     <div class="meta-data">
                                          <span class="comment-author">{{$comment->name}}</span>
+                                         <br>
                                          <span class="comment-date">{{ $comment->email}}</span>
                                          <span class="comment-date pull-right">{{ $comment->created_at->format('d M, Y')}}</span> 
                                     </div>
@@ -181,23 +182,29 @@
                             </div>
                              
                               <ul class="comments-reply">
-                                <li>
-                                    <div class="comment"> 
-                                        <div class="comment-body">
-                                            <div class="meta-data"> <span class="comment-author">Miss Lisa Doe</span>
-                                                <span class="comment-date pull-right">15 Jan, 2021</span> </div>
-                                            <div class="comment-content">
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                                    industry. Lorem Ipsum has been the industry's standard dummy text
-                                                    ever since It has survived not only five centuries, but also the
-                                                    leap into electronic type setting, remaining essentially unchanged.
-                                                </p>
-                                            </div>
-                                            <div class="text-left"> <a class="comment-reply" href="#"><i
-                                                        class="fa fa-share"></i> Reply</a> </div>
+                                  @foreach ($replay as $item)
+                                  @if ($comment->id == $item->comment_id)
+                                  <li>
+                                    <div class="comment-body">
+                                        <div class="meta-data">
+                                             <span class="comment-author">{{$item->name}}</span>
+                                             <span class="comment-date">{{ $item->email}}</span>
+                                             {{-- <span class="comment-date pull-right">{{ $item->created_at->format('d M, Y')}}</span>  --}}
+                                        </div>
+                                        <div class="comment-content">
+                                            <p>{{ $item->text }}</p>
+                                        </div>
+                                        <div class="text-left"> 
+                                            <a class="comment-reply" href="#">
+                                              <i class="fa fa-share"></i> Reply
+                                            </a> 
                                         </div>
                                     </div>
                                 </li>
+                                @endif
+                                 
+                                @endforeach
+                                
                             </ul>
                              
                            

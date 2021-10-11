@@ -56,9 +56,8 @@ class FrontendController extends Controller
         $viewCount  = ViewCount::where('blog_id',$id)->first();
         $populer    = ViewCount::orderBy('view_count','DESC')->take(5)->get();
         $comments   = Comment::where('blog_id',$id)->get();
-     
-
-        return view('frontend.blog_read',compact('blog','relateds','viewCount','populer','comments'));
+        $replay     = Reply::get();
+        return view('frontend.blog_read',compact('blog','relateds','viewCount','populer','comments','replay'));
         }
 
 
