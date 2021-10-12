@@ -95,6 +95,7 @@ class AdController extends Controller
         $request->validate([
             'image'              => 'required|image',
             'position'          => 'required',
+            'link'          => 'required',
          ]);
 
     
@@ -105,11 +106,11 @@ class AdController extends Controller
             $ad->payment_status = 'admin_post';
          }
          $ad->ad_position      = $request->position;
-         if ($request->blog) 
+         if ($request->blog != 'null') 
          {
             $ad->blog_id       = $request->blog;
          }
-
+         $ad->link      = $request->link;
          $image                = $request->file('image');
          $filename            = hexdec(uniqid()) . '-image.' .$image->extension();
          $location             = public_path('uploads/ads/');
@@ -133,11 +134,30 @@ class AdController extends Controller
     public function aprove($id)
     {
       $aprove = Ad::where('id',$id)->first();
+      
+      $ads = Ad::where('aprove_status','aproved')->get();
+      $i=0;
+      foreach ($ads as $ad) 
+      {
+         if ($ad->ad_position == $aprove->ad_position) {
+             $i++;
+         }
+      }
 
+    if ($i < 1) {
       $aprove->aprove_status = 'aproved';
       $aprove->update();
-   
       return redirect()->back()->with('aprove','Aproved Successfully');
+
+    }
+    
+    else {
+        return redirect()->back()->with('deny','Ad already exist on this section');
+    }
+    
+      
+
+  
     }
 
 
@@ -188,10 +208,10 @@ class AdController extends Controller
         $ad = Ad::find($id);
         $ad->delete();
         if (Auth::user()->role == 'admin') {
-            return redirect()->route('adAdmin.index')->with('create','Added Successfully');
+            return redirect()->back()->with('delete','Deleted Successfully');
         } 
         if (Auth::user()->role == 'reporter') {
-            return redirect()->route('adReporter.index')->with('create','Added Successfully');
+            return redirect()->back()->with('delete','Deleted Successfully');
         } 
         
     }

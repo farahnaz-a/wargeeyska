@@ -24,7 +24,6 @@ class CreateBlogsTable extends Migration
             $table->text('quote')->nullable();
             $table->string('thumbnail');
             $table->string('image')->nullable();
-            $table->string('video')->nullable();
             $table->enum('payment_status',['paid','pending'])->default('pending');
             $table->enum('read_status',['read','unread'])->default('unread');
             $table->enum('access_status',['published','not_published'])->default('not_published');

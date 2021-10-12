@@ -16,7 +16,7 @@
 
     <!--Favicon-->
 
-    <link rel="icon" href="{{ asset('uploads/favicon/'.favicon()->image) }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('uploads/favicon')}}/{{ favicon()->image }}" type="image/x-icon">
 
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('frontend_assets/css/bootstrap.min.css') }}">
@@ -133,7 +133,7 @@
                     <div class="col-md-3 col-sm-12">
                         <div class="logo">
                             <a href="{{ url('/') }}">
-                                <img src="{{asset('uploads/logo/')}}/{{logo()->logo}}" width="70" height="" alt="Logo">
+                                <img src="{{asset('uploads/logo/')}}/{{logo()->logo}}" width="100" height="" alt="Logo">
                                 {{-- <img src="{{asset('frontend_assets/images/banner-ads/ad-top-header.png')}}"
                                 width="70" height="" alt="Logo"> --}}
 
@@ -143,8 +143,9 @@
 
                     <div class="col-md-9 col-sm-12 header-right">
                         <div class=" float-right">
-                            <a href="#">
-                                <img style="img-flu" src="" style="width: 100%; height:250px" alt="">
+                            <a href="{{ frontPageTopAd()->link }}" target="_blank">
+                                <img src="{{ asset('uploads/ads')}}/{{ frontPageTopAd()->image }}" class="img-fluid"
+                                    alt="">
                             </a>
                         </div>
                     </div>
@@ -171,11 +172,11 @@
 
                                     @foreach (categories() as $category)
 
-                                         @if ($category->getSubcategory->count() > 0)
+                                    @if ($category->getSubcategory->count() > 0)
                                     <li class="nav-item dropdown utf_mega_dropdown">
-                                        <a href="{{ route('frontend.blog_category', $category->id)}}" class="nav-link dropdown-toggle"
-                                            data-toggle="dropdown" role="button" aria-haspopup="true"
-                                            aria-expanded="false">{{ $category->name }}
+                                        <a href="{{ route('frontend.blog_category', $category->id)}}"
+                                            class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+                                            aria-haspopup="true" aria-expanded="false">{{ $category->name }}
                                             <i class="fa fa-angle-down"></i>
                                         </a>
                                         <div class="utf_dropdown_menu utf_mega_menu_content clearfix">
@@ -215,11 +216,12 @@
                                                                 @if ($item->subcategory_id == $subcategory->id)
                                                                 <div class="col-md-3">
                                                                     <div class="utf_post_block_style clearfix">
-                                                                        <a href=" {{route('frontend.blog_read',$item->id)}}">
+                                                                        <a
+                                                                            href=" {{route('frontend.blog_read',$item->id)}}">
                                                                             <div class="utf_post_thumb">
                                                                                 <img class="img-fluid"
                                                                                     src="{{ asset('uploads/blogs/') }}/{{ $item->thumbnail }}"
-                                                                                    alt=""/>
+                                                                                    alt="" />
                                                                             </div>
                                                                         </a>
                                                                         <a class="utf_post_cat" href="">
@@ -289,14 +291,20 @@
                                             </div>
                                         </div>
                                         @else
-                                     <li> <a href="{{ route('frontend.blog_category', $category->id)}}">{{ $category->name }}</a> </li>
-                                         @endif
-
-
+                                    <li>
+                                        <a href="{{ route('frontend.blog_category', $category->id)}}">{{ $category->name }}</a>
+                                        
                                     </li>
-
+                                    @endif
+                                    </li>
                                     @endforeach
-                                    <li class="@yield('about')"> <a href="{{ route('frontend.about')}}">About</a> </li>
+                                    <li class="@yield('video')"> 
+                                        <a href="{{ route('frontend.video') }}">Video</a> 
+                                    </li>
+                                    <li class="@yield('about')"> 
+                                        <a href="{{ route('frontend.about')}}">About</a>
+                                    </li>
+                                    
                                 </ul>
                             </div>
                         </div>

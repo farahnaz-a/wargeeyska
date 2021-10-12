@@ -19,6 +19,8 @@ class Category extends Model
         return $this->hasMany('App\Models\SubCategory');
 
     }
-    
+    public function getblogs(){
+        return $this->hasMany('\App\Models\Blog');
+    }
 
 }

@@ -95,7 +95,8 @@
     <nav class="header-navbar navbar navbar-expand-lg align-items-center floating-nav navbar-light navbar-shadow">
         <div class="navbar-container d-flex content">
             <ul class="nav navbar-nav align-items-center ml-auto">
-                <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-style"><i class="ficon" data-feather="moon"></i></a></li>
+                <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-style"><i class="ficon"
+                            data-feather="moon"></i></a></li>
                 {{-- <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon"
                             data-feather="search"></i></a>
                     <div class="search-input">
@@ -146,9 +147,9 @@
                                         {{ $unread->title }}
                                     </small>
                                 </div>
-                   </div>
-                </a>
-            </li>
+        </div>
+        </a>
+        </li>
         @endforeach
         </ul>
         </li>
@@ -342,24 +343,43 @@
                     <span data-i18n="Blogs">ads</span>
                     <i data-feather="more-horizontal"></i>
                 </li>
-                <li class="nav-item @yield('ad')">
-                    <a class="d-flex align-items-center" href="{{route('adAdmin.index')}}"><i data-feather='users'></i>
-                        <span class="menu-title text-truncate" data-i18n="Chat">Ad List</span>
+                <li class="nav-item has-sub" style="">
+                    <a class="d-flex align-items-center" href="#">
+                        <i data-feather='target'></i>
+                        <span class="menu-title text-truncate" data-i18n="Invoice">Ads</span>
                     </a>
-                </li>
-
-
-                <li class="nav-item @yield('adRequest')">
-                    <a class="d-flex align-items-center" href="{{route('adRequest')}}"><i data-feather='users'></i>
-                        <span class="menu-title text-truncate" data-i18n="Chat">Requested Ads</span>
-                    </a>
-                </li>
-
-
-                <li class="nav-item @yield('adPost')">
-                    <a class="d-flex align-items-center" href="{{route('adAdmin.create')}}"><i data-feather='users'></i>
-                        <span class="menu-title text-truncate" data-i18n="Chat">Post a add</span>
-                    </a>
+                    <ul class="menu-content">
+                        <li class="nav-item @yield('ad')">
+                            <a class="d-flex align-items-center" href="{{route('adAdmin.index')}}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-circle">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                </svg>
+                                <span class="menu-item text-truncate" data-i18n="List">Ad List</span>
+                            </a>
+                        </li>
+                        <li class=" nav-item @yield('adRequest')">
+                            <a class="d-flex align-items-center" href="{{route('adRequest')}}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-circle">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                </svg>
+                                <span class="menu-item text-truncate" data-i18n="Add">Requested Ads</span>
+                            </a>
+                        </li>
+                        <li class=" nav-item @yield('adPost')">
+                            <a class="d-flex align-items-center" href="{{route('adAdmin.create')}}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-circle">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                </svg>
+                                <span class="menu-item text-truncate" data-i18n="Add">Post a add</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
                 {{-- Blogs --}}
@@ -375,10 +395,55 @@
                 </li>
                 {{-- Pending Blogs --}}
                 <li class="nav-item @yield('reporterblogsPending')">
-                    <a class="d-flex align-items-center" href="{{route('reporter.pending_blog')}}"><i data-feather='users'></i>
+                    <a class="d-flex align-items-center" href="{{route('reporter.pending_blog')}}"><i
+                            data-feather='users'></i>
                         <span class="menu-title text-truncate" data-i18n="Chat">Pending Requist</span>
                     </a>
                 </li>
+
+                {{-- Videos--}}
+                <li class="navigation-header">
+                    <span data-i18n="About">Videos</span>
+                    <i data-feather="more-horizontal"></i>
+                </li>
+
+                <li class="nav-item has-sub" style="">
+                    <a class="d-flex align-items-center" href="#">
+                        <i data-feather='target'></i>
+                        <span class="menu-title text-truncate" data-i18n="Invoice">Videos</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li class="nav-item @yield('videoIndex')">
+                            <a class="d-flex align-items-center" href="{{ route('reportervideos.index') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-circle">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                </svg>
+                                <span class="menu-item text-truncate" data-i18n="List">Aproved Videos</span>
+                            </a>
+                        </li>
+                        <li class="@yield('videoRequest')">
+                            <a class="d-flex align-items-center" href="{{ route('admin.videoRequest') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-circle">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                </svg>
+                                <span class="menu-item text-truncate" data-i18n="Add">Pending Videos</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+
+
+
+
+
+
+
 
                 {{-- Footer, Logo and favicon--}}
                 <li class="navigation-header">
@@ -386,31 +451,21 @@
                     <i data-feather="more-horizontal"></i>
                 </li>
 
-                {{-- Site Logo --}}
+                {{-- Logo --}}
                 <li class="nav-item @yield('logoIndex')">
                     <a class="d-flex align-items-center" href="{{ route('logo.index') }}"><i data-feather='users'></i>
-                        <span class="menu-title text-truncate" data-i18n="Chat">Site</span>
+                        <span class="menu-title text-truncate" data-i18n="Chat">Logo</span>
                     </a>
                 </li>
-                {{-- Dashboard Logo --}}
-                <li class="nav-item @yield('logoAdminIndex')">
-                    <a class="d-flex align-items-center" href=""><i data-feather='users'></i>
-                        <span class="menu-title text-truncate" data-i18n="Chat">Dashboard Logo</span>
-                    </a>
-                </li>
-                {{-- Site Favicon --}}
+
+                {{-- Favicon --}}
                 <li class="nav-item @yield('faviconIndex')">
                     <a class="d-flex align-items-center" href="{{ route('favicon.index') }}"><i
                             data-feather='users'></i>
                         <span class="menu-title text-truncate" data-i18n="Chat">Favicon</span>
                     </a>
                 </li>
-                {{-- Dashboard Favicon --}}
-                <li class="nav-item @yield('faviconAdminIndex')">
-                    <a class="d-flex align-items-center" href=""><i data-feather='users'></i>
-                        <span class="menu-title text-truncate" data-i18n="Chat">Favicon</span>
-                    </a>
-                </li>
+
                 {{-- Footer About us --}}
                 <li class="nav-item @yield('aboutIndex')">
                     <a class="d-flex align-items-center" href="{{route('footer_about.index')}}"><i
@@ -532,6 +587,7 @@
                 ]
             });
         })
+
     </script>
     <!-- BEGIN: Page JS-->
     <!-- END: Page JS-->
@@ -549,6 +605,7 @@
             }
 
         )
+
     </script>
 
     @yield('js')

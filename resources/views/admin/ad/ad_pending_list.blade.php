@@ -50,7 +50,7 @@ active
                     <div class="alert alert-danger">{{ session('deny') }}</div>
                     @endif
                     @if (session('aprove'))
-                    <div class="alert alert-danger">{{ session('aprove') }}</div>
+                    <div class="alert alert-success">{{ session('aprove') }}</div>
                     @endif
                 </div>
                 <div class="card-body">

@@ -41,7 +41,7 @@ active
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="image">Favicon</label>
+                                <label for="image">Ad Image</label>
                                 <div class="custom-file">
                                     <input type="file" name="image" class="custom-file-input" id="image">
                                     <label class="custom-file-label" for="ad">Choose Ad photo</label>
@@ -55,9 +55,9 @@ active
                             <div class="form-group">
                                 <label for="favicon">Select Ad Position</label>
                                 <select class="form-control" id="position" name="position" >
-                                    <option selected="">Open this select menu</option>
                                     <option value="f_top">Top Of The Front Page</option>
                                     <option value="f_mid">Middle of The Front Page</option>
+                                    <option value="f_end">End of The Front Page</option>
                                     <option class="blog" value="blog"> Select Blog</option>
                                 </select>
                                 @error('position')
@@ -70,10 +70,21 @@ active
                             <div class="form-group option d-none" id="option">
                                 <label for="favicon">Select A Blog</label>
                                 <select class="form-control" id="selectDefault" name="blog">
+                                    <option value="null">Select A Blog</option>
                                     @foreach ($blogs as $blog)
                                     <option value="{{$blog->id }}">{{ $blog->title }}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="image">Ad Link</label>
+                                <input type="text" name="link" class="form-control" id="title" placeholder="Link">
+                                    @error('link')
+                                    <span class="text-danger">{{$message}}</span>
+                                    @enderror
                             </div>
                         </div>
 

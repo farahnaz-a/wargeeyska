@@ -15,9 +15,11 @@ use App\Http\Controllers\LogoController;
 use App\Http\Controllers\ReporterController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VideoController;
 use App\Models\Blog;
 use App\Models\FooterAbout;
 use App\Models\FooterContact;
+
 use Illuminate\Support\Facades\Route;
 use League\CommonMark\Extension\FrontMatter\FrontMatterParser;
 
@@ -44,37 +46,61 @@ Route::post('/login/register', [LoginRegister::class, 'index'])->name('frontend.
 //Blogs by Category
 Route::get('/category/blog/{id}', [FrontendController::class, 'blogByCategory'])->name('frontend.blog_category');
 
+//video page
+Route::get('/video',[FrontendController::class, 'video'])->name('frontend.video');
+
 //Admin
 Route::group(['prefix' => 'admin','middleware' => 'checkAdmin'], function () {
+
       Route::get('/dashboard',[AdminController::class , 'index'])->name('admin.dashboard');
+
     // Category Controller
       Route::resource('categories', CategoryController::class);
+
     // SubCategory Controller
       Route::resource('subcategories', SubCategoryController::class);
+
     // About Controller
       Route::resource('about', AboutController::class);
+
     // logo Controller
       Route::resource('logo', LogoController::class);
+
       // ads Controller
      Route::resource('adAdmin', AdController::class); 
+
       // ads Requests
      Route::get('/ad/request/', [AdController::class, 'request'])->name('adRequest'); 
+
       // ads Aprovel
      Route::get('/ad/aprove/{id}', [AdController::class, 'aprove'])->name('adAprove'); 
+
     // favicon Controller
       Route::resource('favicon', FaviconController::class);
+
     // footer about Controller
       Route::resource('footer_about', FooterAboutController::class);
+
     // footer controller Controller
       Route::resource('footer_contact', FooterContactController::class);
+      
     // Reporters Blog Controller
       Route::get('/reporter/blogs', [AdminBlogController::class, 'index'])->name('reporter.blog');
       Route::get('/reporter/pending/blogs', [AdminBlogController::class, 'pending'])->name('reporter.pending_blog');
       Route::post('/reporter/blogs/access', [AdminBlogController::class, 'published'])->name('reporter.blog_published');
       Route::get('/reporter/blogs/access/{id}', [AdminBlogController::class, 'details'])->name('reporter.blog_details');
       Route::get('/reporter/blogs/delete/{id}', [AdminBlogController::class, 'delete'])->name('reporter.blog_delete');
-
       Route::get('/add/aproved/list', [AdminBlogController::class, 'adminAdList'])->name('ad.allAdmin');
+
+        //Videos
+      Route::resource('reportervideos', VideoController::class); 
+
+        //Video Request
+      Route::get('/pending/videos', [VideoController::class,'videoRequest'])->name('admin.videoRequest');
+      Route::get('/approve/videos/{id}', [VideoController::class,'published'])->name('admin.videoApprove');
+
+
+     
 
       
 });
@@ -90,11 +116,14 @@ Route::group(['prefix' => 'reporter', 'middleware' => 'checkReporter'], function
       Route::resource('blogs', BlogController::class);
        // ads Requests
      Route::get('/ad/request/', [AdController::class, 'request'])->name('reporter.adRequest'); 
-
           // ads Controller
      Route::resource('adReporter', AdController::class); 
       // Subcategory
       Route::post('blog_subcategories', [BlogController::class,'subcategories'])->name('blog.subcategories');
+      //Videos
+      Route::resource('videos', VideoController::class); 
+      ////Video Request
+      Route::get('/pending/videos', [VideoController::class,'videoRequest'])->name('reporter.videoRequest');
 });
 
 

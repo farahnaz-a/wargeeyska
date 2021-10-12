@@ -1,12 +1,10 @@
 @extends('layouts.frontend')
 
 @section('title')
-{{ config('app.name') }} | About
+{{ config('app.name') }} | Login
 @endsection
 
-@section('about')
-active
-@endsection
+
 
 @section('content')
 

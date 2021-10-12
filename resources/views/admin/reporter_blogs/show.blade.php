@@ -72,8 +72,10 @@ active
                                     <th class="font-weight-bold">Subcategory</th>
                                     @if ($details->subcategory !=null )
                                     <td>{{$details->subcategory->name}}</td>
-                                    @endif
+                                    @else
                                     <td><span class="text-danger">No Subcategory</span></td>
+                                    @endif
+                                    
                                 </tr>
                                 <tr>
                                     <th class="font-weight-bold">Title</th>
@@ -116,25 +118,30 @@ active
                                 </tr>
 
                                 <tr>
-                                    <th class="font-weight-bold">Post Status</th>
+                                    <th class="font-weight-bold">Approval</th>
                                     @if ($details->access_status == 'not_published')
-                                    @if (Auth::user()->role == 'admin')
                                     <td>
                                         <form action="{{route('reporter.blog_published')}}" method="POST">
                                             @csrf
                                             <input type="hidden" name="id" value="{{ $details->id }}">
                                             <button type="submit"
-                                                class="btn btn-danger waves-effect waves-float waves-light">No
-                                                Publishd</button>
+                                                class="btn btn-sm btn-success">Approve</button>
                                         </form>
                                     </td>
                                     @else
-                                    <td class="text-danger">Not published yet</td>
+                                    <td class="text-danger">Approved</td>
                                     @endif
 
-                                    @else
-                                    <td class="text-success">Published</td>
-                                    @endif
+                                   
+
+                                     
+                                </tr>
+
+                                <tr>
+                                    <th class="font-weight-bold">Reject</th>
+                                     <td>
+                                         <a class="btn btn-sm btn-danger" href="{{ route('reporter.blog_delete',$details->id) }}">Reject</a>
+                                     </td>
                                 </tr>
                             </tbody>
 

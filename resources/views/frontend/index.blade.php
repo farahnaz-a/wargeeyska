@@ -20,7 +20,7 @@ active
 <!-- Latest News Area End -->
 
 <!-- Ad Content Area Start -->
-@include('includes.ad_content')
+@include('includes.ad_middle')
 <!-- Ad Content Area End -->
 
 <!-- 1rd Block Wrapper Start -->
@@ -961,13 +961,7 @@ active
 <!-- 3rd Block Wrapper End -->
 
 <!-- Ad Content Area Start -->
-<div class="utf_ad_content_area text-center utf_banner_area">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12"> <img class="img-fluid" src="images/banner-ads/ad-content-two.png" alt="" /> </div>
-        </div>
-    </div>
-</div>
+@include('includes.ad_end')
 <!-- Ad Content Area End -->
 
 

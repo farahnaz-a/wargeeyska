@@ -173,39 +173,10 @@
                                     <div class="comment-content">
                                         <p>{{ $comment->text }}</p>
                                     </div>
-                                    <div class="text-left"> 
-                                        <a class="comment-reply" href="#">
-                                          <i class="fa fa-share"></i> Reply
-                                        </a> 
-                                    </div>
                                 </div>
                             </div>
                              
-                              <ul class="comments-reply">
-                                  @foreach ($replay as $item)
-                                  @if ($comment->id == $item->comment_id)
-                                  <li>
-                                    <div class="comment-body">
-                                        <div class="meta-data">
-                                             <span class="comment-author">{{$item->name}}</span>
-                                             <span class="comment-date">{{ $item->email}}</span>
-                                             {{-- <span class="comment-date pull-right">{{ $item->created_at->format('d M, Y')}}</span>  --}}
-                                        </div>
-                                        <div class="comment-content">
-                                            <p>{{ $item->text }}</p>
-                                        </div>
-                                        <div class="text-left"> 
-                                            <a class="comment-reply" href="#">
-                                              <i class="fa fa-share"></i> Reply
-                                            </a> 
-                                        </div>
-                                    </div>
-                                </li>
-                                @endif
-                                 
-                                @endforeach
-                                
-                            </ul>
+                         
                              
                            
                             {{-- <div class="comment last"> <img class="comment-avatar pull-left" alt=""
@@ -324,7 +295,7 @@
                         {{-- <img src="https://static.remove.bg/remove-bg-web/8fb1a6ef22fefc0b0866661b4c9b922515be4ae9/assets/start_remove-c851bdf8d3127a24e2d137a55b1b427378cd17385b01aec6e59d5d4b5f39d2ec.png" alt=""/> --}}
                     </div>
 
-                    <div class="widget widget-tags">
+                    {{-- <div class="widget widget-tags">
                         <h3 class="utf_block_title"><span>Popular Tags</span></h3>
                         <ul class="unstyled clearfix">
                             <li><a href="#">Business</a></li>
@@ -339,9 +310,9 @@
                             <li><a href="#">Wordpress</a></li>
                             <li><a href="#">Customer</a></li>
                         </ul>
-                    </div>
+                    </div> --}}
 
-                    <div class="widget m-bottom-0">
+                    {{-- <div class="widget m-bottom-0">
                         <h3 class="utf_block_title"><span>Newsletter</span></h3>
                         <div class="utf_newsletter_block">
                             <div class="utf_newsletter_introtext">
@@ -360,7 +331,7 @@
                                 </form>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

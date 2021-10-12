@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Reply;
 use App\Models\SubCategory;
+use App\Models\Video;
 use App\Models\ViewCount;
 use Facade\FlareClient\View;
 use Illuminate\Auth\Events\Validated;
@@ -26,8 +27,10 @@ class FrontendController extends Controller
         $subcategories = SubCategory::get();
         $blogs         = Blog::get();
 
+        $videos        = Video::where('access_status','published')->latest()->get();
+
         return view('frontend.index',
-              compact('featuredNews1','featuredNews2','featuredNews3','featuredNews4','latests','categories','subcategories','blogs'));
+              compact('featuredNews1','featuredNews2','featuredNews3','featuredNews4','latests','categories','subcategories','blogs','videos'));
     }
 
 
@@ -93,6 +96,12 @@ class FrontendController extends Controller
             $subcategories = SubCategory::where('category_id',$id)->get();
 
             return view('frontend.news_by_category',compact('blogs','category','subcategories'));
+        }
+
+        public function video(){
+
+            $videos = Video::latest()->paginate(6);
+            return view('frontend.video',compact('videos'));
         }
 
     

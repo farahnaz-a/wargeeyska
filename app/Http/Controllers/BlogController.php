@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ad;
 use App\Models\Blog;
 use App\Models\Category;
 use App\Models\SubCategory;
@@ -26,7 +27,7 @@ class BlogController extends Controller
     {
         $user = Auth::user()->id;
 
-        $blogs = Blog::latest()->where('user_id',$user)->get();
+        $blogs = Ad::latest()->where('user_id',$user)->get();
 
         return view('reporters.blogs.index',compact('blogs'));
 

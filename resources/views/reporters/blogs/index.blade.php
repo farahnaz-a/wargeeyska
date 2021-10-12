@@ -20,7 +20,7 @@ active
             <h2 class="content-header-title float-left mb-0">Reporter Dashboard</h2>
             <div class="breadcrumb-wrapper">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item">News Categories</li>
+                    <li class="breadcrumb-item">Aproved Blog List</li>
                 </ol>
             </div>
         </div>

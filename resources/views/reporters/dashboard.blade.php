@@ -428,36 +428,105 @@
                                     stroke-linejoin="round" class="feather feather-circle">
                                     <circle cx="12" cy="12" r="10"></circle>
                                 </svg>
-                                <span class="menu-item text-truncate" data-i18n="List">Trash List</span>
+                                <span class="menu-item text-truncate" data-i18n="List">Rejected Blogs</span>
                             </a>
                         </li>
                     </ul>
                 </li>
 
+
                   {{-- Ads --}}
-                  <li class="navigation-header">
+                <li class="navigation-header">
                     <span data-i18n="Blogs">Ads</span>
                     <i data-feather="more-horizontal"></i>
                 </li>
 
                 {{-- Ads list --}}
-
-                <li class="nav-item @yield('adList')">
-                    <a class="d-flex align-items-center" href="{{ route('adReporter.index') }}"><i data-feather='users'></i>
-                        <span class="menu-title text-truncate" data-i18n="Chat">Approved Ads</span>
+                <li class="nav-item has-sub" style="">
+                    <a class="d-flex align-items-center" href="#">
+                        <i data-feather='target'></i>
+                        <span class="menu-title text-truncate" data-i18n="Invoice">Ads</span>
                     </a>
-                </li>
-                <li class="nav-item @yield('adReporterRequest')">
-                    <a class="d-flex align-items-center" href="{{ route('reporter.adRequest') }}"><i data-feather='users'></i>
-                        <span class="menu-title text-truncate" data-i18n="Chat">Pending Ads</span>
-                    </a>
-                </li>
-
-                <li class="nav-item @yield('adPost')">
-                    <a class="d-flex align-items-center" href="{{route('adReporter.create')}}"><i data-feather='users'></i>
-                        <span class="menu-title text-truncate" data-i18n="Chat">Post a add</span>
-                    </a>
+                    <ul class="menu-content">
+                        <li class="nav-item @yield('adList')">
+                            <a class="d-flex align-items-center" href="{{ route('adReporter.index') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-circle">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                </svg>
+                                <span class="menu-title text-truncate" data-i18n="Chat">Approved Ads</span>
+                            </a>
+                        </li>
+                        <li class=" nav-item @yield('adReporterRequest')">
+                            <a class="d-flex align-items-center" href="{{ route('reporter.adRequest') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-circle">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                </svg>
+                                <span class="menu-title text-truncate" data-i18n="Chat">Pending Ads</span>
+                            </a>
+                        </li>
+                        <li class="nav-item  @yield('adPost')">
+                            <a class="d-flex align-items-center" href="{{route('adReporter.create')}}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-circle">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                </svg>
+                                <span class="menu-title text-truncate" data-i18n="Chat">Post a add</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li> 
+
+
+                    {{-- Videos --}}
+                    <li class="navigation-header">
+                        <span data-i18n="Blogs">Videos</span>
+                        <i data-feather="more-horizontal"></i>
+                    </li>
+    
+                    {{-- Videos --}}
+                    <li class="nav-item has-sub" style="">
+                        <a class="d-flex align-items-center" href="#">
+                            <i data-feather='target'></i>
+                            <span class="menu-title text-truncate" data-i18n="Invoice">Videos</span>
+                        </a>
+                        <ul class="menu-content">
+                            <li class="nav-item @yield('videoIndex')">
+                                <a class="d-flex align-items-center" href="{{ route('videos.index') }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="feather feather-circle">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                    </svg>
+                                    <span class="menu-title text-truncate" data-i18n="Chat">Approved Videos</span>
+                                </a>
+                            </li>
+                            <li class=" nav-item @yield('videoPending')">
+                                <a class="d-flex align-items-center" href="{{ route('reporter.videoRequest') }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="feather feather-circle">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                    </svg>
+                                    <span class="menu-title text-truncate" data-i18n="Chat">Pending Videos</span>
+                                </a>
+                            </li>
+                            <li class="nav-item  @yield('videoPost')">
+                                <a class="d-flex align-items-center" href="{{route('videos.create')}}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="feather feather-circle">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                    </svg>
+                                    <span class="menu-title text-truncate" data-i18n="Chat">Post a Video</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li> 
             </ul>
         </div>
     </div>

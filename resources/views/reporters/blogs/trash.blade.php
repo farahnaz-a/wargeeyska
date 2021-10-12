@@ -2,11 +2,11 @@
 
 {{-- Title --}}
 @section('title')
-{{ config('app.name') }} | Blogs List
+{{ config('app.name') }} | Rejected Blog List
 @endsection
 
 {{-- Menu Active --}}
-@section('blogsIndex')
+@section('blogTrash')
 active
 @endsection
 
@@ -20,7 +20,7 @@ active
             <h2 class="content-header-title float-left mb-0">Reporter Dashboard</h2>
             <div class="breadcrumb-wrapper">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item">News Categories</li>
+                    <li class="breadcrumb-item">Rejected Blogs</li>
                 </ol>
             </div>
         </div>
@@ -35,7 +35,7 @@ active
         <div class="col-lg-12 col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>List of all Blogs</h4>
+                    <h4>List of all Rejected Blogs</h4>
 
                     @if (session('success'))
                     <div class="alert alert-success">{{ session('success') }}</div>
