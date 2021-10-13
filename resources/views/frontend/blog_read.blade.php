@@ -295,7 +295,9 @@
                         {{-- <img src="https://static.remove.bg/remove-bg-web/8fb1a6ef22fefc0b0866661b4c9b922515be4ae9/assets/start_remove-c851bdf8d3127a24e2d137a55b1b427378cd17385b01aec6e59d5d4b5f39d2ec.png" alt=""/> --}}
                     </div>
 
-                    {{-- <div class="widget widget-tags">
+                    <br>
+                    <br>
+                    <div class="widget widget-tags">
                         <h3 class="utf_block_title"><span>Popular Tags</span></h3>
                         <ul class="unstyled clearfix">
                             <li><a href="#">Business</a></li>
@@ -310,7 +312,7 @@
                             <li><a href="#">Wordpress</a></li>
                             <li><a href="#">Customer</a></li>
                         </ul>
-                    </div> --}}
+                    </div>
 
                     {{-- <div class="widget m-bottom-0">
                         <h3 class="utf_block_title"><span>Newsletter</span></h3>
