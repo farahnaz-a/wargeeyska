@@ -94,9 +94,27 @@
     <!-- BEGIN: Header-->
     <nav class="header-navbar navbar navbar-expand-lg align-items-center floating-nav navbar-light navbar-shadow">
         <div class="navbar-container d-flex content">
+            <div class="bookmark-wrapper d-flex align-items-center">
+                <ul class="nav navbar-nav d-xl-none">
+                    <li class="nav-item"></li>
+                    <a class="nav-link menu-toggle" href="javascript:void(0);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-menu ficon">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </a>
+                </ul>
+            </div>
             <ul class="nav navbar-nav align-items-center ml-auto">
-                <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-style"><i class="ficon"
-                            data-feather="moon"></i></a></li>
+                <li class="nav-item d-none d-lg-block">
+                    <a class="nav-link nav-link-style">
+                        <i class="ficon" data-feather="moon"></i>
+                    </a>
+                </li>
+
                 {{-- <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon"
                             data-feather="search"></i></a>
                     <div class="search-input">
@@ -139,20 +157,20 @@
                                         alt="avatar" width="32" height="32">
                                     </div> --}}
                                 </div>
-                                <div class="media-body">
-                                    <p class="media-heading">
-                                        <span class="font-weight-bolder">{{ $unread->user->name }}</span>
-                                    </p>
-                                    <small class="notification-text">
-                                        {{ $unread->title }}
-                                    </small>
+                                    <div class="media-body">
+                                        <p class="media-heading">
+                                            <span class="font-weight-bolder">{{ $unread->user->name }}</span>
+                                        </p>
+                                        <small class="notification-text">
+                                            {{ $unread->title }}
+                                        </small>
+                                    </div>
                                 </div>
-        </div>
-        </a>
-        </li>
-        @endforeach
-        </ul>
-        </li>
+                            </a>
+                        </li>
+                       @endforeach
+                   </ul>
+                </li>
         <li class="nav-item dropdown dropdown-user">
             <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="javascript:void(0);"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -436,15 +454,6 @@
                     </ul>
                 </li>
 
-
-
-
-
-
-
-
-
-
                 {{-- Footer, Logo and favicon--}}
                 <li class="navigation-header">
                     <span data-i18n="About">Footer, Logo and Favicon</span>
@@ -467,21 +476,19 @@
                 </li>
 
                 {{-- Footer About us --}}
-                <li class="nav-item @yield('aboutIndex')">
+                <li class="nav-item @yield('footerAboutIndex')">
                     <a class="d-flex align-items-center" href="{{route('footer_about.index')}}"><i
                             data-feather='users'></i>
                         <span class="menu-title text-truncate" data-i18n="Chat">Footer About</span>
                     </a>
                 </li>
                 {{-- Footer Contact us --}}
-                <li class="nav-item @yield('aboutIndex')">
+                <li class="nav-item @yield('footerContactIndex')">
                     <a class="d-flex align-items-center" href="{{ route('footer_contact.index') }}"><i
                             data-feather='users'></i>
                         <span class="menu-title text-truncate" data-i18n="Chat">Footer Contact</span>
                     </a>
                 </li>
-
-
             </ul>
         </div>
     </div>
