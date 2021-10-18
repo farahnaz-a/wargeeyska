@@ -17,6 +17,7 @@ class AdController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('checkReporter')->except(['store', 'update']);
     }
     /**
      * Display a listing of the resource.
@@ -125,6 +126,9 @@ class AdController extends Controller
          } 
          if (Auth::user()->role == 'reporter') {
             return redirect()->route('reporter.adRequest')->with('create','Added Successfully');
+         } 
+         if (Auth::user()->role == 'user') {
+            return redirect()->route('user.dashboard')->with('create','Added Successfully');
          } 
         
     }

@@ -127,6 +127,7 @@
 <script src="{{ asset('frontend_assets/js/owl.carousel.min.js') }}"></script>
 <script src="{{ asset('frontend_assets/js/jquery.colorbox.js') }}"></script>
 <script src="{{ asset('frontend_assets/js/smoothscroll.js') }}"></script>
+@yield('js')
 <script src="{{ asset('frontend_assets/js/custom_script.js') }}"></script>
 <script>
     /* Loading Js*/

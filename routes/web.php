@@ -34,6 +34,8 @@ use League\CommonMark\Extension\FrontMatter\FrontMatterParser;
 |
 */
 
+Route::get('/dashboard', function(){ return redirect()->route('admin.dashboard'); })->name('dashboard');
+
 Route::get('/', [FrontendController::class, 'index']);
 //Frontend About
 Route::get('/about', [FrontendController::class, 'about'])->name('frontend.about');
@@ -117,19 +119,22 @@ Route::group(['prefix' => 'reporter', 'middleware' => 'checkReporter'], function
        // ads Requests
      Route::get('/ad/request/', [AdController::class, 'request'])->name('reporter.adRequest'); 
           // ads Controller
-     Route::resource('adReporter', AdController::class); 
-      // Subcategory
-      Route::post('blog_subcategories', [BlogController::class,'subcategories'])->name('blog.subcategories');
-      //Videos
-      Route::resource('videos', VideoController::class); 
-      ////Video Request
-      Route::get('/pending/videos', [VideoController::class,'videoRequest'])->name('reporter.videoRequest');
-});
-
+          // Subcategory
+          Route::post('blog_subcategories', [BlogController::class,'subcategories'])->name('blog.subcategories');
+          //Videos
+          Route::resource('videos', VideoController::class); 
+          ////Video Request
+          Route::get('/pending/videos', [VideoController::class,'videoRequest'])->name('reporter.videoRequest');
+        });
+        Route::group(['prefix' => 'reporter'], function(){
+          Route::resource('adReporter', AdController::class); 
+        });
 
 //Reporters
 Route::group(['prefix' => 'user', 'middleware' => 'checkUser'], function () {
   Route::get('/dashboard',[UserController::class , 'index'])->name('user.dashboard');
+  Route::get('/ad-create', [UserController::class, 'create'])->name('user.add.create');
+  Route::get('/become-a-reporter', [UserController::class, 'reporter'])->name('become.reporter');
 });
 
 
