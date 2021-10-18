@@ -105,7 +105,7 @@ active
                                     </td>
                                     <td>
                                         @if ($ad->payment_status == "pending")
-                                        <span class="font-weight-bold text-danger">Pending</span>
+                                        <span class="font-weight-bold text-danger">Unpaid</span>
                                         @elseif($ad->payment_status == "admin_post")
                                         <span class="font-weight-bold text-success">Admin Post</span>
                                         @else

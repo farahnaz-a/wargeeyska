@@ -41,7 +41,7 @@ active
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="image">Favicon</label>
+                                <label for="image">Ad Image</label>
                                 <div class="custom-file">
                                     <input type="file" name="image" class="custom-file-input" id="image">
                                     <label class="custom-file-label" for="ad">Choose Ad photo</label>
@@ -74,6 +74,16 @@ active
                                         <option value="{{$blog->id }}">{{ $blog->title }}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="image">Ad Link</label>
+                                <input type="text" name="link" class="form-control" id="title" placeholder="Link">
+                                    @error('link')
+                                    <span class="text-danger">{{$message}}</span>
+                                    @enderror
                             </div>
                         </div>
 

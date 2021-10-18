@@ -46,7 +46,7 @@ class AdController extends Controller
     {
         if (Auth::user()->role == 'admin') {
            
-            $ads = Ad::where('aprove_status','pending')->get();
+            $ads = Ad::where('payment_status','!=','pending')->where('aprove_status','pending')->get();
            
             return view('admin.ad.ad_pending_list',compact('ads'));
         }
@@ -93,9 +93,9 @@ class AdController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'image'              => 'required|image',
+            'image'             => 'required|image',
             'position'          => 'required',
-            'link'          => 'required',
+            'link'              => 'required',
          ]);
 
     

@@ -22,7 +22,7 @@ class AdminBlogController extends Controller
 
      public function pending()
     {
-        $blogs = Blog::where('access_status','not_published')->get();
+        $blogs = Blog::where('access_status','not_published')->where('payment_status','!=','pending')->get();
         return view('admin.reporter_blogs.pending_request',compact('blogs'));
     }
 
