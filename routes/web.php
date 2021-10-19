@@ -85,14 +85,23 @@ Route::group(['prefix' => 'admin','middleware' => 'checkAdmin'], function () {
 
     // footer controller Controller
       Route::resource('footer_contact', FooterContactController::class);
+
+      
       
     // Reporters Blog Controller
       Route::get('/reporter/blogs', [AdminBlogController::class, 'index'])->name('reporter.blog');
+
       Route::get('/reporter/pending/blogs', [AdminBlogController::class, 'pending'])->name('reporter.pending_blog');
+
       Route::post('/reporter/blogs/access', [AdminBlogController::class, 'published'])->name('reporter.blog_published');
+
       Route::get('/reporter/blogs/access/{id}', [AdminBlogController::class, 'details'])->name('reporter.blog_details');
+
       Route::get('/reporter/blogs/delete/{id}', [AdminBlogController::class, 'delete'])->name('reporter.blog_delete');
+
       Route::get('/add/aproved/list', [AdminBlogController::class, 'adminAdList'])->name('ad.allAdmin');
+
+
 
         //Videos
       Route::resource('reportervideos', VideoController::class); 
@@ -109,31 +118,51 @@ Route::group(['prefix' => 'admin','middleware' => 'checkAdmin'], function () {
 
 //Reporters
 Route::group(['prefix' => 'reporter', 'middleware' => 'checkReporter'], function () {
+
+
       Route::get('/dashboard',[ReporterController::class , 'index'])->name('reporter.dashboard');
+
       // Trash Controller
       Route::get('/blogs/trash', [BlogController::class, 'rejected'])->name('blog.trash');
-      Route::get('/blog/delete/{id}', [BlogController::class, 'p_delete'])->name('blog.delete');  
+
+      Route::get('/blog/delete/{id}', [BlogController::class, 'p_delete'])->name('blog.delete'); 
+
       Route::get('/blog/restore/{id}', [BlogController::class, 'restore'])->name('blog.restore'); 
+
       // Blog Controller
       Route::resource('blogs', BlogController::class);
-       // ads Requests
-     Route::get('/ad/request/', [AdController::class, 'request'])->name('reporter.adRequest'); 
-          // ads Controller
-          // Subcategory
-          Route::post('blog_subcategories', [BlogController::class,'subcategories'])->name('blog.subcategories');
-          //Videos
-          Route::resource('videos', VideoController::class); 
-          ////Video Request
-          Route::get('/pending/videos', [VideoController::class,'videoRequest'])->name('reporter.videoRequest');
-        });
-        Route::group(['prefix' => 'reporter'], function(){
-          Route::resource('adReporter', AdController::class); 
-        });
 
-//Reporters
+      //adController
+      Route::resource('adReporter', AdController::class); 
+
+       // ads Requests
+      Route::get('/ad/request/', [AdController::class, 'request'])->name('reporter.adRequest'); 
+
+     
+      // Subcategory
+      Route::post('blog_subcategories', [BlogController::class,'subcategories'])->name('blog.subcategories');
+
+      //Videos
+      Route::resource('videos', VideoController::class); 
+
+      //Video Request
+      Route::get('/pending/videos', [VideoController::class,'videoRequest'])->name('reporter.videoRequest');
+       });
+
+    //  Route::group(['prefix' => 'reporter'], function(){
+     
+    //  });
+
+
+//users
 Route::group(['prefix' => 'user', 'middleware' => 'checkUser'], function () {
+  
   Route::get('/dashboard',[UserController::class , 'index'])->name('user.dashboard');
+
   Route::get('/ad-create', [UserController::class, 'create'])->name('user.add.create');
+
+  Route::resource('adUser', AdController::class); 
+
   Route::get('/become-a-reporter', [UserController::class, 'reporter'])->name('become.reporter');
 });
 

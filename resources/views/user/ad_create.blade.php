@@ -20,7 +20,7 @@ active
                 <h4 class="card-title">Create a AD</h4>
             </div>
             <div class="card-body">
-                <form class="form form-vertical" action="{{ route('adReporter.store') }}" enctype="multipart/form-data"
+                <form class="form form-vertical" action="{{ route('adUser.store') }}" enctype="multipart/form-data"
                     method="POST">
                     @csrf
                     <div class="row">

@@ -143,10 +143,17 @@
 
                     <div class="col-md-9 col-sm-12 header-right">
                         <div class=" float-right">
+                            @if (frontPageTopAd() != null)
                             <a href="{{ frontPageTopAd()->link }}" target="_blank">
                                 <img src="{{ asset('uploads/ads')}}/{{ frontPageTopAd()->image }}" class="img-fluid"
                                     alt="">
                             </a>
+                            @else
+                            <a href="">
+                                <img src="{{ asset('frontend_assets/images/banner-ads/ad-top-header.png')}}" class="img-fluid"
+                                    alt="">
+                            </a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -293,7 +300,6 @@
                                         @else
                                     <li>
                                         <a href="{{ route('frontend.blog_category', $category->id)}}">{{ $category->name }}</a>
-                                        
                                     </li>
                                     @endif
                                     </li>

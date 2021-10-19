@@ -30,15 +30,15 @@ function menueNews(){
 
   function frontPageTopAd(){
 
-    return \App\Models\Ad::where('ad_position','f_top')->first();
+    return \App\Models\Ad::where('ad_position','f_top')->where('aprove_status','aproved')->first();
   }
   function frontPageMiddleAd(){
 
-    return \App\Models\Ad::where('ad_position','f_mid')->first();
+    return \App\Models\Ad::where('ad_position','f_mid')->where('aprove_status','aproved')->first();
   }
   function frontPageendAd(){
 
-    return \App\Models\Ad::where('ad_position','f_end')->first();
+    return \App\Models\Ad::where('ad_position','f_end')->where('aprove_status','aproved')->first();
   }
 
 

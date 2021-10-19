@@ -2,9 +2,18 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12"> 
-                <a target="_blank" href="{{ frontPageEndAd()->link}}">
-                    <img class="img-fluid" src="{{ asset('uploads/ads')}}/{{ frontPageEndAd()->image }}" alt="" />
-                </a> 
+                @if (frontPageEndAd() != null)
+                <a href="{{ frontPageEndAd()->link }}" target="_blank">
+                    <img src="{{ asset('uploads/ads')}}/{{ frontPageEndAd()->image }}" class="img-fluid"
+                        alt="">
+                </a>
+                @else
+                <a href="">
+                    <img src="{{ asset('frontend_assets/images/banner-ads/ad-content-one.jpg')}}" class="img-fluid"
+                        alt="">
+                </a>
+                @endif
+                
             </div>
         </div>
     </div>

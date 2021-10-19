@@ -157,20 +157,20 @@
                                         alt="avatar" width="32" height="32">
                                     </div> --}}
                                 </div>
-                                    <div class="media-body">
-                                        <p class="media-heading">
-                                            <span class="font-weight-bolder">{{ $unread->user->name }}</span>
-                                        </p>
-                                        <small class="notification-text">
-                                            {{ $unread->title }}
-                                        </small>
-                                    </div>
+                                <div class="media-body">
+                                    <p class="media-heading">
+                                        <span class="font-weight-bolder">{{ $unread->user->name }}</span>
+                                    </p>
+                                    <small class="notification-text">
+                                        {{ $unread->title }}
+                                    </small>
                                 </div>
-                            </a>
-                        </li>
-                       @endforeach
-                   </ul>
-                </li>
+                            </div>
+            </a>
+            </li>
+            @endforeach
+             </ul>
+        </li>
         <li class="nav-item dropdown dropdown-user">
             <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="javascript:void(0);"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -295,7 +295,7 @@
                 {{-- category --}}
                 <li class="nav-item has-sub" style="">
                     <a class="d-flex align-items-center" href="#">
-                        <i data-feather='target'></i>
+                        <i data-feather='codesandbox'></i>
                         <span class="menu-title text-truncate" data-i18n="Invoice">Category</span>
                     </a>
                     <ul class="menu-content">
@@ -317,7 +317,7 @@
                 {{-- sub category --}}
                 <li class="nav-item has-sub" style="">
                     <a class="d-flex align-items-center" href="#">
-                        <i data-feather='target'></i>
+                        <i data-feather='crosshair'></i>
                         <span class="menu-title text-truncate" data-i18n="Invoice">Subcategory</span>
                     </a>
                     <ul class="menu-content">
@@ -343,6 +343,41 @@
                         </li>
                     </ul>
                 </li>
+                {{-- Footer, Logo and favicon--}}
+                <li class="navigation-header">
+                    <span data-i18n="About">Footer, Logo and Favicon</span>
+                    <i data-feather="more-horizontal"></i>
+                </li>
+
+                {{-- Logo --}}
+                <li class="nav-item @yield('logoIndex')">
+                    <a class="d-flex align-items-center" href="{{ route('logo.index') }}">
+                        <i data-feather='chrome'></i>
+                        <span class="menu-title text-truncate" data-i18n="Chat">Logo</span>
+                    </a>
+                </li>
+
+                {{-- Favicon --}}
+                <li class="nav-item @yield('faviconIndex')">
+                    <a class="d-flex align-items-center" href="{{ route('favicon.index') }}">
+                        <i data-feather='command'></i>
+                        <span class="menu-title text-truncate" data-i18n="Chat">Favicon</span>
+                    </a>
+                </li>
+                 {{-- Footer About us --}}
+                 <li class="nav-item @yield('footerAboutIndex')">
+                    <a class="d-flex align-items-center" href="{{route('footer_about.index')}}">
+                        <i data-feather='edit'></i>
+                        <span class="menu-title text-truncate" data-i18n="Chat">Footer About</span>
+                    </a>
+                </li>
+                {{-- Footer Contact us --}}
+                <li class="nav-item @yield('footerContactIndex')">
+                    <a class="d-flex align-items-center" href="{{ route('footer_contact.index') }}">
+                        <i data-feather='phone-call'></i>
+                        <span class="menu-title text-truncate" data-i18n="Chat">Footer Contact</span>
+                    </a>
+                </li>
 
                 {{-- About --}}
                 <li class="navigation-header">
@@ -351,7 +386,8 @@
                 </li>
                 {{-- About --}}
                 <li class="nav-item @yield('aboutIndex')">
-                    <a class="d-flex align-items-center" href="{{ route('about.index') }}"><i data-feather='users'></i>
+                    <a class="d-flex align-items-center" href="{{ route('about.index') }}">
+                        <i data-feather='file-text'></i>
                         <span class="menu-title text-truncate" data-i18n="Chat">About</span>
                     </a>
                 </li>
@@ -363,7 +399,7 @@
                 </li>
                 <li class="nav-item has-sub" style="">
                     <a class="d-flex align-items-center" href="#">
-                        <i data-feather='target'></i>
+                        <i data-feather='image'></i>
                         <span class="menu-title text-truncate" data-i18n="Invoice">Ads</span>
                     </a>
                     <ul class="menu-content">
@@ -407,14 +443,15 @@
                 </li>
                 {{-- Blogs --}}
                 <li class="nav-item @yield('reporterblogsIndex')">
-                    <a class="d-flex align-items-center" href="{{route('reporter.blog')}}"><i data-feather='users'></i>
+                    <a class="d-flex align-items-center" href="{{route('reporter.blog')}}">
+                        <i data-feather='layers'></i>
                         <span class="menu-title text-truncate" data-i18n="Chat">Reporter Blogs</span>
                     </a>
                 </li>
                 {{-- Pending Blogs --}}
                 <li class="nav-item @yield('reporterblogsPending')">
-                    <a class="d-flex align-items-center" href="{{route('reporter.pending_blog')}}"><i
-                            data-feather='users'></i>
+                    <a class="d-flex align-items-center" href="{{route('reporter.pending_blog')}}">
+                        <i data-feather='octagon'></i>
                         <span class="menu-title text-truncate" data-i18n="Chat">Pending Requist</span>
                     </a>
                 </li>
@@ -427,7 +464,7 @@
 
                 <li class="nav-item has-sub" style="">
                     <a class="d-flex align-items-center" href="#">
-                        <i data-feather='target'></i>
+                        <i data-feather='film'></i>
                         <span class="menu-title text-truncate" data-i18n="Invoice">Videos</span>
                     </a>
                     <ul class="menu-content">
@@ -454,41 +491,9 @@
                     </ul>
                 </li>
 
-                {{-- Footer, Logo and favicon--}}
-                <li class="navigation-header">
-                    <span data-i18n="About">Footer, Logo and Favicon</span>
-                    <i data-feather="more-horizontal"></i>
-                </li>
 
-                {{-- Logo --}}
-                <li class="nav-item @yield('logoIndex')">
-                    <a class="d-flex align-items-center" href="{{ route('logo.index') }}"><i data-feather='users'></i>
-                        <span class="menu-title text-truncate" data-i18n="Chat">Logo</span>
-                    </a>
-                </li>
 
-                {{-- Favicon --}}
-                <li class="nav-item @yield('faviconIndex')">
-                    <a class="d-flex align-items-center" href="{{ route('favicon.index') }}"><i
-                            data-feather='users'></i>
-                        <span class="menu-title text-truncate" data-i18n="Chat">Favicon</span>
-                    </a>
-                </li>
-
-                {{-- Footer About us --}}
-                <li class="nav-item @yield('footerAboutIndex')">
-                    <a class="d-flex align-items-center" href="{{route('footer_about.index')}}"><i
-                            data-feather='users'></i>
-                        <span class="menu-title text-truncate" data-i18n="Chat">Footer About</span>
-                    </a>
-                </li>
-                {{-- Footer Contact us --}}
-                <li class="nav-item @yield('footerContactIndex')">
-                    <a class="d-flex align-items-center" href="{{ route('footer_contact.index') }}"><i
-                            data-feather='users'></i>
-                        <span class="menu-title text-truncate" data-i18n="Chat">Footer Contact</span>
-                    </a>
-                </li>
+               
             </ul>
         </div>
     </div>
@@ -594,7 +599,6 @@
                 ]
             });
         })
-
     </script>
     <!-- BEGIN: Page JS-->
     <!-- END: Page JS-->
@@ -612,7 +616,6 @@
             }
 
         )
-
     </script>
 
     @yield('js')

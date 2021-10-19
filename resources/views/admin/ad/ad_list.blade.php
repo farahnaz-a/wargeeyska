@@ -101,7 +101,7 @@ active
                                     </td>
                                     <td>
                                        
-                                        <img src="{{ asset('uploads/ads') }}/{{ $ad->image }}" alt="Ad Image" height="130px" width="220px">
+                                        <img src="{{ asset('uploads/ads') }}/{{ $ad->image }}" alt="Ad Image" width="200">
                                     </td>
                                     <td>
                                         @if ($ad->payment_status == "pending")

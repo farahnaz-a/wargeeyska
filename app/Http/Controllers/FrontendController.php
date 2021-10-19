@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\About;
+use App\Models\Ad;
 use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Comment;
@@ -58,12 +59,14 @@ class FrontendController extends Controller
             $viewCount->blog_id = $id;
             $viewCount->save();
         }
+
+        $ad = Ad::where('blog_id', $id)->where('aprove_status','aproved')->first();
         
         $viewCount  = ViewCount::where('blog_id',$id)->first();
         $populer    = ViewCount::orderBy('view_count','DESC')->take(5)->get();
         $comments   = Comment::where('blog_id',$id)->get();
         $replay     = Reply::get();
-        return view('frontend.blog_read',compact('blog','relateds','viewCount','populer','comments','replay'));
+        return view('frontend.blog_read',compact('blog','relateds','viewCount','populer','comments','replay','ad'));
         }
 
 

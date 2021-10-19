@@ -290,9 +290,20 @@
                         </div>
                     </div>
 
-                    <div > 
-                        <img src="{{ asset('frontend_assets/images/banner-ads/ad-sidebar.png')}}" alt="" />
-                        {{-- <img src="https://static.remove.bg/remove-bg-web/8fb1a6ef22fefc0b0866661b4c9b922515be4ae9/assets/start_remove-c851bdf8d3127a24e2d137a55b1b427378cd17385b01aec6e59d5d4b5f39d2ec.png" alt=""/> --}}
+                    <div> 
+
+                        @if ($ad != null)
+                        <a href="{{ $ad->link }}" target="_blank">
+                            <img src="{{ asset('uploads/ads')}}/{{ $ad->image }}" class="img-fluid"
+                                alt="">
+                        </a>
+                        @else
+                        <a href="">
+                            <img src="{{ asset('frontend_assets/images/banner-ads/ad-sidephpbar.png')}}" class="img-fluid"
+                                alt="">
+                        </a>
+                        @endif 
+                      
                     </div>
 
                     <br>

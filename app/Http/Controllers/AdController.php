@@ -17,7 +17,7 @@ class AdController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('checkReporter')->except(['store', 'update']);
+        // $this->middleware('checkReporter')->except(['store', 'update']);
     }
     /**
      * Display a listing of the resource.
