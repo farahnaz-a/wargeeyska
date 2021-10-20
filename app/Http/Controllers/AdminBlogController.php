@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use Auth;
 
 class AdminBlogController extends Controller
 {
@@ -53,7 +54,14 @@ class AdminBlogController extends Controller
       
         $details = Blog::find($id);
         $details->delete();
-        return redirect()->back()->with('delete','Deleted successfully');
+
+        if (Auth::user()->role == 'admin') {
+            return redirect()->route('reporter.blog')->withSuccess('Added Successfully');
+        }
+        else{
+          // Return Back to Index With Success Message
+          return redirect()->route('blogs.index')->withSuccess('Added Successfully');
+        }
 
     }
 }

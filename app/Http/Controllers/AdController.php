@@ -96,21 +96,27 @@ class AdController extends Controller
         $request->validate([
             'image'             => 'required|image',
             'position'          => 'required',
-            'link'              => 'required',
+            
          ]);
 
     
          
          $ad = new Ad();
          $ad->user_id           = Auth::user()->id;
-         if (Auth::user()->role == 'admin') {
+
+         if (Auth::user()->role == 'admin')
+        {
             $ad->payment_status = 'admin_post';
-         }
+
+        }
+
          $ad->ad_position      = $request->position;
+         
          if ($request->blog != 'null') 
          {
             $ad->blog_id       = $request->blog;
          }
+
          $ad->link      = $request->link;
          $image                = $request->file('image');
          $filename            = hexdec(uniqid()) . '-image.' .$image->extension();
@@ -148,7 +154,8 @@ class AdController extends Controller
          }
       }
 
-    if ($i < 1) {
+    if ($i < 1) 
+    {
       $aprove->aprove_status = 'aproved';
       $aprove->update();
       return redirect()->back()->with('aprove','Aproved Successfully');

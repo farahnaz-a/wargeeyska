@@ -19,7 +19,7 @@ class CreateAdsTable extends Migration
             $table->unsignedBigInteger('blog_id')->nullable();
             $table->string('ad_position');
             $table->string('image');  
-            $table->string('link');  
+            $table->string('link')->nullable();  
             $table->enum('aprove_status',['pending','aproved'])->default('pending');
             $table->enum('payment_status',['pending','aproved','admin_post'])->default('pending');
             $table->enum('admin_seen_status',['unseen','seen'])->default('unseen');
