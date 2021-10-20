@@ -27,7 +27,10 @@ class BlogController extends Controller
     {
         $user = Auth::user()->id;
 
-        $blogs = Ad::latest()->where('user_id',$user)->get();
+       
+
+        $blogs = Blog::where('user_id',$user)->latest()->get();
+
 
         return view('reporters.blogs.index',compact('blogs'));
 
