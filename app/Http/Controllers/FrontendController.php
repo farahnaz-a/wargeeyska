@@ -26,7 +26,7 @@ class FrontendController extends Controller
         $latests       = Blog::where('access_status','published')->latest()->get();
         $categories    = Category::get();
         $subcategories = SubCategory::get();
-        $blogs         = Blog::get();
+        $blogs         = Blog::where('access_status','published')->get();
 
         $videos        = Video::where('access_status','published')->latest()->get();
 

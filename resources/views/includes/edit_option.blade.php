@@ -1,4 +1,7 @@
-<option value="{{$details->subcategory_id}}">{{$details->subcategory->name}}</option>
+@if ($category->subcategory_id != null)
+<option value="{{$details->subcategory_id}}">{{$details->subcategory->name}}</option> 
+@endif
+
 @foreach ($subcategories as $subcategory)
 @if ($details->subcategory_id == $subcategory->id )
 <option hidden value="{{$subcategory->id}}">{{$subcategory->name}}</option>

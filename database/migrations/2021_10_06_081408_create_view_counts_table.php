@@ -15,8 +15,11 @@ class CreateViewCountsTable extends Migration
     {
         Schema::create('view_counts', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('blog_id');
+            $table->unsignedBigInteger('blog_id');
             $table->bigInteger('view_count')->default(1);
+            $table->foreign('blog_id')
+                  ->references('id')->on('blogs')
+                  ->onDelete('cascade');  
             $table->timestamps();
         });
     }

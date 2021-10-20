@@ -6,7 +6,10 @@
 
                 <div class="item" style="background-image:url({{asset('uploads/blogs')}}/{{ $blog->thumbnail }})">
                     <div class="utf_featured_post">
-                        <div class="utf_post_content">{{$blog->subcategory->name}}
+                        <div class="utf_post_content">
+                            @if ($blog->subcateory_id != null)
+                               {{$blog->subcategory->name}}
+                            @endif
                             <h2 class="utf_post_title title-extra-large">
                                 <a href="{{ route('frontend.blog_read',$blog->id) }}">{{$blog->title}}</a>
                             </h2>

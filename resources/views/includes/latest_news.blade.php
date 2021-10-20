@@ -15,8 +15,8 @@
                                         <img class="img-fluid" src="{{ asset('uploads/blogs/')}}/{{ $item->thumbnail }}" alt="Thumbnail" />
                                     </div>
                                 </a>
-                                @if ($featuredNews2->subcategory_id != null)
-                                <a class="utf_post_cat" href="#">{{ $featuredNews2->subcategory->name}}</a>
+                                @if ($item->subcategory_id != null)
+                                <a class="utf_post_cat" href="#">{{ $item->subcategory->name}}</a>
                                 @endif
                                 <div class="utf_post_content">
                                     <h2 class="utf_post_title title-medium">

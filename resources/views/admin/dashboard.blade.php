@@ -445,7 +445,7 @@
                 <li class="nav-item @yield('reporterblogsIndex')">
                     <a class="d-flex align-items-center" href="{{route('reporter.blog')}}">
                         <i data-feather='layers'></i>
-                        <span class="menu-title text-truncate" data-i18n="Chat">Reporter Blogs</span>
+                        <span class="menu-title text-truncate" data-i18n="Chat">Blogs List</span>
                     </a>
                 </li>
                 {{-- Pending Blogs --}}
@@ -454,6 +454,29 @@
                         <i data-feather='octagon'></i>
                         <span class="menu-title text-truncate" data-i18n="Chat">Pending Requist</span>
                     </a>
+                </li>
+
+
+                {{-- Admin Blog --}}
+                <li class="nav-item has-sub" style="">
+                    <a class="d-flex align-items-center" href="#">
+                        <i data-feather='codesandbox'></i>
+                        <span class="menu-title text-truncate" data-i18n="Invoice">Admin Blog</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li class="nav-item @yield('adminBlogList')">
+                            <a class="d-flex align-items-center" href="{{route('adminBlogs.index')}}">
+                                <i data-feather='target'></i>
+                                <span class="menu-item text-truncate" data-i18n="List">List</span>
+                            </a>
+                        </li>
+                        <li class="@yield('adminBlogCreate')">
+                            <a class="d-flex align-items-center" href="{{route('adminBlogs.create')}}">
+                                <i data-feather='target'></i>
+                                <span class="menu-item text-truncate" data-i18n="Add">Create</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
                 {{-- Videos--}}
@@ -558,6 +581,7 @@
     <!-- END: Footer-->
     <!-- BEGIN: Vendor JS-->
     <script src="{{ asset('dashboard_assets/vendors/js/vendors.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
     <!-- BEGIN Vendor JS-->

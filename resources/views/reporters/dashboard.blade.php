@@ -532,9 +532,7 @@
     </div>
     <!-- END: Main Menu-->
     <!-- BEGIN: Content-->
-    @if(Route::is('reservation.index'))
-    @yield('content')
-    @else
+ 
     <div class="app-content content ">
         <div class="content-overlay">
         </div>
@@ -575,7 +573,7 @@
             </div>
         </div>
     </div>
-    @endif
+
     <!-- END: Content-->
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>

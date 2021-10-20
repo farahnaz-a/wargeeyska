@@ -15,7 +15,7 @@ active
 <div class="content-header-left col-md-12 col-12 mb-2">
     <div class="row breadcrumbs-top">
         <div class="col-12">
-            <h2 class="content-header-title float-left mb-0">Admin Dashboard</h2>
+            <h2 class="content-header-title float-left mb-0">Reporter Dashboard</h2>
             <div class="breadcrumb-wrapper">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">Create Blogs</li>
@@ -69,8 +69,9 @@ active
                                 <label for="subcategory">Select subcategory</label>
                                 <select class="form-control" aria-label="Default select example" id="subcategory"
                                     name="subcategory_id">
-                                    
-                                  @include('includes.edit_option')
+                              
+                                       @include('includes.edit_option')
+
                                 </select>
                                 @error('subcategory')
                                 <span class="text-danger">{{$message}}</span>

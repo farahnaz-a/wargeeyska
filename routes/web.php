@@ -102,6 +102,11 @@ Route::group(['prefix' => 'admin','middleware' => 'checkAdmin'], function () {
       Route::get('/add/aproved/list', [AdminBlogController::class, 'adminAdList'])->name('ad.allAdmin');
 
 
+      
+      // Admin Blog Controller
+      Route::resource('adminBlogs', BlogController::class);
+      Route::post('/adminBlog_subcategories', [BlogController::class,'subcategories'])->name('adminblog.subcategories');
+
 
         //Videos
       Route::resource('reportervideos', VideoController::class); 

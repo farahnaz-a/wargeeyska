@@ -24,18 +24,20 @@ class CreateBlogsTable extends Migration
             $table->text('quote')->nullable();
             $table->string('thumbnail');
             $table->string('image')->nullable();
-            $table->enum('payment_status',['paid','pending'])->default('pending');
+            $table->enum('payment_status',['paid','pending','admin_post'])->default('pending');
             $table->enum('read_status',['read','unread'])->default('unread');
             $table->enum('access_status',['published','not_published'])->default('not_published');
             $table->foreign('subcategory_id')
                   ->references('id')->on('sub_categories')
+                  ->onDelete('cascade');     
+            $table->foreign('category_id')
+                  ->references('id')->on('categories')
                   ->onDelete('cascade');     
             $table->foreign('user_id')
                   ->references('id')->on('users')
                   ->onDelete('cascade');     
             $table->timestamps();
             $table->softDeletes();
-
         });
     }
 

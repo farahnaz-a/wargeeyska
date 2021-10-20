@@ -1,4 +1,4 @@
-@extends('reporters.dashboard')
+@extends('admin.dashboard')
 
 {{-- Title --}}
 @section('title')
@@ -6,7 +6,7 @@
 @endsection
 
 {{-- Menu Active --}}
-@section('blogsCreate')
+@section('adminBlogCreate')
 active
 @endsection
 
@@ -15,7 +15,7 @@ active
 <div class="content-header-left col-md-12 col-12 mb-2">
     <div class="row breadcrumbs-top">
         <div class="col-12">
-            <h2 class="content-header-title float-left mb-0">Reporter Dashboard</h2>
+            <h2 class="content-header-title float-left mb-0">Admin Dashboard</h2>
             <div class="breadcrumb-wrapper">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">Create Blogs</li>
@@ -41,13 +41,13 @@ active
                 @endif
             </div>
             <div class="card-body">
-                <form action="{{route('blogs.store')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('adminBlogs.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-12">
                             <div class=form-group">
-                                <label for="category">Select category</label>
-                                <select class="form-control" aria-label="Default select example" id="category"
+                                <label for="categories">Select category</label>
+                                <select class="form-control" aria-label="Default select example" id="categories"
                                     name="category_id">
                                     <option>-Select-</option>
                                     @foreach ($categories as $category)
@@ -62,13 +62,10 @@ active
                         <div class="col-12">
                             <div class=form-group">
                                 <label for="subcategory">Select subcategory</label>
-                                <select class="form-control" aria-label="Default select example" id="subcategory"
+                                <select class="form-control" aria-label="Default select example" id="subcategories"
                                     name="subcategory_id">
-                                  @include('includes.option')
+                                    @include('includes.option')
                                 </select>
-                                @error('subcategory')
-                                <span class="text-danger">{{$message}}</span>
-                                @enderror
                             </div>
                         </div>
 
@@ -156,27 +153,28 @@ active
 @endsection
 
 @section('js')
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     $(document).ready(function() {
-        $("#category").change(function(e){
+        $("#categories").change(function(e){
             e.preventDefault(); 
             let id = $(this).val();
 
             $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+               headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+               }
+            });
         
          $.ajax({
-            url: "{{route('blog.subcategories')}}",
+            url: "{{route('adminblog.subcategories')}}",
             type: 'post',
             data: {
                 'id': id
             },
             success: function (response) {
-               
-            $('#subcategory').html(response.status);
+            $('#subcategories').html(response.status);
 
             },
 

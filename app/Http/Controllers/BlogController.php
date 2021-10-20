@@ -31,9 +31,19 @@ class BlogController extends Controller
 
         $blogs = Blog::where('user_id',$user)->latest()->get();
 
+        if (Auth::user()->role == 'admin') {
+          
+            return view('admin.admin_blog.index',compact('blogs'));
 
-        return view('reporters.blogs.index',compact('blogs'));
+         } 
+         
+         else 
+         {
+            return view('reporters.blogs.index',compact('blogs'));
 
+         }
+
+       
     }
 
     /**
@@ -43,9 +53,19 @@ class BlogController extends Controller
      */
     public function create()
     {
+
+
         $categories = Category::get();
         $subcategories = [];
-        return view('reporters.blogs.create',compact('categories','subcategories'));
+
+        if (Auth::user()->role == 'admin') {
+            return view('admin.admin_blog.create',compact('categories','subcategories'));
+        } 
+        else {
+            return view('reporters.blogs.create',compact('categories','subcategories'));
+        }
+        
+       
     }
 
 
@@ -83,6 +103,11 @@ class BlogController extends Controller
             'user_id'    => Auth::user()->id,
         ]); 
 
+        if (Auth::user()->role == 'admin') {
+            $blogs->payment_status = 'admin_post';
+        }
+        
+        $blogs->payment_status = 'paid';
         //Thumbnail Upload
         $thumbnail    = $request->file('thumbnail');
         $filename = $blogs->id. '-thumbnail.' .$thumbnail->extension();
@@ -108,8 +133,14 @@ class BlogController extends Controller
         // Save Everything In Database
         $blogs->save(); 
 
-        // Return Back to Index With Success Message
-        return redirect()->route('blogs.index')->withSuccess('Added Successfully');
+        if (Auth::user()->role == 'admin') {
+            return redirect()->route('adminBlogs.index')->withSuccess('Added Successfully');
+        }
+        else{
+          // Return Back to Index With Success Message
+          return redirect()->route('blogs.index')->withSuccess('Added Successfully');
+        }
+  
     }
 
     /**
@@ -121,8 +152,16 @@ class BlogController extends Controller
     public function show($id)
     {
         $details = Blog::where('id',$id)->first();
-        return view('reporters.blogs.show',compact('details'));
+       
+
+        if (Auth::user()->role == 'admin') {
+            return view('admin.admin_blog.show',compact('details'));
+        } 
+        else {
+            return view('reporters.blogs.show',compact('details'));
+        }
     }
+       
 
     /**
      * Show the form for editing the specified resource.
@@ -135,8 +174,19 @@ class BlogController extends Controller
         $categories = Category::get();
         $subcategories = [];
         $details = Blog::where('id',$id)->first();
-        return view('reporters.blogs.edit',compact('details','categories','subcategories'));
+
+        if (Auth::user()->role == 'admin') {
+            
+            // dd($details->category->name);
+            return view('admin.admin_blog.edit',compact('details','categories','subcategories'));
+        } 
+
+        else {
+            return view('reporters.blogs.edit',compact('details','categories','subcategories'));
+        }
     }
+        
+       
 
     /**
      * Update the specified resource in storage.
@@ -152,8 +202,8 @@ class BlogController extends Controller
             'title'              => 'required',
             'short_description'  => 'required',
             'description'        => 'required',
-            'thumbnail'          => 'image',
-            'image'              => 'image',
+            'quote'              => 'required'
+            
          ]);
 
         
@@ -191,17 +241,32 @@ class BlogController extends Controller
 
          // Save Everything In Database
          $blogs->category_id       = $request->category_id; 
-         $blogs->subcategory_id    = $request->subcategory_id; 
+
+         if ($request->subcategory_id) 
+         {
+            $blogs->subcategory_id    = $request->subcategory_id; 
+         }
          $blogs->title             = $request->title; 
          $blogs->short_description = $request->short_description; 
          $blogs->description       = $request->description; 
          $blogs->quote             = $request->quote; 
-         $blogs->video             = $request->video; 
-         $blogs->access_status     = 'not_published'; 
+         
+         if (Auth::user()->role == 'reporter') 
+         {
+            $blogs->access_status     = 'not_published'; 
+         }
+         
          $blogs->update(); 
  
          // Return Back to Index With Success Message
-         return redirect()->route('blogs.index')->with('update','Update Successfully');
+         if (Auth::user()->role == 'admin') {
+            return redirect()->route('adminBlogs.index')->with('update','Update Successfully');
+         } 
+         else {
+            return redirect()->route('blogs.index')->with('update','Update Successfully');
+         }
+         
+        
     }
 
     /**
@@ -212,15 +277,22 @@ class BlogController extends Controller
      */
     public function destroy($id)
     {
+        
         Blog::find($id)->delete();
         Blog::onlyTrashed()->find($id)->forceDelete();
-        return redirect()->back()->with('delete','Deleted successfully');
+        if (Auth::user()->role == 'admin') {
+            return redirect()->back()->with('delete','Deleted successfully');
+        }
+         else {
+            return redirect()->back()->with('delete','Deleted successfully');
+        }
+        
+        
     }
 
     public function rejected()
     {
         $blogs = Blog::onlyTrashed()->get();
-       
         return view('reporters.blogs.trash',compact('blogs'));
       
     }

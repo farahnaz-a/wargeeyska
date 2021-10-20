@@ -1,4 +1,4 @@
-@extends('reporters.dashboard')
+@extends('admin.dashboard')
 
 {{-- Title --}}
 @section('title')
@@ -6,7 +6,7 @@
 @endsection
 
 {{-- Menu Active --}}
-@section('blogsCreate')
+@section('adminBlogCreate')
 active
 @endsection
 
@@ -15,7 +15,7 @@ active
 <div class="content-header-left col-md-12 col-12 mb-2">
     <div class="row breadcrumbs-top">
         <div class="col-12">
-            <h2 class="content-header-title float-left mb-0">Reporter Dashboard</h2>
+            <h2 class="content-header-title float-left mb-0">Admin Dashboard</h2>
             <div class="breadcrumb-wrapper">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">Create Blogs</li>
@@ -41,17 +41,22 @@ active
                 @endif
             </div>
             <div class="card-body">
-                <form action="{{route('blogs.store')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('adminBlogs.update',$details->id)}}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <div class="row">
                         <div class="col-12">
                             <div class=form-group">
                                 <label for="category">Select category</label>
                                 <select class="form-control" aria-label="Default select example" id="category"
                                     name="category_id">
-                                    <option>-Select-</option>
+                                    <option value="{{$details->category_id}}">{{$details->category->name}}</option>
                                     @foreach ($categories as $category)
+                                    @if ($details->category_id == $category->id)
+                                    <option hidden value="{{$category->id}}">{{$category->name}}</option>
+                                    @else
                                     <option value="{{$category->id}}">{{$category->name}}</option>
+                                    @endif
                                     @endforeach
                                 </select>
                                 @error('category')
@@ -64,7 +69,8 @@ active
                                 <label for="subcategory">Select subcategory</label>
                                 <select class="form-control" aria-label="Default select example" id="subcategory"
                                     name="subcategory_id">
-                                  @include('includes.option')
+                                    
+                                  @include('includes.edit_option')
                                 </select>
                                 @error('subcategory')
                                 <span class="text-danger">{{$message}}</span>
@@ -77,7 +83,7 @@ active
                             <div class="form-group">
                                 <label for="title">Title</label>
                                 <input type="text" name="title" class="form-control" id="title"
-                                    placeholder="Blog Title">
+                                    value="{{ $details->title }}">
                                 @error('title')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
@@ -87,8 +93,7 @@ active
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="short description">Short Description</label>
-                                <textarea name="short_description" class="form-control" id="short description"
-                                    placeholder="Short Description"></textarea>
+                                <textarea name="short_description" class="form-control" id="short description">{{$details->short_description}}</textarea>
                                 @error('short_description')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
@@ -99,8 +104,7 @@ active
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="quote">Quote</label>
-                                <textarea name="quote" class="form-control" id="quote"
-                                    placeholder="Quote"></textarea>
+                                <textarea name="quote" class="form-control" id="quote">{{ $details->quote}}</textarea>
                                 @error('quote')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
@@ -110,8 +114,7 @@ active
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <textarea name="description" class="form-control" id="description"
-                                    placeholder="Description"></textarea>
+                                <textarea name="description" class="form-control" id="description">{{ $details->description}}</textarea>
                                 @error('description')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
@@ -129,7 +132,12 @@ active
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
+                            <div class="from-group">
+                                <img src="{{asset('uploads/blogs/'.$details->thumbnail)}}" alt="" style="height:170px;width:300px;">
+                            </div>
                         </div>
+                        <br>
+                        <br>
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="image">Image (Optional)</label>
@@ -141,8 +149,19 @@ active
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
+                            @if ($details->image != null)
+                            <div class="from-group">
+                                <img src="{{asset('uploads/blogs/'.$details->image)}}" alt="" style="height:170px;width:300px;">
+                            </div>
+                            @endif
                         </div>
+                       
+                        
                     </div>
+                
+                        <br>
+                        <br>
+                        <br>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
@@ -169,7 +188,7 @@ active
         });
         
          $.ajax({
-            url: "{{route('blog.subcategories')}}",
+            url: "{{route('adminblog.subcategories')}}",
             type: 'post',
             data: {
                 'id': id
