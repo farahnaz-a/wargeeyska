@@ -31,6 +31,7 @@
             <div class="col-lg-6 col-md-12 mrb-40">
                 <h3>Login</h3>
                 <p>Your email address will not be published. Required fields are marked <span style="color:red">*</span>
+                    <x-jet-validation-errors class="mb-4 text-danger" />
                 </p>
                 <form method="POST" action="{{ route('login') }}">
                     @csrf

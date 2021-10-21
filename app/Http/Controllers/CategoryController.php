@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -105,6 +106,12 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+        $subcategories =SubCategory::where('category_id',$id)->get();
+        foreach ($subcategories as $item) 
+        {  
+            $item->delete();
+        }
+
         $category = Category::find($id);
         $category->delete();
         return redirect()->back()->with('delete','Deleted successfully');

@@ -39,6 +39,9 @@ active
                 @if (session('warning'))
                 <div class="alert alert-success">{{ session('warning') }}</div>
                 @endif
+                @if (session('deny'))
+                <div class="alert alert-danger">{{ session('deny') }}</div>
+                @endif
             </div>
             <div class="card-body">
                 <form action="{{route('subcategories.store')}}" method="POST" enctype="multipart/form-data">
@@ -46,7 +49,7 @@ active
                     <div class="from-group">
                         <label for="category">Select category</label>
                         <select class="form-control" aria-label="Default select example" id="category" name="category_id">
-                            <option>-Select-</option>
+                            <option value = "" >-Select-</option>
                             @foreach ($categories as $category)
                             <option value="{{$category->id}}">{{$category->name}}</option>
                             @endforeach

@@ -97,6 +97,8 @@ Route::group(['prefix' => 'admin','middleware' => 'checkAdmin'], function () {
 
       Route::get('/reporter/blogs/access/{id}', [AdminBlogController::class, 'details'])->name('reporter.blog_details');
 
+      Route::get('/reporter/blogs/edit/{id}', [AdminBlogController::class, 'edit'])->name('reporter.blog_edit');
+
       Route::get('/reporter/blogs/delete/{id}', [AdminBlogController::class, 'delete'])->name('reporter.blog_delete');
 
       Route::get('/add/aproved/list', [AdminBlogController::class, 'adminAdList'])->name('ad.allAdmin');
@@ -110,6 +112,8 @@ Route::group(['prefix' => 'admin','middleware' => 'checkAdmin'], function () {
 
         //Videos
       Route::resource('reportervideos', VideoController::class); 
+
+   
 
         //Video Request
       Route::get('/pending/videos', [VideoController::class,'videoRequest'])->name('admin.videoRequest');

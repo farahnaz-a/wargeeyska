@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Carbon\Carbon;
@@ -44,16 +45,24 @@ class SubCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'category_id' => 'required', 
-            'name' => 'required|unique:sub_categories'  
-        ]);
-
-        // Pass the data into database
-        $subCategory = SubCategory::create($request->except('_token')); 
-        // Successful return
-        return redirect()->route('subcategories.index')->withSuccess('Create Subcategory Successfully');
+        if ($request->category_id == null) {
+            return redirect()->back()->with('deny', 'Please select a Category first');
+        } 
+        else 
+        {
+            $request->validate([
+                'category_id' => 'required', 
+                'name' => 'required|unique:sub_categories'  
+            ]);
+    
+            // Pass the data into database
+            $subCategory = SubCategory::create($request->except('_token')); 
+            // Successful return
+            return redirect()->route('subcategories.index')->withSuccess('Create Subcategory Successfully');
+        }
     }
+        
+      
 
     /**
      * Display the specified resource.
@@ -108,8 +117,13 @@ class SubCategoryController extends Controller
      */
     public function destroy($id)
     {
-       // Find subcategory 
-       $category = SubCategory::find($id)->delete();
+        $blogs =Blog::where('subcategory_id',$id)->get();
+        foreach ($blogs as $item) 
+        {  
+            $item->delete();
+        }
+
+       $subcategory = SubCategory::find($id)->delete();
 
         // Succesful Return
         return redirect()->back()->with('delete','Deleted Successfully');

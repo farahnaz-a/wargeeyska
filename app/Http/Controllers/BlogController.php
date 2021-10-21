@@ -103,12 +103,22 @@ class BlogController extends Controller
             'user_id'    => Auth::user()->id,
         ]); 
 
-        if (Auth::user()->role == 'admin') {
+        if (Auth::user()->role == 'admin') 
+        {
             $blogs->payment_status = 'admin_post';
         }
+
+
+        if (Auth::user()->role == 'admin') 
+        {
+            $blogs->access_status = 'published';
+        }
+
+        if (Auth::user()->role == 'reporter') 
+        {
+            $blogs->payment_status = 'paid';
+        }
         
-        $blogs->payment_status = 'paid';
-        //Thumbnail Upload
         $thumbnail    = $request->file('thumbnail');
         $filename = $blogs->id. '-thumbnail.' .$thumbnail->extension();
         $location = public_path('uploads/blogs/');
@@ -119,7 +129,6 @@ class BlogController extends Controller
 
 
         if ($request->image) {
-        
         //image Upload
         $image    = $request->file('image');
         $filename2 = $blogs->id. '-image.' .$image->extension();
@@ -177,7 +186,6 @@ class BlogController extends Controller
 
         if (Auth::user()->role == 'admin') {
             
-            // dd($details->category->name);
             return view('admin.admin_blog.edit',compact('details','categories','subcategories'));
         } 
 
@@ -234,12 +242,6 @@ class BlogController extends Controller
          $blogs->image = $filename2; 
          }
 
-        //  if ($blogs->access_status) {
-        //      # code...
-        //  }
-         
-
-         // Save Everything In Database
          $blogs->category_id       = $request->category_id; 
 
          if ($request->subcategory_id) 
@@ -256,11 +258,24 @@ class BlogController extends Controller
             $blogs->access_status     = 'not_published'; 
          }
          
+        
+         
          $blogs->update(); 
  
+    
          // Return Back to Index With Success Message
          if (Auth::user()->role == 'admin') {
-            return redirect()->route('adminBlogs.index')->with('update','Update Successfully');
+              // dd($details->category->name);
+            if ($blogs->user->role == 'reporter') 
+            {
+                $blogs = Blog::where('access_status','published')->latest()->get();
+                return view('admin.reporter_blogs.index',compact('blogs'))->with('update','Update Successfully');
+            } 
+
+            else {
+                return redirect()->route('adminBlogs.index')->with('update','Update Successfully');
+            }
+           
          } 
          else {
             return redirect()->route('blogs.index')->with('update','Update Successfully');

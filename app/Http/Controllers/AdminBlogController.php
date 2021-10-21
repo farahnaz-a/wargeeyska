@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -13,9 +14,21 @@ class AdminBlogController extends Controller
         $this->middleware('auth');;
         $this->middleware('checkAdmin');
     }
+
+    public function edit($id){
+
+        $categories = Category::get();
+        $subcategories = [];
+        $details = Blog::where('id',$id)->first();
+
+       
+        return view('admin.admin_blog.edit',compact('details','categories','subcategories'));
+
+    }
+
     public function index(){
       
-        $blogs = Blog::where('access_status','published')->get();
+        $blogs = Blog::where('access_status','published')->latest()->get();
         return view('admin.reporter_blogs.index',compact('blogs'));
     }
 

@@ -69,6 +69,10 @@ active
                                 <label for="subcategory">Select subcategory</label>
                                 <select class="form-control" aria-label="Default select example" id="subcategory"
                                     name="subcategory_id">
+
+                                    @if ($details->subcategory_id != null)
+                                      <option value="{{$details->subcategory_id}}">{{$details->subcategory->name}}</option> 
+                                    @endif
                                     
                                   @include('includes.edit_option')
                                 </select>

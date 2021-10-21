@@ -41,6 +41,8 @@ active
                 <div class="card-header">
                     <h4>List of Aproved video</h4>
 
+                    <a href="{{ route('reportervideos.create') }}" class="btn btn-success">Post A Video</a>
+
                     @if (session('success'))
                     <div class="alert alert-success">{{ session('success') }}</div>
                     @endif

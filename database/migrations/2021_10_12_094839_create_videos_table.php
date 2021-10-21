@@ -19,7 +19,7 @@ class CreateVideosTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('title');
             $table->string('video');
-            $table->enum('payment_status',['paid','pending'])->default('pending');
+            $table->enum('payment_status',['paid','pending','admin_post'])->default('pending');
             $table->enum('read_status',['read','unread'])->default('unread');
             $table->enum('access_status',['published','not_published'])->default('not_published');
             $table->foreign('user_id')

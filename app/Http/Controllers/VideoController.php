@@ -54,7 +54,14 @@ class VideoController extends Controller
      */
     public function create()
     {
-        return view('reporters.videos.create');
+        if (Auth::user()->role == 'admin'){
+            return view('admin.videos.post_video');
+        } 
+        else {
+            return view('reporters.video.create');
+        }
+        
+        
     }
 
     /**
@@ -65,6 +72,7 @@ class VideoController extends Controller
      */
     public function store(Request $request)
     {
+      
         $request->validate([
             'video'             => 'required|mimes:mp4,mov,ogg,3gp',
             'title'             => 'required',
@@ -77,10 +85,10 @@ class VideoController extends Controller
 
          if (Auth::user()->role == 'admin') {
          $video->payment_status = 'admin_post';
+         $video->access_status  = 'published';
          }
 
          $video->title = $request->title;
-
          $image                = $request->file('video');
          $filename             = hexdec(uniqid()) . '-video.' .$image->extension();
          $location             = public_path('uploads/video/');
@@ -90,9 +98,12 @@ class VideoController extends Controller
          $video->video           = $filename; 
          $video->save();
  
-        //  if (Auth::user()->role == 'admin') {
-        //     return redirect()->route('adRequest')->with('create','Added Successfully');
-        //  } 
+         if (Auth::user()->role == 'admin') {
+          
+            $videos = Video::where('access_status','published')->latest()->get();
+
+            return view('admin.videos.index',compact('videos'))->with('create','Added Successfully');;
+         } 
 
          if (Auth::user()->role == 'reporter') {
             return redirect()->route('videos.index')->with('create','Added Successfully');
