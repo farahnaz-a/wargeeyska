@@ -32,6 +32,34 @@
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,500,600,700,800&amp;display=swap"
         rel="stylesheet">
+        <script src="{{ asset('frontend_assets/js/trans.js') }}"></script>
+{{-- <script data-ad-client="ca-pub-7417336915807647" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> --}}
+
+
+<style>
+ .translated-ltr{margin-top:-40px;}
+        .translated-ltr{margin-top:-40px;}
+        .goog-te-banner-frame {display: none;margin-top:-20px;}
+
+        .goog-logo-link {
+        display:none !important;
+        }
+
+        .goog-te-gadget{
+        color: transparent !important;
+        }
+        .goog-te-gadget-simple img{
+            display: none;
+
+        }
+        .goog-te-gadget .goog-te-combo {
+         color: #222;
+				 border-radius: 50px;
+                 position: absolute;
+    top: 0;
+        }
+
+</style>
 </head>
 
 <body>
@@ -56,6 +84,9 @@
                         <ul class="unstyled top-nav">
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Signup</a></li>
+                            <li>
+                                <span id="google_translate_element"></span>
+                            </li>
                         </ul>
                     </div>
                     @endguest
@@ -82,13 +113,20 @@
                                         href="{{ route('logout') }}">Logout</a>
                                 </form>
                             </li>
+                            <li>
+                                <span id="google_translate_element"></span>
+                            </li>
 
                         </ul>
                     </div>
                     @endauth
 
                     <div class="col-md-4 top-social text-lg-right text-md-center">
+                        
                         <ul class="unstyled">
+                            
+                         
+
                             <li>
                                 <a title="Facebook" href="#">
                                     <span class="social-icon">
