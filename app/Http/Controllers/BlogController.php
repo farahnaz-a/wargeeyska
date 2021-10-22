@@ -269,8 +269,8 @@ class BlogController extends Controller
             if ($blogs->user->role == 'reporter') 
             {
                 $blogs = Blog::where('access_status','published')->latest()->get();
-                return view('admin.reporter_blogs.index',compact('blogs'))->with('update','Update Successfully'); 
-                // return redirect()->route('blogs.index')->with('update','Update Successfully');
+                // return view('admin.reporter_blogs.index',compact('blogs'))->with('update','Update Successfully'); 
+                return redirect()->route('reporter.blog')->with('update','Update Successfully');
             } 
 
             else {
