@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Str;
 
 class BlogController extends Controller
 {
@@ -120,7 +121,7 @@ class BlogController extends Controller
         }
         
         $thumbnail    = $request->file('thumbnail');
-        $filename = $blogs->id. '-thumbnail.' .$thumbnail->extension();
+        $filename = $blogs->id. '-' . Str::random(4) . '-thumbnail.' .$thumbnail->extension();
         $location = public_path('uploads/blogs/');
         $thumbnail->move($location, $filename); 
 
@@ -131,7 +132,7 @@ class BlogController extends Controller
         if ($request->image) {
         //image Upload
         $image    = $request->file('image');
-        $filename2 = $blogs->id. '-image.' .$image->extension();
+        $filename2 = $blogs->id. '-' . Str::random(4) . '-image.' .$image->extension();
         $location = public_path('uploads/blogs/');
         $image->move($location, $filename2); 
 
@@ -220,7 +221,7 @@ class BlogController extends Controller
              //Thumbnail Upload
 
             $thumbnail    = $request->file('thumbnail');
-            $filename = $blogs->id. '-thumbnail.' .$thumbnail->extension();
+            $filename = $blogs->id. '-' . Str::random(4) . '-thumbnail.' .$thumbnail->extension();
             $location = public_path('uploads/blogs/');
             $thumbnail->move($location, $filename); 
     
@@ -235,7 +236,7 @@ class BlogController extends Controller
          
          //image Upload
          $image    = $request->file('image');
-         $filename2 = $blogs->id. '-image.' .$image->extension();
+         $filename2 = $blogs->id. '-' . Str::random(4) .'-image.' .$image->extension();
          $location = public_path('uploads/blogs/');
          $image->move($location, $filename2); 
  
