@@ -126,6 +126,10 @@ active
                         </div>
                        
                         <div class="col-12">
+                            <div class="from-group">
+                                <strong>Existing  Thumbnail (MAIN IMAGE ON THE TOP OF BLOGS)</strong> <br>
+                                <img src="{{asset('uploads/blogs/'.$details->thumbnail)}}" alt="" style="height:170px;width:300px;">
+                            </div>
                             <div class="form-group">
                                 <label for="thumbnail">Thumbnail</label>
                                 <div class="custom-file">
@@ -136,14 +140,18 @@ active
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
-                            <div class="from-group">
-                                <img src="{{asset('uploads/blogs/'.$details->thumbnail)}}" alt="" style="height:170px;width:300px;">
-                            </div>
+                           
                         </div>
                         <br>
                         <br>
-                        <div class="col-12">
+                          <div class="col-12">
                             <div class="form-group">
+                                @if ($details->image != null)
+                                <div class="from-group">
+                                    <strong>INNER IMAGE  (THIS IS NOT THUMBNAIL BUT INNER IMAGE OF THE BLOG)</strong> <br>
+                                    <img src="{{asset('uploads/blogs/'.$details->image)}}" alt="" style="height:170px;width:300px;">
+                                </div>
+                                @endif
                                 <label for="image">Image (Optional)</label>
                                 <div class="custom-file">
                                     <input type="file" name="image" class="custom-file-input" id="iamge">
@@ -153,12 +161,8 @@ active
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
-                            @if ($details->image != null)
-                            <div class="from-group">
-                                <img src="{{asset('uploads/blogs/'.$details->image)}}" alt="" style="height:170px;width:300px;">
-                            </div>
-                            @endif
-                        </div>
+                      
+                        </div> 
                        
                         
                     </div>

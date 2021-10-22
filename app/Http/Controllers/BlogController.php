@@ -216,8 +216,9 @@ class BlogController extends Controller
 
         
          $blogs = Blog::where('id',$id)->first();
-         if ($request->image) {
+         if ($request->has('thumbnail')) {
              //Thumbnail Upload
+
             $thumbnail    = $request->file('thumbnail');
             $filename = $blogs->id. '-thumbnail.' .$thumbnail->extension();
             $location = public_path('uploads/blogs/');
@@ -230,11 +231,11 @@ class BlogController extends Controller
       
  
  
-         if ($request->image) {
+         if ($request->has('image')) {
          
          //image Upload
          $image    = $request->file('image');
-         $filename2 = $blogs->id. '-image.' .$image->extention();
+         $filename2 = $blogs->id. '-image.' .$image->extension();
          $location = public_path('uploads/blogs/');
          $image->move($location, $filename2); 
  
@@ -260,19 +261,20 @@ class BlogController extends Controller
          
         
          
-         $blogs->update(); 
+         $blogs->save(); 
  
     
          // Return Back to Index With Success Message
          if (Auth::user()->role == 'admin') {
-              // dd($details->category->name);
             if ($blogs->user->role == 'reporter') 
             {
                 $blogs = Blog::where('access_status','published')->latest()->get();
-                return view('admin.reporter_blogs.index',compact('blogs'))->with('update','Update Successfully');
+                return view('admin.reporter_blogs.index',compact('blogs'))->with('update','Update Successfully'); 
+                // return redirect()->route('blogs.index')->with('update','Update Successfully');
             } 
 
             else {
+
                 return redirect()->route('adminBlogs.index')->with('update','Update Successfully');
             }
            
@@ -281,6 +283,8 @@ class BlogController extends Controller
             return redirect()->route('blogs.index')->with('update','Update Successfully');
          }
          
+        // return redirect()->route('blogs.index')->with('update','Update Successfully');
+        //  }
         
     }
 
