@@ -60,7 +60,7 @@
                             <blockquote>{{ $blog->quote }}</blockquote>
                             <p>{{ $blog->short_description }}</p>
                             @if ($blog->image != null)
-                            <p><img class="pull-left" src="{{ asset('uploads/blogs/')}}/{{ $blog->image }}" alt=""></p>
+                            <p><img width="100%" class="pull-left" src="{{ asset('uploads/blogs/')}}/{{ $blog->image }}" alt=""></p>
                             @endif
                             <p>{{ $blog->description }}</p>
 
@@ -267,7 +267,7 @@
                                 <li class="clearfix">
                                     <div class="utf_post_block_style post-float clearfix">
                                         <div class="utf_post_thumb"> <a href="{{route('frontend.blog_read',$item->blog_id)}}">
-                                                <img class="img-fluid" src="{{asset('uploads/blogs/')}}/{{ $item->blog->thumbnail }}" alt=""/>
+                                                <img width="100%" class="img-fluid" src="{{asset('uploads/blogs/')}}/{{ $item->blog->thumbnail }}" alt="Blog Thumbnail"/>
                                                 {{-- <a class="utf_post_cat" href="#">{{ $item->blog->subcategoy->name }}</a>--}}
                                         </div> 
                                         <div class="utf_post_content">
@@ -294,12 +294,12 @@
 
                         @if ($ad != null)
                         <a href="{{ $ad->link }}" target="_blank">
-                            <img src="{{ asset('uploads/ads')}}/{{ $ad->image }}" class="img-fluid"
+                            <img width="100%" src="{{ asset('uploads/ads')}}/{{ $ad->image }}" class="img-fluid"
                                 alt="">
                         </a>
                         @else
                         <a href="">
-                            <img src="{{ asset('frontend_assets/images/banner-ads/ad-sidephpbar.png')}}" class="img-fluid"
+                            <img width="100%" src="{{ asset('frontend_assets/images/banner-ads/ad-sidephpbar.png')}}" class="img-fluid"
                                 alt="">
                         </a>
                         @endif 
