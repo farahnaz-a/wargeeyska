@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\Category;
+use App\Models\ViewCount;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -67,6 +68,8 @@ class AdminBlogController extends Controller
       
         $details = Blog::find($id);
         $details->delete();
+
+        $delete_view = ViewCount::where('blog_id',$id)->delete();
 
         if (Auth::user()->role == 'admin') {
             return redirect()->route('reporter.blog')->withSuccess('Added Successfully');

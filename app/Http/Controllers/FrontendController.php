@@ -44,7 +44,7 @@ class FrontendController extends Controller
 
     public function blog_read($id)
     {
-        $blog     = Blog::where('id',$id)->first();
+        $blog     = Blog::where('id',$id)->firstOrFail();
         $relateds = Blog::where('subcategory_id',$blog->subcategory_id)->get();
 
         $viewCount = ViewCount::where('blog_id',$id)->first();

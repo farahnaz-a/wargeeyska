@@ -32,34 +32,45 @@
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,500,600,700,800&amp;display=swap"
         rel="stylesheet">
-        <script src="{{ asset('frontend_assets/js/trans.js') }}"></script>
-{{-- <script data-ad-client="ca-pub-7417336915807647" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> --}}
+    <script src="{{ asset('frontend_assets/js/trans.js') }}"></script>
+    {{-- <script data-ad-client="ca-pub-7417336915807647" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> --}}
 
 
-<style>
- .translated-ltr{margin-top:-40px;}
-        .translated-ltr{margin-top:-40px;}
-        .goog-te-banner-frame {display: none;margin-top:-20px;}
+    <style>
+        .translated-ltr {
+            margin-top: -40px;
+        }
+
+        .translated-ltr {
+            margin-top: -40px;
+        }
+
+        .goog-te-banner-frame {
+            display: none;
+            margin-top: -20px;
+        }
 
         .goog-logo-link {
-        display:none !important;
+            display: none !important;
         }
 
-        .goog-te-gadget{
-        color: transparent !important;
+        .goog-te-gadget {
+            color: transparent !important;
         }
-        .goog-te-gadget-simple img{
+
+        .goog-te-gadget-simple img {
             display: none;
 
         }
+
         .goog-te-gadget .goog-te-combo {
-         color: #222;
-				 border-radius: 50px;
-                 position: absolute;
-    top: 0;
+            color: #222;
+            border-radius: 50px;
+            position: absolute;
+            top: 0;
         }
 
-</style>
+    </style>
 </head>
 
 <body>
@@ -122,36 +133,39 @@
                     @endauth
 
                     <div class="col-md-4 top-social text-lg-right text-md-center">
-                        
+
                         <ul class="unstyled">
-                            
-                         
+
+
 
                             <li>
-                                <a title="Facebook" href="#">
+                                <a title="Facebook" href="{{ footerContact()->facebook_link}}">
                                     <span class="social-icon">
                                         <i class="fa fa-facebook"></i>
                                     </span>
                                 </a>
-                                <a title="Twitter" href="#">
+                                <a title="Facebook" href="{{ footerContact()->instagram_link }}">
                                     <span class="social-icon">
-                                        <i class="fa fa-twitter"></i>
-                                    </span> </a> <a title="Google+" href="#">
+                                        <i class="fa fa-instagram"></i>
+                                    </span>
+                                </a>
+                              
+                                <a title="Google+" href="{{ footerContact()->goole_link }}">
                                     <span class="social-icon">
                                         <i class="fa fa-google-plus"></i>
                                     </span>
                                 </a>
-                                <a title="Linkdin" href="#">
+                                <a title="Linkdin" href="{{ footerContact()->linkdin_link }}">
                                     <span class="social-icon">
                                         <i class="fa fa-linkedin"></i>
                                     </span>
                                 </a>
-                                <a title="Rss" href="#">
+                                <a title="Rss" href="{{ footerContact()->twiter_link }}">
                                     <span class="social-icon">
-                                        <i class="fa fa-rss"></i>
+                                        <i class="fa fa-twitter"></i>
                                     </span>
                                 </a>
-                                <a title="Skype" href="#">
+                                <a title="Skype" href="{{ footerContact()->skyp_link }}">
                                     <span class="social-icon">
                                         <i class="fa fa-skype"></i>
                                     </span>
@@ -188,8 +202,8 @@
                             </a>
                             @else
                             <a href="">
-                                <img src="{{ asset('frontend_assets/images/banner-ads/ad-top-header.png')}}" class="img-fluid"
-                                    alt="">
+                                <img src="{{ asset('frontend_assets/images/banner-ads/ad-top-header.png')}}"
+                                    class="img-fluid" alt="">
                             </a>
                             @endif
                         </div>
@@ -337,18 +351,19 @@
                                         </div>
                                         @else
                                     <li>
-                                        <a href="{{ route('frontend.blog_category', $category->id)}}">{{ $category->name }}</a>
+                                        <a
+                                            href="{{ route('frontend.blog_category', $category->id)}}">{{ $category->name }}</a>
                                     </li>
                                     @endif
                                     </li>
                                     @endforeach
-                                    <li class="@yield('video')"> 
-                                        <a href="{{ route('frontend.video') }}">Video</a> 
+                                    <li class="@yield('video')">
+                                        <a href="{{ route('frontend.video') }}">Video</a>
                                     </li>
-                                    <li class="@yield('about')"> 
+                                    <li class="@yield('about')">
                                         <a href="{{ route('frontend.about')}}">About</a>
                                     </li>
-                                    
+
                                 </ul>
                             </div>
                         </div>

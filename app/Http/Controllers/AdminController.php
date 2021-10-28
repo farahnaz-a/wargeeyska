@@ -32,7 +32,8 @@ class AdminController extends Controller
 
         $view_count = [];
         $blog_name  = [];
-        foreach ($view as  $item) {
+        foreach ($view as  $item) 
+        {
             $blog_name[] = Str::limit($item->blog->title, 10);
             $view_count[] = $item->view_count;
         }
@@ -46,8 +47,7 @@ class AdminController extends Controller
           $reporter_count[] =  User::where('role', 'reporter')->whereDate('created_at' ,   Carbon::now()->subDays($i))->get()->count();
           
         }
-
-       
+        
         return view('admin.index', compact('count', 'day','view','view_count','blog_name','reporter_count'));
     }
 
