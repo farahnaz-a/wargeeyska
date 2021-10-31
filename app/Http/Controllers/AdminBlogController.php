@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ad;
 use App\Models\Blog;
 use App\Models\Category;
 use App\Models\ViewCount;
@@ -70,13 +71,14 @@ class AdminBlogController extends Controller
         $details->delete();
 
         $delete_view = ViewCount::where('blog_id',$id)->delete();
+        $delete_ad = Ad::where('blog_id',$id)->delete();
 
         if (Auth::user()->role == 'admin') {
-            return redirect()->route('reporter.blog')->withSuccess('Added Successfully');
+            return redirect()->route('reporter.blog')->with('delete','Added Successfully');
         }
         else{
           // Return Back to Index With Success Message
-          return redirect()->route('blogs.index')->withSuccess('Added Successfully');
+          return redirect()->route('blogs.index')->with('delete','Added Successfully');
         }
 
     }

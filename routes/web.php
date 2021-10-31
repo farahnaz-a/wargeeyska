@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminBlogController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CopyRightController;
 use App\Http\Controllers\FaviconController;
 use App\Http\Controllers\FooterAboutController;
 use App\Http\Controllers\FooterContactController;
@@ -83,8 +84,11 @@ Route::group(['prefix' => 'admin','middleware' => 'checkAdmin'], function () {
     // footer about Controller
       Route::resource('footer_about', FooterAboutController::class);
 
-    // footer controller Controller
+    // footer Controller
       Route::resource('footer_contact', FooterContactController::class);
+
+    // Copy Right Controller
+      Route::resource('copyRights', CopyRightController::class);
 
       
       

@@ -325,17 +325,13 @@ class BlogController extends Controller
     }
 
 
-      // restore
-      public function restore($id)
-      {
-          $reservations = Blog::withTrashed()->find($id)->restore();    
-          return redirect()->back()->withSuccess('restore','Reservation restore successfully');
-      }
+    
+    // restore
+    public function restore($id)
+    {
+        $reservations = Blog::withTrashed()->find($id)->restore();    
+        return redirect()->back()->withSuccess('restore','Reservation restore successfully');
+    }
 
-
-     public function blog_comment($id){
-
-
-     }
 
 }

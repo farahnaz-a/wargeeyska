@@ -41,4 +41,9 @@ function menueNews(){
     return \App\Models\Ad::where('ad_position','f_end')->where('aprove_status','aproved')->first();
   }
 
+  function copyRight(){
+
+    return \App\Models\CopyRight::first();
+  }
+
 

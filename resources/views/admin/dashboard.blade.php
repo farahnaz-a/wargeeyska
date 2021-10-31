@@ -378,8 +378,15 @@
                         <span class="menu-title text-truncate" data-i18n="Chat">Footer Contact</span>
                     </a>
                 </li>
+                {{-- Copy Right --}}
+                <li class="nav-item @yield('copyRightIndex')">
+                    <a class="d-flex align-items-center" href="{{ route('copyRights.index') }}">
+                        <i data-feather='phone-call'></i>
+                        <span class="menu-title text-truncate" data-i18n="Chat">Update Copy Right</span>
+                    </a>
+                </li>
 
-                {{-- About --}}
+                {{-- About Setting --}}
                 <li class="navigation-header">
                     <span data-i18n="About">About Section</span>
                     <i data-feather="more-horizontal"></i>

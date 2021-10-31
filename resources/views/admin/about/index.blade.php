@@ -64,7 +64,7 @@ active
                         <div class="form-group">
                             <label for="image">Image</label>
                             <input name="image" type="file" class="form-control-file" id="image" value="{{$about->image}}">
-                            @error('iamge')
+                            @error('image')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
                         </div>
