@@ -143,10 +143,10 @@ active
 
                                     </td>
                                     <td>
-                                        <form action="{{route('videos.destroy',$video->id)}}" method="POST">
+                                        <form action="{{route('reportervideos.destroy',$video->id)}}" method="POST">
                                             {{ method_field('DELETE') }}
                                             @csrf
-                                            <a class="btn btn-sm btn-danger" href="{{route('videos.destroy',$video->id)}}"
+                                            <a class="btn btn-sm btn-danger" href="{{route('reportervideos.destroy',$video->id)}}"
                                                 onclick="event.preventDefault(); this.closest('form').submit();">
                                                 <span>Delete</span>
                                             </a>

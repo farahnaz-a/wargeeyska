@@ -125,8 +125,6 @@ Route::group(['prefix' => 'admin','middleware' => 'checkAdmin'], function () {
 
 
      
-
-      
 });
 
 //Reporters
