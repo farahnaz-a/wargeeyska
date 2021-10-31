@@ -28,7 +28,7 @@ class VideoController extends Controller
         }
         elseif (Auth::user()->role == 'reporter') {
             $videos = Video::where('user_id',$user)->where('access_status','published')->latest()->get();
-            return view('reporters.videos.index',compact('videos'));
+            return view('reporters.video.index',compact('videos'));
         } 
     }
 
