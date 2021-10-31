@@ -19,7 +19,7 @@
                     </ul>
                 </div>
                 <div class="col-lg-4 col-sm-12 col-xs-12 footer-widget contact-widget">
-                    <h3 class="widget-title">Social Midia</h3>
+                    <h3 class="widget-title">Social Media</h3>
                    
                     <ul class="unstyled utf_footer_social">
                         <li><a title="Facebook" href="{{ footerContact()->facebook_link }}"><i class="fa fa-facebook"></i></a></li>

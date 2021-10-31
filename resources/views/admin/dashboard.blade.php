@@ -381,7 +381,7 @@
                 {{-- Copy Right --}}
                 <li class="nav-item @yield('copyRightIndex')">
                     <a class="d-flex align-items-center" href="{{ route('copyRights.index') }}">
-                        <i data-feather='phone-call'></i>
+                        <i data-feather='at-sign'></i>
                         <span class="menu-title text-truncate" data-i18n="Chat">Update Copy Right</span>
                     </a>
                 </li>
