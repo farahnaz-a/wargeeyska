@@ -28,14 +28,14 @@ class AdController extends Controller
     {
         if (Auth::user()->role == 'admin') {
            
-            $ads = Ad::where('aprove_status','aproved')->get();
+            $ads = Ad::where('aprove_status','aproved')->latest()->get();
            
             return view('admin.ad.ad_list',compact('ads'));
         }
         
         else if(Auth::user()->role == 'reporter'){
 
-            $ads = Ad::where('user_id', Auth::user()->id)->where('aprove_status','aproved')->get();
+            $ads = Ad::where('user_id', Auth::user()->id)->where('aprove_status','aproved')->latest()->get();
            
             return view('reporters.ad.ad_list',compact('ads'));
         }
@@ -47,14 +47,14 @@ class AdController extends Controller
     {
         if (Auth::user()->role == 'admin') {
            
-            $ads = Ad::where('payment_status','!=','pending')->where('aprove_status','pending')->get();
+            $ads = Ad::where('payment_status','!=','pending')->where('aprove_status','pending')->latest()->get();
            
             return view('admin.ad.ad_pending_list',compact('ads'));
         }
         
         else if(Auth::user()->role == 'reporter'){
 
-            $ads = Ad::where('user_id', Auth::user()->id)->where('aprove_status','pending')->get();
+            $ads = Ad::where('user_id', Auth::user()->id)->where('aprove_status','pending')->latest()->get();
            
             return view('reporters.ad.ad_request_list',compact('ads'));
         }

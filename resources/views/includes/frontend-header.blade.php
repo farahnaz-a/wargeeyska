@@ -198,7 +198,7 @@
                             @if (frontPageTopAd() != null)
                             <a href="{{ frontPageTopAd()->link }}" target="_blank">
                                 <img src="{{ asset('uploads/ads')}}/{{ frontPageTopAd()->image }}" class="img-fluid"
-                                    alt="">
+                                    alt="" style="height: 90px; width:730px">
                             </a>
                             @else
                             <a href="">
